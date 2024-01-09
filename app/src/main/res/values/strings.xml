@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Dungeon_helper</string>
+    <string name="title_info">Info</string>
+    <string name="title_character">Character</string>
+    <string name="title_lobby">Lobby</string>
+    <string name="title_account">Account</string>
 </resources>
