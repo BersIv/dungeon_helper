@@ -1,4 +1,4 @@
-package com.example.dungeon_helper.fragments
+package com.example.dungeon_helper.fragments.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

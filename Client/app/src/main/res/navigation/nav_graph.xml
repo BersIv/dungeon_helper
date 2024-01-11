@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/navigation_info"
-        android:name="com.example.dungeon_helper.fragments.InfoMain"
+        android:name="com.example.dungeon_helper.fragments.main.InfoMain"
         tools:layout="@layout/fragment_info_main" />
 
     <fragment
         android:id="@+id/navigation_character"
-        android:name="com.example.dungeon_helper.fragments.CharacterMain"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterMain"
         tools:layout="@layout/fragment_character_main" />
 
     <fragment
         android:id="@+id/navigation_lobby"
-        android:name="com.example.dungeon_helper.fragments.LobbyMain"
+        android:name="com.example.dungeon_helper.fragments.main.LobbyMain"
         tools:layout="@layout/fragment_lobby_main" />
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.example.dungeon_helper.fragments.AccountMain"
+        android:name="com.example.dungeon_helper.fragments.main.AccountMain"
         tools:layout="@layout/fragment_account_main" />
 
 </navigation>

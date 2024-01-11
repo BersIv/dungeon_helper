@@ -1,4 +1,4 @@
-package com.example.dungeon_helper.fragments
+package com.example.dungeon_helper.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,18 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.dungeon_helper.R
-import com.example.dungeon_helper.databinding.FragmentInfoMainBinding
+import com.example.dungeon_helper.databinding.FragmentLobbyMainBinding
 
-class InfoMain : Fragment() {
+class LobbyMain : Fragment() {
 
     companion object {
-        fun newInstance() = InfoMain()
+        fun newInstance() = LobbyMain()
     }
-    private lateinit var viewModel: InfoMainViewModel
+    private lateinit var viewModel: LobbyMainViewModel
 
 
-    private var _binding: FragmentInfoMainBinding? = null
+    private var _binding: FragmentLobbyMainBinding? = null
     private  val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,13 +25,13 @@ class InfoMain : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val infoMainViewModel = ViewModelProvider(this)[InfoMainViewModel::class.java]
+        val lobbyMainViewModel = ViewModelProvider(this)[LobbyMainViewModel::class.java]
 
-        _binding = FragmentInfoMainBinding.inflate(inflater, container, false)
+        _binding = FragmentLobbyMainBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textInfo
-        infoMainViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textLobby
+        lobbyMainViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 
