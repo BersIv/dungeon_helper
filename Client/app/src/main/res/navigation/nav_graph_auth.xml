@@ -33,5 +33,17 @@
         <action
             android:id="@+id/action_authRestorePwd_to_auth"
             app:destination="@id/auth" />
+        <action
+            android:id="@+id/action_authRestorePwd_to_authRestorePwd2"
+            app:destination="@id/authRestorePwd2" />
+    </fragment>
+    <fragment
+        android:id="@+id/authRestorePwd2"
+        android:name="com.example.dungeon_helper.fragments.auth.AuthRestorePwd2"
+        android:label="fragment_auth_restore_pwd2"
+        tools:layout="@layout/fragment_auth_restore_pwd2" >
+        <action
+            android:id="@+id/action_authRestorePwd2_to_auth"
+            app:destination="@id/auth" />
     </fragment>
 </navigation>
