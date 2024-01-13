@@ -55,6 +55,8 @@ class AuthRestorePwd : Fragment() {
         backBtn.setOnClickListener {
             (activity as AuthActivity).navController.navigate(R.id.action_authRestorePwd_to_auth)
         }
-
+        restoreBtn.setOnClickListener {
+            (activity as AuthActivity).navController.navigate(R.id.action_authRestorePwd_to_authRestorePwd2)
+        }
     }
 }
