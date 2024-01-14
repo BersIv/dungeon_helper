@@ -32,3 +32,15 @@ func (r *repository) CreateAccount(ctx context.Context, req *CreateAccountReq) e
 
 	return nil
 }
+
+func (r *repository) GetAccountByEmail(ctx context.Context, email string) (*Account, error) {
+	res := Account{}
+	query := `SELECT a.id, email, password, nickname, i.image FROM account a 
+				LEFT JOIN image i ON a.idAvatar = i.id 
+				WHERE email = ?`
+	err := r.db.QueryRowContext(ctx, query, email).Scan(&res.Id, &res.Email, &res.Password, &res.Nickname, &res.Avatar.Image)
+	if err != nil {
+		return nil, err
+	}
+	return &res, nil
+}

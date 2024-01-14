@@ -8,6 +8,8 @@ import (
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type service struct {
@@ -17,8 +19,8 @@ type service struct {
 
 func NewService(repository Repository) Service {
 	return &service{
-		repository,
-		time.Duration(2) * time.Second,
+		Repository: repository,
+		timeout:    time.Duration(2) * time.Second,
 	}
 }
 
@@ -49,6 +51,61 @@ func (s *service) CreateAccount(c context.Context, req *CreateAccountReq) error 
 	}
 
 	return nil
+}
+
+func (s *service) Login(c context.Context, req *LoginAccountReq) (*LoginAccountRes, error) {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	account, err := s.Repository.GetAccountByEmail(ctx, req.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	err = util.CheckPassword(req.Password, account.Password)
+	if err != nil {
+		return nil, err
+	}
+
+	ss, err := newToken(account)
+	if err != nil {
+		return nil, err
+	}
+
+	return &LoginAccountRes{accessToken: ss, Id: account.Id, Email: account.Email, Nickname: account.Nickname, Avatar: account.Avatar}, nil
+}
+
+func (s *service) GoogleAuth(c context.Context, req *GoogleAcc) (*LoginAccountRes, error) {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	account, err := s.Repository.GetAccountByEmail(ctx, req.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	ss, err := newToken(account)
+	if err != nil {
+		return nil, err
+	}
+
+	return &LoginAccountRes{accessToken: ss, Id: account.Id, Email: account.Email, Nickname: account.Nickname, Avatar: account.Avatar}, nil
+}
+
+func newToken(res *Account) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, util.MyJWTClaims{
+		Id: res.Id,
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:    strconv.Itoa(int(res.Id)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24 * 7)),
+		},
+	})
+	secretKey := os.Getenv("SECRET_KEY")
+	ss, err := token.SignedString([]byte(secretKey))
+	if err != nil {
+		return "", err
+	}
+	return ss, nil
 }
 
 func sendEmail(toEmail string, subject string, body string) error {

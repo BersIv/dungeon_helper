@@ -7,20 +7,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type responseWriterWithStatus struct {
-	http.ResponseWriter
-	statusCode int
-}
-
-func (r *responseWriterWithStatus) WriteHeader(statusCode int) {
-	r.statusCode = statusCode
-}
-
 type Option func(router *mux.Router)
 
 func AccountRoutes(accountHandler *account.Handler) Option {
 	return func(r *mux.Router) {
 		r.HandleFunc("/auth/registration", accountHandler.CreateAccount).Methods("POST")
+		r.HandleFunc("/auth/byEmail", accountHandler.Login).Methods("POST")
+		r.HandleFunc("/logout", accountHandler.Logout).Methods("POST")
+		r.HandleFunc("/auth/google/login", accountHandler.LoginGoogle).Methods("POST")
 	}
 }
 
