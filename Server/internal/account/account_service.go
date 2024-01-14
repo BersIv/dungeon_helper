@@ -234,15 +234,3 @@ func sendWelcomeEmail(toEmail string) error {
 
 	return nil
 }
-
-func sendNewPassword(toEmail string, password string) error {
-	subject := "Восстановление пароля"
-	body := fmt.Sprintf("Новый пароль: %s", password)
-
-	err := sendEmail(toEmail, subject, body)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
