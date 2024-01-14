@@ -92,17 +92,16 @@ func (s *service) GoogleAuth(c context.Context, req *GoogleAcc) (*LoginAccountRe
 	return &LoginAccountRes{accessToken: ss, Id: account.Id, Email: account.Email, Nickname: account.Nickname, Avatar: account.Avatar}, nil
 }
 
-func (s *service) RestorePassword(c context.Context, email string) error {
+func (s *service) RestorePassword(c context.Context, req *RestoreReq) error {
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
 
-	account, err := s.Repository.GetAccountByEmail(ctx, email)
+	account, err := s.Repository.GetAccountByEmail(ctx, req.Email)
 	if err != nil {
 		return err
 	}
 
-	tempPassword := util.GeneratePassword()
-	hashedPassword, err := util.HashPassword(tempPassword)
+	hashedPassword, err := util.HashPassword(req.NewPassword)
 	if err != nil {
 		return err
 	}
@@ -112,10 +111,70 @@ func (s *service) RestorePassword(c context.Context, email string) error {
 		return err
 	}
 
-	err = sendNewPassword(account.Email, tempPassword)
+	return nil
+}
+
+func (s *service) UpdateNickname(c context.Context, req *UpdateNicknameReq) error {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	account, err := s.Repository.GetAccountById(ctx, req.Id)
 	if err != nil {
 		return err
 	}
+
+	account.Nickname = req.Nickname
+	err = s.Repository.UpdateNickname(ctx, account)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *service) UpdatePassword(c context.Context, req *UpdatePasswordReq) error {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	account, err := s.Repository.GetAccountById(ctx, req.Id)
+	if err != nil {
+		return err
+	}
+
+	err = util.CheckPassword(req.OldPassword, account.Password)
+	if err != nil {
+		return err
+	}
+
+	hashedPassword, err := util.HashPassword(req.NewPassword)
+	if err != nil {
+		return err
+	}
+
+	account.Password = hashedPassword
+	err = s.Repository.UpdatePassword(ctx, account)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *service) UpdateAvatar(c context.Context, req *UpdateAvatarReq) error {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	account, err := s.Repository.GetAccountById(ctx, req.Id)
+	if err != nil {
+		return err
+	}
+
+	account.Avatar = req.Avatar
+	err = s.Repository.UpdateAvatar(ctx, account)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

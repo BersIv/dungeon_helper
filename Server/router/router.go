@@ -16,6 +16,9 @@ func AccountRoutes(accountHandler *account.Handler) Option {
 		r.HandleFunc("/logout", accountHandler.Logout).Methods("POST")
 		r.HandleFunc("/auth/google/login", accountHandler.LoginGoogle).Methods("POST")
 		r.HandleFunc("/auth/restorePassword", accountHandler.RestorePassword).Methods("POST")
+		r.HandleFunc("/account/change/nickname", accountHandler.UpdateNickname).Methods("PATCH")
+		r.HandleFunc("/account/change/password", accountHandler.UpdatePassword).Methods("PATCH")
+		r.HandleFunc("/account/change/avatar", accountHandler.UpdateAvatar).Methods("PATCH")
 	}
 }
 
