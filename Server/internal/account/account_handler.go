@@ -4,8 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
+	"net/mail"
 
 	"github.com/go-sql-driver/mysql"
 )
@@ -18,6 +20,11 @@ func NewHandler(s Service) *Handler {
 	return &Handler{
 		Service: s,
 	}
+}
+
+func isValidEmail(email string) error {
+	_, err := mail.ParseAddress(email)
+	return err
 }
 
 func (h *Handler) CreateAccount(w http.ResponseWriter, r *http.Request) {
@@ -34,6 +41,11 @@ func (h *Handler) CreateAccount(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}(r.Body)
+
+	if err := isValidEmail(account.Email); err != nil {
+		http.Error(w, fmt.Sprintf("Invalid email address: %s", err.Error()), http.StatusBadRequest)
+		return
+	}
 
 	ctx := r.Context()
 	err = h.Service.CreateAccount(ctx, &account)
