@@ -92,6 +92,33 @@ func (s *service) GoogleAuth(c context.Context, req *GoogleAcc) (*LoginAccountRe
 	return &LoginAccountRes{accessToken: ss, Id: account.Id, Email: account.Email, Nickname: account.Nickname, Avatar: account.Avatar}, nil
 }
 
+func (s *service) RestorePassword(c context.Context, email string) error {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	account, err := s.Repository.GetAccountByEmail(ctx, email)
+	if err != nil {
+		return err
+	}
+
+	tempPassword := util.GeneratePassword()
+	hashedPassword, err := util.HashPassword(tempPassword)
+	if err != nil {
+		return err
+	}
+
+	account.Password = hashedPassword
+	if err := s.Repository.UpdatePassword(ctx, account); err != nil {
+		return err
+	}
+
+	err = sendNewPassword(account.Email, tempPassword)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func newToken(res *Account) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, util.MyJWTClaims{
 		Id: res.Id,
@@ -140,6 +167,18 @@ func sendEmail(toEmail string, subject string, body string) error {
 func sendWelcomeEmail(toEmail string) error {
 	subject := "Добро пожаловать!"
 	body := "Спасибо за регистрацию!"
+
+	err := sendEmail(toEmail, subject, body)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func sendNewPassword(toEmail string, password string) error {
+	subject := "Восстановление пароля"
+	body := fmt.Sprintf("Новый пароль: %s", password)
 
 	err := sendEmail(toEmail, subject, body)
 	if err != nil {

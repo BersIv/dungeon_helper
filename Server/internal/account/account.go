@@ -43,13 +43,19 @@ type Token struct {
 	Token string `json:"token"`
 }
 
+type RestoreReq struct {
+	Email string `json:"email"`
+}
+
 type Repository interface {
 	CreateAccount(ctx context.Context, account *CreateAccountReq) error
 	GetAccountByEmail(ctx context.Context, email string) (*Account, error)
+	UpdatePassword(ctx context.Context, account *Account) error
 }
 
 type Service interface {
 	CreateAccount(c context.Context, req *CreateAccountReq) error
 	Login(c context.Context, req *LoginAccountReq) (*LoginAccountRes, error)
 	GoogleAuth(c context.Context, req *GoogleAcc) (*LoginAccountRes, error)
+	RestorePassword(c context.Context, email string) error
 }

@@ -44,3 +44,13 @@ func (r *repository) GetAccountByEmail(ctx context.Context, email string) (*Acco
 	}
 	return &res, nil
 }
+
+func (r *repository) UpdatePassword(ctx context.Context, account *Account) error {
+	query := "UPDATE account SET password = ? WHERE id = ?"
+	_, err := r.db.ExecContext(ctx, query, account.Password, account.Id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

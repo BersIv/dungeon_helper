@@ -2,8 +2,9 @@ package util
 
 import (
 	"fmt"
-	"golang.org/x/crypto/bcrypt"
 	"math/rand"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func HashPassword(password string) (string, error) {
@@ -27,6 +28,5 @@ func GeneratePassword() string {
 	for i := range password {
 		password[i] = charset[rand.Intn(len(charset))]
 	}
-	println(string(password))
 	return string(password)
 }

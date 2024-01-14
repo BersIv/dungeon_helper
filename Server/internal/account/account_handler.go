@@ -190,6 +190,35 @@ func (h *Handler) LoginGoogle(w http.ResponseWriter, r *http.Request) {
 	setCookieAndRespond(w, "jwt", res.accessToken, res)
 }
 
+func (h *Handler) RestorePassword(w http.ResponseWriter, r *http.Request) {
+	var restoreReq RestoreReq
+	if err := json.NewDecoder(r.Body).Decode(&restoreReq); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}(r.Body)
+
+	if restoreReq.Email == "" {
+		http.Error(w, "Email is required", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+	err := h.Service.RestorePassword(ctx, restoreReq.Email)
+	if err != nil {
+		handleError(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
 func handleError(w http.ResponseWriter, err error, status int) {
 	switch {
 	case errors.Is(err, context.DeadlineExceeded):
