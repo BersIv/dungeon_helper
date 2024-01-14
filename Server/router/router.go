@@ -4,6 +4,7 @@ import (
 	"dungeons_helper/internal/account"
 	"dungeons_helper/internal/alignment"
 	"dungeons_helper/internal/class"
+	"dungeons_helper/internal/races"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -33,6 +34,12 @@ func AlignmentRouter(alignmentHandler *alignment.Handler) Option {
 func ClassRouter(classHandler *class.Handler) Option {
 	return func(r *mux.Router) {
 		r.HandleFunc("/getClasses", classHandler.GetAllClasses).Methods("GET")
+	}
+}
+
+func RacesRouter(racesHandler *races.Handler) Option {
+	return func(r *mux.Router) {
+		r.HandleFunc("/race/getRaces", racesHandler.GetAllRaces).Methods("GET")
 	}
 }
 
