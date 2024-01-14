@@ -3,6 +3,7 @@ package router
 import (
 	"dungeons_helper/internal/account"
 	"dungeons_helper/internal/alignment"
+	"dungeons_helper/internal/class"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -26,6 +27,12 @@ func AccountRouter(accountHandler *account.Handler) Option {
 func AlignmentRouter(alignmentHandler *alignment.Handler) Option {
 	return func(r *mux.Router) {
 		r.HandleFunc("/getAlignments", alignmentHandler.GetAllAlignments).Methods("GET")
+	}
+}
+
+func ClassRouter(classHandler *class.Handler) Option {
+	return func(r *mux.Router) {
+		r.HandleFunc("/getClasses", classHandler.GetAllClasses).Methods("GET")
 	}
 }
 
