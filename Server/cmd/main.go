@@ -3,6 +3,7 @@ package main
 import (
 	"dungeons_helper/db"
 	"dungeons_helper/internal/account"
+	"dungeons_helper/internal/alignment"
 	"dungeons_helper/router"
 	"log"
 )
@@ -15,9 +16,11 @@ func main() {
 	}
 
 	accountHandler := account.NewHandler(account.NewService(account.NewRepository(dbConn.GetDB())))
+	alignmentHandler := alignment.NewHandler(alignment.NewService(alignment.NewRepository(dbConn.GetDB())))
 
 	r := router.InitRouter(
-		router.AccountRoutes(accountHandler),
+		router.AccountRouter(accountHandler),
+		router.AlignmentRouter(alignmentHandler),
 	)
 
 	log.Printf("Server started")

@@ -2,6 +2,7 @@ package router
 
 import (
 	"dungeons_helper/internal/account"
+	"dungeons_helper/internal/alignment"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -9,7 +10,7 @@ import (
 
 type Option func(router *mux.Router)
 
-func AccountRoutes(accountHandler *account.Handler) Option {
+func AccountRouter(accountHandler *account.Handler) Option {
 	return func(r *mux.Router) {
 		r.HandleFunc("/auth/registration", accountHandler.CreateAccount).Methods("POST")
 		r.HandleFunc("/auth/byEmail", accountHandler.Login).Methods("POST")
@@ -19,6 +20,12 @@ func AccountRoutes(accountHandler *account.Handler) Option {
 		r.HandleFunc("/account/change/nickname", accountHandler.UpdateNickname).Methods("PATCH")
 		r.HandleFunc("/account/change/password", accountHandler.UpdatePassword).Methods("PATCH")
 		r.HandleFunc("/account/change/avatar", accountHandler.UpdateAvatar).Methods("PATCH")
+	}
+}
+
+func AlignmentRouter(alignmentHandler *alignment.Handler) Option {
+	return func(r *mux.Router) {
+		r.HandleFunc("/getAlignments", alignmentHandler.GetAllAlignments).Methods("GET")
 	}
 }
 
