@@ -43,4 +43,8 @@ class AccountMain : Fragment() {
         _binding = null
     }
 
+    override fun onStart() {
+        super.onStart()
+//        val exitBtn = binding.exitBtn
+    }
 }

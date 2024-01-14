@@ -12,5 +12,92 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/edit_btn"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_gravity="left|right"
+        android:layout_margin="16dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="Редактировать аккаунт"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_edit_24" />
 
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exAcc_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:text="Выйти из аккаунта"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/changePwd_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="Изменить пароль"
+        app:layout_constraintBottom_toTopOf="@+id/exAcc_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="190dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/baseline_cruelty_free_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/nick"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="160dp"
+        android:text="Игровой ник"
+        app:layout_constraintBottom_toTopOf="@+id/changePwd_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/nickFill"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="130dp"
+        android:text="Пример"
+        app:layout_constraintBottom_toTopOf="@+id/changePwd_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/email"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="100dp"
+        android:text="Почта"
+        app:layout_constraintBottom_toTopOf="@+id/changePwd_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/emailFill"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="70dp"
+        android:text="Пример"
+        app:layout_constraintBottom_toTopOf="@+id/changePwd_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
