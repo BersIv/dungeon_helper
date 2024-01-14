@@ -23,6 +23,43 @@
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.example.dungeon_helper.fragments.main.AccountMain"
-        tools:layout="@layout/fragment_account_main" />
+        tools:layout="@layout/fragment_account_main" >
+        <action
+            android:id="@+id/action_navigation_account_to_accountEdit"
+            app:destination="@id/accountEdit" />
+        <action
+            android:id="@+id/action_navigation_account_to_authRestorePwd4"
+            app:destination="@id/authRestorePwd4" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountEdit"
+        android:name="com.example.dungeon_helper.fragments.main.AccountEdit"
+        android:label="fragment_account_edit"
+        tools:layout="@layout/fragment_account_edit" >
+        <action
+            android:id="@+id/action_accountEdit_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
+    <fragment
+        android:id="@+id/authRestorePwd22"
+        android:name="com.example.dungeon_helper.fragments.auth.AuthRestorePwd2"
+        android:label="fragment_auth_restore_pwd2"
+        tools:layout="@layout/fragment_auth_restore_pwd2" >
+        <action
+            android:id="@+id/action_authRestorePwd22_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
+    <fragment
+        android:id="@+id/authRestorePwd4"
+        android:name="com.example.dungeon_helper.fragments.auth.AuthRestorePwd"
+        android:label="fragment_auth_restore_pwd"
+        tools:layout="@layout/fragment_auth_restore_pwd" >
+        <action
+            android:id="@+id/action_authRestorePwd4_to_authRestorePwd22"
+            app:destination="@id/authRestorePwd22" />
+        <action
+            android:id="@+id/action_authRestorePwd4_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
 
 </navigation>
