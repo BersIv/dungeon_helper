@@ -13,9 +13,9 @@ type Lobby struct {
 }
 
 type GetLobbyRes struct {
-	Id          int64  `json:"id"`
-	LobbyName   string `json:"lobbyName"`
-	LobbyMaster string `json:"lobbyMaster"`
+	Id             int64  `json:"id"`
+	LobbyName      string `json:"lobbyName"`
+	PlayersInLobby string `json:"playersInLobby"`
 }
 
 type Repository interface {

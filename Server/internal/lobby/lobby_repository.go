@@ -19,7 +19,7 @@ func (r *repository) GetAllLobby(ctx context.Context) ([]GetLobbyRes, error) {
 	query := `SELECT l.id, l.lobbyName, count(ac.idAcc) FROM lobby l 
     LEFT JOIN accLobby ac on l.id = ac.idLobby 
     LEFT JOIN account a on ac.idAcc = a.id
-	GROUP BY l.id, l.lobbyName`
+	GROUP BY l.id, l.lobbyName, a.id`
 
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
@@ -28,7 +28,7 @@ func (r *repository) GetAllLobby(ctx context.Context) ([]GetLobbyRes, error) {
 
 	for rows.Next() {
 		var lobby GetLobbyRes
-		err := rows.Scan(&lobby.Id, &lobby.LobbyName, &lobby.LobbyMaster)
+		err := rows.Scan(&lobby.Id, &lobby.LobbyName, &lobby.PlayersInLobby)
 		if err != nil {
 			return nil, err
 		}

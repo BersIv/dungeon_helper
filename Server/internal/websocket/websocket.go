@@ -101,7 +101,6 @@ func (h *Handler) JoinLobby(w http.ResponseWriter, r *http.Request) {
 	}
 
 	h.Reg(w, r, accountId, int64(idLobby), nickname)
-
 }
 
 func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, idLobby int64, nickname string) {
