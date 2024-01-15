@@ -180,7 +180,8 @@ func (s *service) UpdateAvatar(c context.Context, req *UpdateAvatarReq) error {
 
 func newToken(res *Account) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, util.MyJWTClaims{
-		Id: res.Id,
+		Id:       res.Id,
+		Nickname: res.Nickname,
 		RegisteredClaims: jwt.RegisteredClaims{
 			Issuer:    strconv.Itoa(int(res.Id)),
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24 * 7)),
