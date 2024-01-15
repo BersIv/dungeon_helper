@@ -7,22 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.R
-import com.example.dungeon_helper.databinding.FragmentAccountEditBinding
+import com.example.dungeon_helper.MainActivity
+import com.example.dungeon_helper.databinding.FragmentAccountRestorePwd2Binding
 
-class AccountEdit : Fragment() {
+class AccountRestorePwd2 : Fragment() {
 
     companion object {
-        fun newInstance() = AccountEdit()
+        fun newInstance() = AccountRestorePwd2()
     }
 
-    private lateinit var viewModel: AccountEditViewModel
-
-    private var _binding: FragmentAccountEditBinding? = null
+    private lateinit var viewModel: AccountRestorePwd2ViewModel
+    private var _binding: FragmentAccountRestorePwd2Binding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val activity = requireActivity() as MainActivity
@@ -36,12 +36,11 @@ class AccountEdit : Fragment() {
         menuItem2.isVisible = false
         menuItem3.isVisible = false
         menuItem4.isVisible = false
-       val accountEditViewModel = ViewModelProvider(this)[AccountEditViewModel::class.java]
-        _binding = FragmentAccountEditBinding.inflate(inflater, container, false)
-        val root: View =  binding.root
-        val textView: TextView = binding.textAccountEdit
-        accountEditViewModel.text.observe(viewLifecycleOwner)
-        {
+        val accountRestorePwd2ViewModel = ViewModelProvider(this)[AccountRestorePwd2ViewModel::class.java]
+        _binding = FragmentAccountRestorePwd2Binding.inflate(inflater, container, false)
+        val root: View = binding.root
+        val textView: TextView = binding.textRestorePwd2
+        accountRestorePwd2ViewModel.text.observe(viewLifecycleOwner){
             textView.text = it
         }
         return root
@@ -63,18 +62,18 @@ class AccountEdit : Fragment() {
         menuItem4.isVisible = true
     }
 
+
     override fun onStart() {
         super.onStart()
-        val exAccBtn = binding.exAccBtn
-        val exEditBtn = binding.exEditBtn
-        val changePwdBtn = binding.changePwdBtn
+        val backBtn2 = binding.backBtn2
+        val savePwdBtn = binding.savePwdBtn
 
-        exAccBtn.setEnabled(false)
-        changePwdBtn.setEnabled(false)
-        exEditBtn.setOnClickListener{
-            (activity as MainActivity).navController.navigate(R.id.action_accountEdit_to_navigation_account)
+        backBtn2.setOnClickListener{
+            (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd2_to_navigation_account)
         }
-
+        savePwdBtn.setOnClickListener {
+            (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd2_to_navigation_account)
+        }
     }
 
 }
