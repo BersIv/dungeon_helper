@@ -15,7 +15,8 @@ type Lobby struct {
 type GetLobbyRes struct {
 	Id             int64  `json:"id"`
 	LobbyName      string `json:"lobbyName"`
-	PlayersInLobby string `json:"playersInLobby"`
+	Amount         int64  `json:"amount"`
+	PlayersInLobby int64  `json:"playersInLobby"`
 }
 
 type Repository interface {

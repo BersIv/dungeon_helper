@@ -113,6 +113,8 @@ func (c *Client) readCommand(hub *Hub, charRepo character.Repository) {
 			}
 			hub.Broadcast <- cmd
 			fmt.Println(c.Character)
+		case "leave":
+			c.Conn.Close()
 		default:
 			// Обработка неизвестной команды
 			fmt.Println("Unknown command:", command)

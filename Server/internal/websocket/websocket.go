@@ -67,6 +67,10 @@ func (h *Handler) CreateLobby(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	err = tx.Commit()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	idLobby, err := res.LastInsertId()
 	if err != nil {
 		fmt.Println(err)

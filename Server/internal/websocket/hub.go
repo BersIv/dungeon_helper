@@ -57,7 +57,7 @@ func (h *Hub) Run() {
 			_, err = tx.ExecContext(ctx, query, cl.Id, cl.IdLobby)
 			if err != nil {
 				fmt.Println(err)
-				sendErrorMessage(cl.Conn, "Failed to execute query")
+				sendErrorMessage(cl.Conn, err.Error())
 				if rollbackErr := tx.Rollback(); rollbackErr != nil {
 					fmt.Println("Failed to rollback transaction:", rollbackErr)
 				}
@@ -70,7 +70,6 @@ func (h *Hub) Run() {
 			}
 
 		case cl := <-h.LeaveRoom:
-			h.removeFromLobby(cl)
 			ctx := context.Background()
 			tx, err := h.Db.BeginTx(ctx, nil)
 			if err != nil {
@@ -78,16 +77,68 @@ func (h *Hub) Run() {
 				sendErrorMessage(cl.Conn, "Failed to start transaction")
 				continue
 			}
-			query := `DELETE FROM accLobby WHERE idAcc = ? AND idLobby = ?`
-			_, err = tx.ExecContext(ctx, query, cl.Id, cl.IdLobby)
+			var masterId int64
+			query := `SELECT lobbyMasterId FROM lobby WHERE id = ?`
+			err = tx.QueryRowContext(ctx, query, cl.IdLobby).Scan(&masterId)
 			if err != nil {
 				fmt.Println(err)
-				sendErrorMessage(cl.Conn, "Failed to execute query")
+				sendErrorMessage(cl.Conn, err.Error())
 				if rollbackErr := tx.Rollback(); rollbackErr != nil {
 					fmt.Println("Failed to rollback transaction:", rollbackErr)
 				}
 				continue
 			}
+			if masterId == cl.Id {
+				if clients, ok := h.LobbyMembers[cl.IdLobby]; ok {
+					for _, client := range clients {
+						// leaveCmd := &Command{
+						// 	Type:    "leave",
+						// 	Payload: cl.IdLobby,
+						// }
+						// err := client.Conn.WriteJSON(leaveCmd)
+						// if err != nil {
+						// 	sendErrorMessage(client.Conn, err.Error())
+						// 	continue
+						// }
+
+						client.Conn.Close()
+					}
+				}
+
+				// query = `DELETE FROM accLobby WHERE idLobby = ?`
+				// _, err = tx.ExecContext(ctx, query, cl.IdLobby)
+				// if err != nil {
+				// 	fmt.Println(err)
+				// 	sendErrorMessage(cl.Conn, err.Error())
+				// 	if rollbackErr := tx.Rollback(); rollbackErr != nil {
+				// 		fmt.Println("Failed to rollback transaction:", rollbackErr)
+				// 	}
+				// 	continue
+				// }
+				// query = `DELETE FROM lobby WHERE id = ?`
+				// _, err = tx.ExecContext(ctx, query, cl.IdLobby)
+				// if err != nil {
+				// 	fmt.Println(err)
+				// 	sendErrorMessage(cl.Conn, err.Error())
+				// 	if rollbackErr := tx.Rollback(); rollbackErr != nil {
+				// 		fmt.Println("Failed to rollback transaction:", rollbackErr)
+				// 	}
+				// 	continue
+				// }
+			} else {
+				// query = `DELETE FROM accLobby WHERE idAcc = ? AND idLobby = ?`
+				// _, err = tx.ExecContext(ctx, query, cl.Id, cl.IdLobby)
+				// if err != nil {
+				// 	fmt.Println(err)
+				// 	sendErrorMessage(cl.Conn, err.Error())
+				// 	if rollbackErr := tx.Rollback(); rollbackErr != nil {
+				// 		fmt.Println("Failed to rollback transaction:", rollbackErr)
+				// 	}
+				// 	continue
+				// }
+			}
+			h.removeFromLobby(cl)
+
 			if err := tx.Commit(); err != nil {
 				fmt.Println(err)
 				sendErrorMessage(cl.Conn, err.Error())
@@ -138,6 +189,41 @@ func (h *Hub) removeFromLobby(cl *Client) {
 		for i, client := range clients {
 			if client.Id == cl.Id {
 				h.LobbyMembers[lobbyID] = append(clients[:i], clients[i+1:]...)
+				ctx := context.Background()
+				tx, err := h.Db.BeginTx(ctx, nil)
+				if err != nil {
+					fmt.Println(err)
+					sendErrorMessage(cl.Conn, "Failed to start transaction")
+					continue
+				}
+				query := `DELETE FROM accLobby WHERE idLobby = ?`
+				_, err = tx.ExecContext(ctx, query, cl.IdLobby)
+				if err != nil {
+					fmt.Println(err)
+					sendErrorMessage(cl.Conn, err.Error())
+					if rollbackErr := tx.Rollback(); rollbackErr != nil {
+						fmt.Println("Failed to rollback transaction:", rollbackErr)
+					}
+					continue
+				}
+				if len(h.LobbyMembers[lobbyID]) == 0 {
+					delete(h.LobbyMembers, lobbyID)
+					query = `DELETE FROM lobby WHERE id = ?`
+					_, err = tx.ExecContext(ctx, query, cl.IdLobby)
+					if err != nil {
+						fmt.Println(err)
+						sendErrorMessage(cl.Conn, err.Error())
+						if rollbackErr := tx.Rollback(); rollbackErr != nil {
+							fmt.Println("Failed to rollback transaction:", rollbackErr)
+						}
+						continue
+					}
+				}
+				if err := tx.Commit(); err != nil {
+					fmt.Println(err)
+					sendErrorMessage(cl.Conn, err.Error())
+					continue
+				}
 				return
 			}
 		}

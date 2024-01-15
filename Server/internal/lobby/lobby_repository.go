@@ -16,7 +16,7 @@ func NewRepository(db db.DatabaseTX) Repository {
 func (r *repository) GetAllLobby(ctx context.Context) ([]GetLobbyRes, error) {
 	var lobbyList []GetLobbyRes
 
-	query := `SELECT l.id, l.lobbyName, count(ac.idAcc) FROM lobby l 
+	query := `SELECT l.id, l.lobbyName, l.amount, count(ac.idAcc) FROM lobby l 
     LEFT JOIN accLobby ac on l.id = ac.idLobby 
     LEFT JOIN account a on ac.idAcc = a.id
 	GROUP BY l.id, l.lobbyName, a.id`
@@ -28,7 +28,7 @@ func (r *repository) GetAllLobby(ctx context.Context) ([]GetLobbyRes, error) {
 
 	for rows.Next() {
 		var lobby GetLobbyRes
-		err := rows.Scan(&lobby.Id, &lobby.LobbyName, &lobby.PlayersInLobby)
+		err := rows.Scan(&lobby.Id, &lobby.LobbyName, &lobby.Amount, &lobby.PlayersInLobby)
 		if err != nil {
 			return nil, err
 		}
