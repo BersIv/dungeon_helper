@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.dungeon_helper.MainActivity
 import android.widget.TextView
+import com.example.dungeon_helper.AuthActivity
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentAccountMainBinding
+import android.content.Intent
 
 class AccountMain : Fragment() {
 
@@ -56,8 +58,9 @@ class AccountMain : Fragment() {
         editBtn.setOnClickListener{
             (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
         }
-        //exAccBtn.setOnClickListener {
-        //    (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_authMain)
-        //}
+        exAccBtn.setOnClickListener {
+            val intent = Intent(requireActivity(), AuthActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
