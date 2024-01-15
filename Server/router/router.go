@@ -5,6 +5,7 @@ import (
 	"dungeons_helper/internal/alignment"
 	"dungeons_helper/internal/character"
 	"dungeons_helper/internal/class"
+	"dungeons_helper/internal/lobby"
 	"dungeons_helper/internal/races"
 	"dungeons_helper/internal/skills"
 	"dungeons_helper/internal/stats"
@@ -71,6 +72,12 @@ func CharacterRouter(characterHandler *character.Handler) Option {
 		r.HandleFunc("/getAllCharactersByAccId", characterHandler.GetAllCharactersByAccId).Methods("GET")
 		r.HandleFunc("/getCharacterById", characterHandler.GetCharacterById).Methods("GET")
 		r.HandleFunc("/createCharacter", characterHandler.CreateCharacter).Methods("POST")
+	}
+}
+
+func LobbyRouter(lobbyHandler *lobby.Handler) Option {
+	return func(r *mux.Router) {
+		r.HandleFunc("/getAllLobby", lobbyHandler.GetAllLobby).Methods("POST")
 	}
 }
 
