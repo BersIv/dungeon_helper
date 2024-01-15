@@ -6,6 +6,8 @@ import (
 	"dungeons_helper/internal/alignment"
 	"dungeons_helper/internal/class"
 	"dungeons_helper/internal/races"
+	"dungeons_helper/internal/stats"
+	"dungeons_helper/internal/subraces"
 	"dungeons_helper/router"
 	"log"
 )
@@ -21,12 +23,16 @@ func main() {
 	alignmentHandler := alignment.NewHandler(alignment.NewService(alignment.NewRepository(dbConn.GetDB())))
 	classHandler := class.NewHandler(class.NewService(class.NewRepository(dbConn.GetDB())))
 	racesHandler := races.NewHandler(races.NewService(races.NewRepository(dbConn.GetDB())))
+	subracesHandler := subraces.NewHandler(subraces.NewService(subraces.NewRepository(dbConn.GetDB())))
+	statsHandler := stats.NewHandler(stats.NewService(stats.NewRepository(dbConn.GetDB())))
 
 	r := router.InitRouter(
 		router.AccountRouter(accountHandler),
 		router.AlignmentRouter(alignmentHandler),
 		router.ClassRouter(classHandler),
 		router.RacesRouter(racesHandler),
+		router.SubracesRouter(subracesHandler),
+		router.StatsRouter(statsHandler),
 	)
 
 	log.Printf("Server started")
