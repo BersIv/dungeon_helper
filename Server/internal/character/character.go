@@ -74,6 +74,8 @@ type Repository interface {
 	GetAllCharactersByAccId(ctx context.Context, idAcc int64) ([]Character, error)
 	GetCharacterById(ctx context.Context, id int64) (*Character, error)
 	CreateCharacter(ctx context.Context, character *CreateCharacterReq) error
+	UpdateCharacterHpById(ctx context.Context, id int64, hp int64) error
+	UpdateCharacterExpById(ctx context.Context, id int64, exp int64) error
 }
 
 type Service interface {
