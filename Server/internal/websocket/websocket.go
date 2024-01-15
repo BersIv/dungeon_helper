@@ -6,11 +6,12 @@ import (
 	"dungeons_helper/util"
 	"errors"
 	"fmt"
-	"github.com/go-sql-driver/mysql"
-	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/go-sql-driver/mysql"
+	"github.com/gorilla/websocket"
 )
 
 type Handler struct {
