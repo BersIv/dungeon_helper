@@ -45,10 +45,10 @@ func (s *service) CreateAccount(c context.Context, req *CreateAccountReq) error 
 		return err
 	}
 
-	err = sendWelcomeEmail(req.Email)
-	if err != nil {
-		return err
-	}
+	// err = sendWelcomeEmail(req.Email)
+	// if err != nil {
+	// 	return err
+	// }
 
 	return nil
 }
