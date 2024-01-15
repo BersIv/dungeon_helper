@@ -10,6 +10,45 @@
     <TextView
         android:id="@+id/text_info"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Поиск главы"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="172dp"
+            android:layout_below="@id/searchView"
+            android:layout_marginTop="30dp"
+            android:padding="16dp" />
+
+
+
+
+    </RelativeLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/emailFill"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="580dp"
+        android:text="ДНД"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
