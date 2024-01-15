@@ -5,6 +5,7 @@ import (
 	"dungeons_helper/internal/alignment"
 	"dungeons_helper/internal/class"
 	"dungeons_helper/internal/races"
+	"dungeons_helper/internal/skills"
 	"dungeons_helper/internal/stats"
 	"dungeons_helper/internal/subraces"
 	"net/http"
@@ -54,6 +55,12 @@ func SubracesRouter(subracesHandler *subraces.Handler) Option {
 func StatsRouter(statsHandler *stats.Handler) Option {
 	return func(r *mux.Router) {
 		r.HandleFunc("/getStatsById", statsHandler.GetStatsById).Methods("GET")
+	}
+}
+
+func SkillsRouter(skillHandler *skills.Handler) Option {
+	return func(r *mux.Router) {
+		r.HandleFunc("/getSkills", skillHandler.GetAllSkills).Methods("GET")
 	}
 }
 
