@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
 
     //private lateinit var bottomNavigationView: BottomNavigationView
+    fun getNavView(): BottomNavigationView {
+        return binding.navView
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
