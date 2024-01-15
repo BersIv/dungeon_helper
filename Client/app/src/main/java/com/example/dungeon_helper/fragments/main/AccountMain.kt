@@ -50,9 +50,9 @@ class AccountMain : Fragment() {
         val changePwdBtn = binding.changePwdBtn
         val exAccBtn = binding.exAccBtn
         val editBtn = binding.editBtn
-        // changePwdBtn.setOnClickListener {
-        //  (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_authRestorePwd4)
-        //  }
+        changePwdBtn.setOnClickListener {
+          (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountRestorePwd)
+         }
         editBtn.setOnClickListener{
             (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
         }
