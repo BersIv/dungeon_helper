@@ -6,13 +6,19 @@ import (
 )
 
 type Subraces struct {
-	Id          int64       `json:"id"`
-	SubraceName string      `json:"raceName"`
-	Stats       stats.Stats `json:"idStats"`
+	Id          int64             `json:"id"`
+	SubraceName string            `json:"raceName"`
+	Stats       stats.GetStatsRes `json:"stats"`
 }
 
 type RaceId struct {
 	RaceId int64 `json:"raceId"`
+}
+
+type CreateCharReq struct {
+	Id          int64             `json:"id"`
+	SubraceName string            `json:"raceName"`
+	Stats       stats.GetStatsRes `json:"Stats"`
 }
 
 type Repository interface {

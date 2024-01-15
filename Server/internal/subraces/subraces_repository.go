@@ -28,7 +28,7 @@ func (r *repository) GetAllSubraces(ctx context.Context, idRace int64) ([]Subrac
 	defer func(rows *sql.Rows) {
 		err := rows.Close()
 		if err != nil {
-
+			return
 		}
 	}(rows)
 	for rows.Next() {
