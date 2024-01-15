@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.dungeon_helper.MainActivity
 import android.widget.TextView
+import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentAccountMainBinding
 
 class AccountMain : Fragment() {
@@ -45,6 +47,17 @@ class AccountMain : Fragment() {
 
     override fun onStart() {
         super.onStart()
-//        val exitBtn = binding.exitBtn
+        val changePwdBtn = binding.changePwdBtn
+        val exAccBtn = binding.exAccBtn
+        val editBtn = binding.editBtn
+        // changePwdBtn.setOnClickListener {
+        //  (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_authRestorePwd4)
+        //  }
+        editBtn.setOnClickListener{
+            (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
+        }
+        //exAccBtn.setOnClickListener {
+        //    (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_authMain)
+        //}
     }
 }
