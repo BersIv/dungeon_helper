@@ -2,9 +2,13 @@ package com.example.dungeon_helper.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.dungeon_helper.MainActivity
@@ -56,6 +60,39 @@ class InfoAllChapters : Fragment() {
         gameChaptersView.setOnClickListener {
             (activity as MainActivity).navController.navigate(R.id.action_infoAllChapters_to_infoChapter1Content)
         }
+        val searchView = binding.searchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    return true
+                }
+
+                val gameChaptersText = gameChaptersView.text.toString()
+                val spannableString = SpannableString(gameChaptersText)
+
+                // Используйте ForegroundColorSpan для выделения текста
+                val startIndex = gameChaptersText.indexOf(newText, ignoreCase = true)
+                val endIndex = startIndex + newText.length
+
+                if (startIndex != -1) {
+                    spannableString.setSpan(
+                        ForegroundColorSpan(resources.getColor(R.color.purple_700)),
+                        startIndex,
+                        endIndex,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+
+                // Установите текст с использованием SpannableString
+                gameChaptersView.text = spannableString
+
+                return true
+            }
+        })
 
     }
 

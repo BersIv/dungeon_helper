@@ -1,11 +1,14 @@
 package com.example.dungeon_helper.fragments.main
-
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.MainActivity
@@ -43,6 +46,48 @@ class InfoChapter1Content : Fragment() {
         backBtn.setOnClickListener{
             (activity as MainActivity).navController.navigate(R.id.action_infoChapter1Content_to_infoAllChapters)
         }
+        val chapterSearchView = binding.chapterSearchView
+        val chapterContent = binding.chapterContent
+        chapterSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val contentText = chapterContent.text.toString()
+
+
+                chapterContent.text = SpannableString.valueOf(contentText)
+
+
+                if (newText.isNullOrEmpty()) {
+                    return true
+                }
+
+                val spannableString = SpannableString(contentText)
+
+
+                val startIndex = contentText.indexOf(newText, ignoreCase = true)
+                val endIndex = startIndex + newText.length
+
+
+                if (startIndex != -1) {
+                    spannableString.setSpan(
+                        ForegroundColorSpan(resources.getColor(R.color.purple_700)),
+                        startIndex,
+                        endIndex,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+
+
+                chapterContent.text = spannableString
+
+                return true
+            }
+        })
     }
+
 
 }
