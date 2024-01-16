@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/navigation_info"
         android:name="com.example.dungeon_helper.fragments.main.InfoMain"
-        tools:layout="@layout/fragment_info_main" />
+        tools:layout="@layout/fragment_info_main" >
+        <action
+            android:id="@+id/action_navigation_info_to_infoVers"
+            app:destination="@id/infoVers" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_character"
@@ -60,6 +64,42 @@
         <action
             android:id="@+id/action_accountRestorePwd2_to_navigation_account"
             app:destination="@id/navigation_account" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoVers"
+        android:name="com.example.dungeon_helper.fragments.main.InfoVers"
+        android:label="fragment_info_vers"
+        tools:layout="@layout/fragment_info_vers" >
+        <action
+            android:id="@+id/action_infoVers_to_navigation_info"
+            app:destination="@id/navigation_info" />
+        <action
+            android:id="@+id/action_infoVers_to_infoAllChapters"
+            app:destination="@id/infoAllChapters" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoAllChapters"
+        android:name="com.example.dungeon_helper.fragments.main.InfoAllChapters"
+        android:label="fragment_info_all_chapters"
+        tools:layout="@layout/fragment_info_all_chapters" >
+        <action
+            android:id="@+id/action_infoAllChapters_to_infoVers"
+            app:destination="@id/infoVers" />
+        <action
+            android:id="@+id/action_infoAllChapters_to_navigation_info"
+            app:destination="@id/navigation_info" />
+        <action
+            android:id="@+id/action_infoAllChapters_to_infoChapter1Content"
+            app:destination="@id/infoChapter1Content" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoChapter1Content"
+        android:name="com.example.dungeon_helper.fragments.main.InfoChapter1Content"
+        android:label="fragment_info_chapter1_content"
+        tools:layout="@layout/fragment_info_chapter1_content" >
+        <action
+            android:id="@+id/action_infoChapter1Content_to_infoAllChapters"
+            app:destination="@id/infoAllChapters" />
     </fragment>
 
 </navigation>

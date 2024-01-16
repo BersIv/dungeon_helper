@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.SearchView
+import com.example.dungeon_helper.R
+import androidx.recyclerview.widget.RecyclerView
+import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.databinding.FragmentInfoMainBinding
 
 class InfoMain : Fragment() {
@@ -19,6 +23,7 @@ class InfoMain : Fragment() {
 
     private var _binding: FragmentInfoMainBinding? = null
     private  val binding get() = _binding!!
+    private lateinit var gameTitleView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,12 +40,22 @@ class InfoMain : Fragment() {
             textView.text = it
         }
 
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        gameTitleView = binding.gameTitle
+        gameTitleView.setOnClickListener {
+            (activity as MainActivity).navController.navigate(R.id.action_navigation_info_to_infoVers)
+        }
+
     }
 
 }
