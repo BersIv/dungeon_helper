@@ -52,8 +52,8 @@ type UpdateNicknameReq struct {
 }
 
 type UpdatePasswordReq struct {
-	Id          int64  `json:"id"`
-	OldPassword string `json:"oldPassword"`
+	Id int64 `json:"id"`
+	//	OldPassword string `json:"oldPassword"`
 	NewPassword string `json:"newPassword"`
 }
 

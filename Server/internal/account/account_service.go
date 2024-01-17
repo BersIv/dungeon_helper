@@ -141,10 +141,10 @@ func (s *service) UpdatePassword(c context.Context, req *UpdatePasswordReq) erro
 		return err
 	}
 
-	err = util.CheckPassword(req.OldPassword, account.Password)
-	if err != nil {
-		return err
-	}
+	// err = util.CheckPassword(req.OldPassword, account.Password)
+	// if err != nil {
+	// 	return err
+	// }
 
 	hashedPassword, err := util.HashPassword(req.NewPassword)
 	if err != nil {
