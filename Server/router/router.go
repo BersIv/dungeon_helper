@@ -23,7 +23,7 @@ func AccountRouter(accountHandler *account.Handler) Option {
 	return func(r *mux.Router) {
 		r.HandleFunc("/auth/registration", accountHandler.CreateAccount).Methods("POST")
 		r.HandleFunc("/auth/byEmail", accountHandler.Login).Methods("POST")
-		r.HandleFunc("/logout", accountHandler.Logout).Methods("POST")
+		r.HandleFunc("/auth/logout", accountHandler.Logout).Methods("POST")
 		r.HandleFunc("/auth/google/login", accountHandler.LoginGoogle).Methods("POST")
 		r.HandleFunc("/auth/restorePassword", accountHandler.RestorePassword).Methods("POST")
 		r.HandleFunc("/account/change/nickname", accountHandler.UpdateNickname).Methods("PATCH")
