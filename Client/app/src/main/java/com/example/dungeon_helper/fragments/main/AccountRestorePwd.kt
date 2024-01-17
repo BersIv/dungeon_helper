@@ -50,17 +50,7 @@ class AccountRestorePwd : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        val activity = requireActivity() as MainActivity
-        val navView = activity.getNavView()
-        val menu = navView.menu
-        val menuItem1 = menu.findItem(R.id.navigation_info)
-        val menuItem2 = menu.findItem(R.id.navigation_character)
-        val menuItem3 = menu.findItem(R.id.navigation_lobby)
-        val menuItem4 = menu.findItem(R.id.navigation_account)
-        menuItem1.isVisible = true
-        menuItem2.isVisible = true
-        menuItem3.isVisible = true
-        menuItem4.isVisible = true
+
     }
 
     override fun onStart() {
@@ -69,7 +59,19 @@ class AccountRestorePwd : Fragment() {
         val restoreBtn = binding.restoreBtn
 
         backBtn.setOnClickListener {
+            val activity = requireActivity() as MainActivity
+            val navView = activity.getNavView()
+            val menu = navView.menu
+            val menuItem1 = menu.findItem(R.id.navigation_info)
+            val menuItem2 = menu.findItem(R.id.navigation_character)
+            val menuItem3 = menu.findItem(R.id.navigation_lobby)
+            val menuItem4 = menu.findItem(R.id.navigation_account)
+            menuItem1.isVisible = true
+            menuItem2.isVisible = true
+            menuItem3.isVisible = true
+            menuItem4.isVisible = true
             (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd_to_navigation_account)
+
         }
         restoreBtn.setOnClickListener {
             (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd_to_accountRestorePwd2)

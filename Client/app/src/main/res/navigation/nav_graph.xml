@@ -17,7 +17,11 @@
     <fragment
         android:id="@+id/navigation_character"
         android:name="com.example.dungeon_helper.fragments.main.CharacterMain"
-        tools:layout="@layout/fragment_character_main" />
+        tools:layout="@layout/fragment_character_main" >
+        <action
+            android:id="@+id/action_navigation_character_to_characterCreate1"
+            app:destination="@id/characterCreate1" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_lobby"
@@ -125,6 +129,90 @@
         <action
             android:id="@+id/action_lobbyList_to_navigation_lobby"
             app:destination="@id/navigation_lobby" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreate1"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate1"
+        android:label="fragment_character_create1"
+        tools:layout="@layout/fragment_character_create1" >
+        <action
+            android:id="@+id/action_characterCreate1_to_navigation_character"
+            app:destination="@id/navigation_character" />
+        <action
+            android:id="@+id/action_characterCreate1_to_characterCreate2"
+            app:destination="@id/characterCreate2" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreate2"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate2"
+        android:label="fragment_character_create2"
+        tools:layout="@layout/fragment_character_create2" >
+        <action
+            android:id="@+id/action_characterCreate2_to_characterCreate1"
+            app:destination="@id/characterCreate1" />
+        <action
+            android:id="@+id/action_characterCreate2_to_characterCreate3"
+            app:destination="@id/characterCreate3" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreate3"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate3"
+        android:label="fragment_character_create3"
+        tools:layout="@layout/fragment_character_create3" >
+        <action
+            android:id="@+id/action_characterCreate3_to_characterCreate2"
+            app:destination="@id/characterCreate2" />
+        <action
+            android:id="@+id/action_characterCreate3_to_characterCreate4"
+            app:destination="@id/characterCreate4" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreate4"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate4"
+        android:label="fragment_character_create4"
+        tools:layout="@layout/fragment_character_create4" >
+        <action
+            android:id="@+id/action_characterCreate4_to_characterCreate3"
+            app:destination="@id/characterCreate3" />
+        <action
+            android:id="@+id/action_characterCreate4_to_characterCreate5"
+            app:destination="@id/characterCreate5" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreate5"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate5"
+        android:label="fragment_character_create5"
+        tools:layout="@layout/fragment_character_create5" >
+        <action
+            android:id="@+id/action_characterCreate5_to_characterCreate4"
+            app:destination="@id/characterCreate4" />
+        <action
+            android:id="@+id/action_characterCreate5_to_characterCreate6"
+            app:destination="@id/characterCreate6" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreate6"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate6"
+        android:label="fragment_character_create6"
+        tools:layout="@layout/fragment_character_create6" >
+        <action
+            android:id="@+id/action_characterCreate6_to_characterCreate5"
+            app:destination="@id/characterCreate5" />
+        <action
+            android:id="@+id/action_characterCreate6_to_characterCreate7"
+            app:destination="@id/characterCreate7" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreate7"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate7"
+        android:label="fragment_character_create7"
+        tools:layout="@layout/fragment_character_create7" >
+        <action
+            android:id="@+id/action_characterCreate7_to_navigation_character"
+            app:destination="@id/navigation_character" />
+        <action
+            android:id="@+id/action_characterCreate7_to_characterCreate6"
+            app:destination="@id/characterCreate6" />
     </fragment>
 
 </navigation>

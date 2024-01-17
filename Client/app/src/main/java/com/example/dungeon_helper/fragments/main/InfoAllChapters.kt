@@ -74,7 +74,7 @@ class InfoAllChapters : Fragment() {
                 val gameChaptersText = gameChaptersView.text.toString()
                 val spannableString = SpannableString(gameChaptersText)
 
-                // Используйте ForegroundColorSpan для выделения текста
+
                 val startIndex = gameChaptersText.indexOf(newText, ignoreCase = true)
                 val endIndex = startIndex + newText.length
 
@@ -87,7 +87,7 @@ class InfoAllChapters : Fragment() {
                     )
                 }
 
-                // Установите текст с использованием SpannableString
+
                 gameChaptersView.text = spannableString
 
                 return true
