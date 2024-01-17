@@ -34,8 +34,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="466" />
-                            <option name="y" value="674" />
+                            <option name="x" value="194" />
+                            <option name="y" value="836" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -60,8 +60,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="643" />
-                            <option name="y" value="672" />
+                            <option name="x" value="495" />
+                            <option name="y" value="831" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -222,6 +222,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_characterCreate6_to_characterCreate7">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -235,6 +240,20 @@
                             <option name="x" value="1196" />
                             <option name="y" value="-296" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_characterCreate7_to_characterCreate6">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_characterCreate7_to_navigation_character">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -343,8 +362,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-267" />
-                            <option name="y" value="983" />
+                            <option name="x" value="-246" />
+                            <option name="y" value="1033" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -376,6 +395,11 @@
                               </value>
                             </entry>
                             <entry key="action_navigation_account_to_accountRestorePwd">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_account_to_accountRestorePwd2">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -494,7 +518,7 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
+                            <option name="x" value="272" />
                             <option name="y" value="368" />
                           </Point>
                         </option>
@@ -526,6 +550,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_authRestorePwd_to_authRestorePwd2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -536,9 +565,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="467" />
-                            <option name="y" value="11" />
+                            <option name="x" value="479" />
+                            <option name="y" value="12" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_authRestorePwd2_to_auth">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

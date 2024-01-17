@@ -14,20 +14,27 @@ class SharedViewModel: ViewModel() {
 
     val token = MutableLiveData<String>()
     val email = MutableLiveData<String>()
-    var nickname = MutableLiveData<String>()
+    val nickname = MutableLiveData<String>()
     val avatar = MutableLiveData<String>()
+    val mailChangePwd = MutableLiveData<String>()
+    val mailRestorePwd = MutableLiveData<String>()
 
     fun getData(string: String) {
+        println(string)
         val pairs = string.split(",")
+        println(pairs)
         if (pairs.isNotEmpty()) {
             val list = ArrayList<String>()
             for (pair in pairs) {
                 val pair = pair.trim().split(":")
+                println(pair)
                 list.add(pair[1])
             }
-            email.value = list[1]
-            nickname.value = list[2]
-            avatar.value = list[3]
+            println(list)
+            println(list[1])
+            email.value = list[1].removeSurrounding("\"")
+            nickname.value = list[2].removeSurrounding("\"")
+            avatar.value = list[3].removeSurrounding("\"")
         }
 
     }

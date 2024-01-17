@@ -1,13 +1,16 @@
 package com.example.dungeon_helper
 
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dungeon_helper.databinding.ActivityMainBinding
+import com.example.dungeon_helper.fragments.main.AccountMain
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /*
@@ -46,5 +49,24 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        supportActionBar?.hide()
+
+        val receivedData = intent.getStringExtra("key")
+
+        val sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
+
+        sharedViewModel.token.value = intent.getStringExtra("token")
+        sharedViewModel.email.value = intent.getStringExtra("mail")
+        sharedViewModel.nickname.value = intent.getStringExtra("nick")
+        sharedViewModel.avatar.value = intent.getStringExtra("avatar")
+
+//        // Создание фрагмента и передача данных через метод
+//        val fragment = AccountMain()
+//        fragment.receiveData(receivedData)
+//
+//        // Заменить или добавить фрагмент в контейнер
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.containerMain, fragment)
+//            .commit()
     }
 }

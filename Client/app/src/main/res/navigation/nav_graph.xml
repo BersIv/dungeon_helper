@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_navigation_account_to_accountRestorePwd"
             app:destination="@id/accountRestorePwd" />
+        <action
+            android:id="@+id/action_navigation_account_to_accountRestorePwd2"
+            app:destination="@id/accountRestorePwd2" />
     </fragment>
     <fragment
         android:id="@+id/accountEdit"

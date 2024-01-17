@@ -19,5 +19,6 @@ class LobbyActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         navController = Navigation.findNavController(this, R.id.nav_host_activity_lobby)
+        supportActionBar?.hide()
     }
 }

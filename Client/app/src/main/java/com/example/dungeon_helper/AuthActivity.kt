@@ -20,5 +20,8 @@ class AuthActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         navController = Navigation.findNavController(this, R.id.nav_host_activity_auth)
+        supportActionBar?.hide()
     }
+
+
 }
