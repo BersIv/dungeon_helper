@@ -12,6 +12,8 @@ import com.example.dungeon_helper.AuthActivity
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentAccountMainBinding
 import android.content.Intent
+import androidx.lifecycle.Observer
+import com.example.dungeon_helper.SharedViewModel
 
 class AccountMain : Fragment() {
 
@@ -49,9 +51,27 @@ class AccountMain : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val shared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+
+        var nick = binding.nickFill.text
+        var mail = binding.nickFill.text
+
+        shared.nickname.observe(viewLifecycleOwner, Observer {
+            // updating data in displayMsg
+            nick = it
+        })
+
+        shared.email.observe(viewLifecycleOwner, Observer {
+            // updating data in displayMsg
+            mail = it
+        })
+
         val changePwdBtn = binding.changePwdBtn
         val exAccBtn = binding.exAccBtn
         val editBtn = binding.editBtn
+
+
         changePwdBtn.setOnClickListener {
           (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountRestorePwd)
          }
@@ -59,7 +79,7 @@ class AccountMain : Fragment() {
             (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
         }
         exAccBtn.setOnClickListener {
-            val intent = Intent(requireActivity(), AuthActivity::class.java)
+            val intent = Intent(activity as MainActivity, AuthActivity::class.java)
             startActivity(intent)
         }
     }

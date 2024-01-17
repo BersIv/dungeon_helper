@@ -1,49 +1,44 @@
 package com.example.dungeon_helper.fragments.main
-
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.widget.SearchView
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import androidx.lifecycle.ViewModelProvider
+import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.SearchView
-import com.example.dungeon_helper.R
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dungeon_helper.MainActivity
-import com.example.dungeon_helper.databinding.FragmentInfoMainBinding
+import com.example.dungeon_helper.R
+import com.example.dungeon_helper.databinding.FragmentInfoVersBinding
 
-class InfoMain : Fragment() {
+class InfoVers : Fragment() {
 
     companion object {
-        fun newInstance() = InfoMain()
+        fun newInstance() = InfoVers()
     }
-    private lateinit var viewModel: InfoMainViewModel
 
+    private lateinit var viewModel: InfoVersViewModel
 
-    private var _binding: FragmentInfoMainBinding? = null
-    private  val binding get() = _binding!!
+    private var _binding: FragmentInfoVersBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var gameVersionView: TextView
     private lateinit var gameTitleView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val infoMainViewModel = ViewModelProvider(this)[InfoMainViewModel::class.java]
-
-        _binding = FragmentInfoMainBinding.inflate(inflater, container, false)
+    ): View? {
+       val infoVersViewModel = ViewModelProvider(this)[InfoVersViewModel::class.java]
+        _binding = FragmentInfoVersBinding.inflate(inflater, container,false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textInfo
-        infoMainViewModel.text.observe(viewLifecycleOwner) {
+        val textView:TextView = binding.textInfoVers
+        infoVersViewModel.text.observe(viewLifecycleOwner){
             textView.text = it
         }
-
-
         return root
     }
 
@@ -56,26 +51,27 @@ class InfoMain : Fragment() {
         super.onStart()
         gameTitleView = binding.gameTitle
         gameTitleView.setOnClickListener {
-            (activity as MainActivity).navController.navigate(R.id.action_navigation_info_to_infoVers)
+            (activity as MainActivity).navController.navigate(R.id.action_infoVers_to_navigation_info)
+        }
+        gameVersionView = binding.gameVersion
+        gameVersionView.setOnClickListener {
+            (activity as MainActivity).navController.navigate(R.id.action_infoVers_to_infoAllChapters)
         }
         val searchView = binding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
                 if (newText.isNullOrEmpty()) {
                     return true
                 }
 
-                val gameTitleText = gameTitleView.text.toString()
-                val spannableString = SpannableString(gameTitleText)
+                val gameVersionText = gameVersionView.text.toString()
+                val spannableString = SpannableString(gameVersionText)
 
-
-                val startIndex = gameTitleText.indexOf(newText, ignoreCase = true)
+                val startIndex = gameVersionText.indexOf(newText, ignoreCase = true)
                 val endIndex = startIndex + newText.length
 
                 if (startIndex != -1) {
@@ -87,14 +83,13 @@ class InfoMain : Fragment() {
                     )
                 }
 
-
-                gameTitleView.text = spannableString
+                gameVersionView.text = spannableString
 
                 return true
             }
         })
-
     }
+
 
 
 }

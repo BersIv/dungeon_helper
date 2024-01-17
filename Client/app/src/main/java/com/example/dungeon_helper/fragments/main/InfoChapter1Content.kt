@@ -1,49 +1,37 @@
 package com.example.dungeon_helper.fragments.main
-
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import androidx.lifecycle.ViewModelProvider
+import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.SearchView
+import android.widget.TextView
 import com.example.dungeon_helper.R
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dungeon_helper.MainActivity
-import com.example.dungeon_helper.databinding.FragmentInfoMainBinding
+import com.example.dungeon_helper.databinding.FragmentInfoChapter1ContentBinding
 
-class InfoMain : Fragment() {
+class InfoChapter1Content : Fragment() {
 
     companion object {
-        fun newInstance() = InfoMain()
+        fun newInstance() = InfoChapter1Content()
     }
-    private lateinit var viewModel: InfoMainViewModel
 
-
-    private var _binding: FragmentInfoMainBinding? = null
+    private lateinit var viewModel: InfoChapter1ContentViewModel
+    private var _binding: FragmentInfoChapter1ContentBinding? = null
     private  val binding get() = _binding!!
-    private lateinit var gameTitleView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val infoMainViewModel = ViewModelProvider(this)[InfoMainViewModel::class.java]
-
-        _binding = FragmentInfoMainBinding.inflate(inflater, container, false)
+    ): View? {
+       val infoChapter1ContentViewModel = ViewModelProvider(this)[AccountMainViewModel::class.java]
+        _binding = FragmentInfoChapter1ContentBinding.inflate(inflater, container,false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textInfo
-        infoMainViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
-
         return root
     }
 
@@ -54,29 +42,35 @@ class InfoMain : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        gameTitleView = binding.gameTitle
-        gameTitleView.setOnClickListener {
-            (activity as MainActivity).navController.navigate(R.id.action_navigation_info_to_infoVers)
+        val backBtn = binding.backBtn
+        backBtn.setOnClickListener{
+            (activity as MainActivity).navController.navigate(R.id.action_infoChapter1Content_to_infoAllChapters)
         }
-        val searchView = binding.searchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val chapterSearchView = binding.chapterSearchView
+        val chapterContent = binding.chapterContent
+        chapterSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                val contentText = chapterContent.text.toString()
+
+
+                chapterContent.text = SpannableString.valueOf(contentText)
+
 
                 if (newText.isNullOrEmpty()) {
                     return true
                 }
 
-                val gameTitleText = gameTitleView.text.toString()
-                val spannableString = SpannableString(gameTitleText)
+                val spannableString = SpannableString(contentText)
 
 
-                val startIndex = gameTitleText.indexOf(newText, ignoreCase = true)
+                val startIndex = contentText.indexOf(newText, ignoreCase = true)
                 val endIndex = startIndex + newText.length
+
 
                 if (startIndex != -1) {
                     spannableString.setSpan(
@@ -88,12 +82,11 @@ class InfoMain : Fragment() {
                 }
 
 
-                gameTitleView.text = spannableString
+                chapterContent.text = spannableString
 
                 return true
             }
         })
-
     }
 
 

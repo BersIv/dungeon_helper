@@ -75,6 +75,14 @@ dependencies {
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.code.gson:gson:2.10")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.retrofit2:retrofit:2.7.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.7.1")
+    implementation("androidx.test:runner:1.5.2@aar")
+    implementation("androidx.test.espresso:espresso-core:3.5.1@aar")
+    implementation("junit:junit:4.13.2")
 
 
     implementation("androidx.core:core-ktx:1.12.0")

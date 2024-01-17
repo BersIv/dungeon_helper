@@ -5,14 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.auth.AuthRegistration">
+    tools:context=".fragments.main.LobbyCreate">
 
     <TextView
-        android:id="@+id/textRegistration"
+        android:id="@+id/text_lobbyCreate"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="-110dp" />
+        android:layout_height="match_parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/back_btn"
@@ -25,57 +23,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/appCompatImageView"
-        android:layout_width="190dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/baseline_cruelty_free_24"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создание лобби"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.216" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldNick"
+        android:id="@+id/textFieldName"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="146dp"
         android:layout_height="81dp"
-        android:hint="Ник"
-        app:errorEnabled="true"
+        android:layout_marginTop="40dp"
+        android:hint="Название"
         app:counterEnabled="true"
         app:counterMaxLength="16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView">
-
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldMail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="146dp"
-        android:layout_height="81dp"
-        android:hint="Почта"
         app:errorEnabled="true"
-        app:counterEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/textFieldPwd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldNick">
+        app:layout_constraintTop_toBottomOf="@+id/text">
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,14 +65,16 @@
         android:layout_width="146dp"
         android:layout_height="81dp"
         android:hint="Пароль"
-        app:errorEnabled="true"
         app:counterEnabled="true"
         app:counterMaxLength="16"
         app:endIconMode="password_toggle"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toBottomOf="@+id/text_lobbyCreate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldMail">
+        app:layout_constraintTop_toTopOf="@+id/text_lobbyCreate"
+        app:layout_constraintVertical_bias="0.536">
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
@@ -103,37 +85,39 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldRepPwd"
+        android:id="@+id/textFieldNumber"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="146dp"
         android:layout_height="81dp"
-        android:hint="Повторите пароль"
-        app:errorEnabled="true"
+        android:hint="Кол-во игроков"
         app:counterEnabled="true"
         app:counterMaxLength="16"
-        app:endIconMode="password_toggle"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldPwd">
+        app:layout_constraintTop_toBottomOf="@+id/textFieldPwd"
+        app:layout_constraintVertical_bias="0.15">
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/registration_btn"
+        android:id="@+id/create_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Регистрация"
+        android:text="Создать лобби"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldRepPwd"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintTop_toBottomOf="@+id/textFieldNumber"
+        app:layout_constraintVertical_bias="0.316" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
