@@ -40,7 +40,7 @@ class AuthMain : Fragment() {
         fun newInstance() = AuthMain()
     }
 
-    private lateinit var viewModel: AuthMainViewModel
+    private lateinit var sharedViewModel: SharedViewModel
 
     private var _binding: FragmentAuthMainBinding? = null
     private  val binding get() = _binding!!
@@ -72,7 +72,7 @@ class AuthMain : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val shared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
         val mail = binding.textFieldMail.editText
         val pwd = binding.textFieldPwd.editText
@@ -126,9 +126,10 @@ class AuthMain : Fragment() {
                                 " ${response.code} ${response.message}")
                     }
                     // пример получения конкретного заголовка ответа
-                    println("Account id: ${response.header("id")}")
+                    println("${response.code} ${response.message}")
                     // вывод тела ответа
-                    shared.getData(response.body!!.string())
+                    //println(response.body!!.string())
+                    sharedViewModel.getData(response.body!!.string())
 
                     val cookies = response.headers("Set-Cookie")
                     if (cookies.isNotEmpty()) {
@@ -137,9 +138,13 @@ class AuthMain : Fragment() {
                         editor.putString("Cookie", cookies.joinToString(";"))
                         editor.apply()
 
-                        shared.token.value = getCookieValue()
+                        sharedViewModel.token.value = getCookieValue()
 
                         val intent = Intent(activity as AuthActivity, MainActivity::class.java)
+                        intent.putExtra("token", sharedViewModel.getToken().toString())
+                        intent.putExtra("mail", sharedViewModel.getEmail().toString())
+                        intent.putExtra("nick", sharedViewModel.getNick().toString())
+                        intent.putExtra("avatar", sharedViewModel.getAvatar().toString())
                         startActivity(intent)
                     }
 

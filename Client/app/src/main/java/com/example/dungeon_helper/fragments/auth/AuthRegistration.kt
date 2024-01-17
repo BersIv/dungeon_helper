@@ -115,15 +115,14 @@ class AuthRegistration : Fragment() {
                                 " ${response.code} ${response.message}")
                     }
                     // пример получения конкретного заголовка ответа
-                    println("Server: ${response.header("Server")}")
+                    println("${response.code} ${response.message}")
                     // вывод тела ответа
                     println(response.body!!.string())
+                    (activity as AuthActivity).navController.navigate(R.id.action_authRegistration_to_auth)
 
                 } catch (e: IOException) {
                     println("Ошибка подключения: $e");
                 }
-
-            //(activity as AuthActivity).navController.navigate(R.id.action_authRegistration_to_auth)
             }
         }
     }

@@ -86,6 +86,11 @@ class AccountEdit : Fragment() {
         val changePwdBtn = binding.changePwdBtn
         val newNick = binding.textFieldNick.editText
 
+        shared.email.observe(viewLifecycleOwner, Observer {
+            // updating data in displayMsg
+            binding.emailFill.text = it
+        })
+
         exAccBtn.setEnabled(false)
         changePwdBtn.setEnabled(false)
 
@@ -133,7 +138,7 @@ class AccountEdit : Fragment() {
                                 " ${response.code} ${response.message}")
                     }
                     // пример получения конкретного заголовка ответа
-                    println("Response message: ${response.header("message")}")
+                    println("${response.code} ${response.message}")
                     // вывод тела ответа
                     println(response.body!!.string())
                     shared.nickname.value = newNick?.text.toString()

@@ -1,5 +1,6 @@
 package com.example.dungeon_helper.fragments.main
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,14 +14,26 @@ import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentAccountMainBinding
 import android.content.Intent
 import androidx.lifecycle.Observer
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 import com.example.dungeon_helper.SharedViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.IOException
 
 class AccountMain : Fragment() {
 
     companion object {
         fun newInstance() = AccountMain()
     }
-    private lateinit var viewModel: AccountMainViewModel
+    private lateinit var sharedViewModel: SharedViewModel
 
 
     private var _binding: FragmentAccountMainBinding? = null
@@ -49,23 +62,25 @@ class AccountMain : Fragment() {
         _binding = null
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onStart() {
         super.onStart()
 
-        val shared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+        binding.nickFill.text
 
-        var nick = binding.nickFill.text
-        var mail = binding.nickFill.text
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
-        shared.nickname.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.nickname.observe(viewLifecycleOwner, Observer {
             // updating data in displayMsg
-            nick = it
+            println(it)
+            binding.nickFill.text = it
         })
 
-        shared.email.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.email.observe(viewLifecycleOwner, Observer {
             // updating data in displayMsg
-            mail = it
+            binding.emailFill.text = it
         })
+
 
         val changePwdBtn = binding.changePwdBtn
         val exAccBtn = binding.exAccBtn
@@ -73,14 +88,46 @@ class AccountMain : Fragment() {
 
 
         changePwdBtn.setOnClickListener {
-          (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountRestorePwd)
+          (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountRestorePwd2)
          }
         editBtn.setOnClickListener{
             (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
         }
         exAccBtn.setOnClickListener {
-            val intent = Intent(activity as MainActivity, AuthActivity::class.java)
-            startActivity(intent)
+            GlobalScope.launch(Dispatchers.Main) {
+
+                val client = OkHttpClient()
+
+                val request = Request.Builder()
+                    .url("http://194.247.187.44:5000/auth/logout")
+                    .post("".toRequestBody())
+                    .build()
+
+                try {
+                    val response = withContext(Dispatchers.IO) {
+                        client.newCall(request).execute()
+                    }
+
+                    if (!response.isSuccessful) {
+                        throw IOException("Запрос к серверу не был успешен:" +
+                                " ${response.code} ${response.message}")
+                    }
+                    // пример получения конкретного заголовка ответа
+                    println("${response.code} ${response.message}")
+                    // вывод тела ответа
+                    println(response.body!!.string())
+
+                    val intent = Intent(activity as MainActivity, AuthActivity::class.java)
+                    startActivity(intent)
+
+                } catch (e: IOException) {
+                    println("Ошибка подключения: $e");
+                }
+
+
+            }
+
+
         }
     }
 }
