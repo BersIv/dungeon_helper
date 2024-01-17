@@ -209,3 +209,35 @@ func (r *repository) UpdateCharacterExpById(ctx context.Context, id int64, hp in
 
 	return nil
 }
+
+func (r *repository) SetActiveCharacterById(ctx context.Context, req *SetActiveCharReq) error {
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			err := tx.Rollback()
+			if err != nil {
+				return
+			}
+			return
+		}
+		err = tx.Commit()
+	}()
+
+	query := "UPDATE accChar SET act = false WHERE idAccount = ?"
+	_, err = tx.ExecContext(ctx, query, req.IdAcc)
+	if err != nil {
+		return err
+	}
+
+	query = "UPDATE accChar SET act = false WHERE idChar = ?"
+	_, err = tx.ExecContext(ctx, query, req.IdChar)
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}

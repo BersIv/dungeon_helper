@@ -11,6 +11,7 @@ import (
 	"dungeons_helper/internal/stats"
 	"dungeons_helper/internal/subraces"
 	"dungeons_helper/internal/websocket"
+	"dungeons_helper/util"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -72,6 +73,7 @@ func CharacterRouter(characterHandler *character.Handler) Option {
 		r.HandleFunc("/getAllCharactersByAccId", characterHandler.GetAllCharactersByAccId).Methods("GET")
 		r.HandleFunc("/getCharacterById", characterHandler.GetCharacterById).Methods("GET")
 		r.HandleFunc("/createCharacter", characterHandler.CreateCharacter).Methods("POST")
+		r.HandleFunc("/setActiveCharacter", characterHandler.SetActiveCharacterById).Methods("POST")
 	}
 }
 
@@ -90,6 +92,7 @@ func WebsocketRouter(wsHandler *websocket.Handler) Option {
 
 func InitRouter(options ...Option) *mux.Router {
 	r := mux.NewRouter()
+	r.Use(util.LoggingMiddleware)
 
 	for _, option := range options {
 		option(r)

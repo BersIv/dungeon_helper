@@ -59,3 +59,15 @@ func (s *service) CreateCharacter(c context.Context, character *CreateCharacterR
 
 	return nil
 }
+
+func (s *service) SetActiveCharacterById(c context.Context, req *SetActiveCharReq) error {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	err := s.Repository.SetActiveCharacterById(ctx, req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

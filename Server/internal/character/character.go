@@ -70,16 +70,23 @@ type GetCharacterReq struct {
 	Id int64 `json:"id"`
 }
 
+type SetActiveCharReq struct {
+	IdAcc  int64 `json:"idAcc"`
+	IdChar int64 `json:"idChar"`
+}
+
 type Repository interface {
 	GetAllCharactersByAccId(ctx context.Context, idAcc int64) ([]Character, error)
 	GetCharacterById(ctx context.Context, id int64) (*Character, error)
 	CreateCharacter(ctx context.Context, character *CreateCharacterReq) error
 	UpdateCharacterHpById(ctx context.Context, id int64, hp int64) error
 	UpdateCharacterExpById(ctx context.Context, id int64, exp int64) error
+	SetActiveCharacterById(ctx context.Context, req *SetActiveCharReq) error
 }
 
 type Service interface {
 	GetAllCharactersByAccId(c context.Context, idAcc int64) ([]Character, error)
 	GetCharacterById(c context.Context, id int64) (*Character, error)
 	CreateCharacter(c context.Context, character *CreateCharacterReq) error
+	SetActiveCharacterById(c context.Context, req *SetActiveCharReq) error
 }
