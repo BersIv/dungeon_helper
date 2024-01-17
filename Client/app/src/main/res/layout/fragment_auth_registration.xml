@@ -42,6 +42,9 @@
         android:layout_width="146dp"
         android:layout_height="81dp"
         android:hint="Ник"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +64,8 @@
         android:layout_width="146dp"
         android:layout_height="81dp"
         android:hint="Почта"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +75,7 @@
             style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +85,9 @@
         android:layout_width="146dp"
         android:layout_height="81dp"
         android:hint="Пароль"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -100,6 +108,9 @@
         android:layout_width="146dp"
         android:layout_height="81dp"
         android:hint="Повторите пароль"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
