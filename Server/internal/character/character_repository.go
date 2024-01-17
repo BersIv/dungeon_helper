@@ -14,20 +14,12 @@ func NewRepository(db db.DatabaseTX) Repository {
 	return &repository{db: db}
 }
 
-func (r *repository) GetAllCharactersByAccId(ctx context.Context, idAcc int64) ([]Character, error) {
-	var chars []Character
+func (r *repository) GetAllCharactersByAccId(ctx context.Context, idAcc int64) ([]GetAllCharactesRes, error) {
+	var chars []GetAllCharactesRes
 
-	query := "SELECT c.hp, c.exp, c.charName, c.sex, c.weight, c.height, c.addLanguage, " +
-		"c.ideals, c.weaknesses, c.traits, c.allies, c.organizations, c.enemies, c.story, " +
-		"c.goals, c.treasures, c.notes, cl.className, r.raceName, s.subraceName, st.strength, " +
-		"st.dexterity, st.constitution, st.intelligence, st.wisdom, st.charisma, " +
-		"GROUP_CONCAT(sk.skillName SEPARATOR ', ') " +
-		"AS characterSkills, a.alignmentName, i.image FROM characters c " +
-		"JOIN accChar ac ON c.id = ac.idChar JOIN class cl ON c.idClass = cl.id " +
-		"JOIN races r on c.idRace = r.id JOIN subrace s on c.idSubrace = s.id " +
-		"JOIN stats st on c.idStats = st.id JOIN charSkills cs on c.id = cs.idChar " +
-		"JOIN skills sk on cs.idSkill = sk.id JOIN alignment a on c.idAlignment = a.id " +
-		"JOIN image i ON c.idAvatar = i.id WHERE ac.idAccount = ? GROUP BY c.id"
+	query := `SELECT c.id, c.charName, i.image FROM characters c
+		JOIN accChar ac ON c.id = ac.idChar JOIN class cl ON c.idClass = cl.id
+		JOIN image i ON c.idAvatar = i.id WHERE ac.idAccount = ? GROUP BY c.id`
 
 	rows, err := r.db.QueryContext(ctx, query, idAcc)
 	if err != nil {
@@ -41,13 +33,8 @@ func (r *repository) GetAllCharactersByAccId(ctx context.Context, idAcc int64) (
 	}(rows)
 
 	for rows.Next() {
-		var char Character
-		err := rows.Scan(&char.Hp, &char.Exp, &char.CharName, &char.Sex, &char.Weight, &char.Height, &char.AddLanguage,
-			&char.Ideals, &char.Weaknesses, &char.Traits, &char.Allies, &char.Organizations, &char.Enemies,
-			&char.Story, &char.Goals, &char.Treasures, &char.Notes, &char.Class, &char.Race,
-			&char.Subrace, &char.Stats.Strength, &char.Stats.Dexterity, &char.Stats.Constitution,
-			&char.Stats.Intelligence, &char.Stats.Wisdom, &char.Stats.Charisma, &char.CharacterSkills,
-			&char.Alignment, &char.Avatar)
+		var char GetAllCharactesRes
+		err := rows.Scan(&char.IdChar, &char.CharName, &char.Avatar)
 		if err != nil {
 			return nil, err
 		}
@@ -61,7 +48,7 @@ func (r *repository) GetCharacterById(ctx context.Context, id int64) (*Character
 	char := Character{}
 	var imageBytes []byte
 
-	query := "SELECT c.id, c.hp, c.exp, c.charName, c.sex, c.weight, c.height, c.addLanguage, " +
+	query := "SELECT c.id, c.hp, c.lvl, c.exp, c.charName, c.sex, c.weight, c.height, c.addLanguage, " +
 		"c.ideals, c.weaknesses, c.traits, c.allies, c.organizations, c.enemies, c.story, " +
 		"c.goals, c.treasures, c.notes, cl.className, r.raceName, s.subraceName, st.strength, " +
 		"st.dexterity, st.constitution, st.intelligence, st.wisdom, st.charisma, " +
@@ -73,7 +60,7 @@ func (r *repository) GetCharacterById(ctx context.Context, id int64) (*Character
 		"JOIN skills sk on cs.idSkill = sk.id JOIN alignment a on c.idAlignment = a.id " +
 		"JOIN image i ON c.idAvatar = i.id WHERE c.id = ? GROUP BY c.id"
 
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&char.Id, &char.Hp, &char.Exp, &char.CharName, &char.Sex, &char.Weight, &char.Height, &char.AddLanguage,
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&char.Id, &char.Hp, &char.Lvl, &char.Exp, &char.CharName, &char.Sex, &char.Weight, &char.Height, &char.AddLanguage,
 		&char.Ideals, &char.Weaknesses, &char.Traits, &char.Allies, &char.Organizations, &char.Enemies,
 		&char.Story, &char.Goals, &char.Treasures, &char.Notes, &char.Class, &char.Race,
 		&char.Subrace, &char.Stats.Strength, &char.Stats.Dexterity, &char.Stats.Constitution,
@@ -122,11 +109,11 @@ func (r *repository) CreateCharacter(ctx context.Context, char *CreateCharacterR
 		return err
 	}
 
-	query = `INSERT INTO characters(hp, exp, idAvatar, charName, sex, weight, height, idClass, 
+	query = `INSERT INTO characters(hp, lvl, exp, idAvatar, charName, sex, weight, height, idClass, 
                        idRace, idSubrace, idStats, addLanguage, idAlignment, ideals, weaknesses, 
                        traits, allies, organizations, enemies, story, goals, treasures, notes)  
-					   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-	result, err = tx.ExecContext(ctx, query, char.Hp, char.Exp, idImage, char.CharName, char.Sex, char.Weight, char.Height,
+					   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+	result, err = tx.ExecContext(ctx, query, char.Hp, 1, char.Exp, idImage, char.CharName, char.Sex, char.Weight, char.Height,
 		char.Class.Id, char.Race.Id, char.Subrace.Id, statsId, char.AddLanguage, char.Alignment.Id, char.Ideals,
 		char.Weaknesses, char.Traits, char.Allies, char.Organizations, char.Enemies, char.Story, char.Goals, char.Treasures, char.Notes)
 	if err != nil {

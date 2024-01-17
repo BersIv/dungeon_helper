@@ -13,6 +13,7 @@ import (
 type Character struct {
 	Id              int64             `json:"id"`
 	Hp              int64             `json:"hp"`
+	Lvl             int64             `json:"lvl"`
 	Exp             int64             `json:"exp"`
 	Avatar          string            `json:"avatar"`
 	CharName        string            `json:"charName"`
@@ -66,6 +67,12 @@ type CreateCharacterReq struct {
 	Notes           string                 `json:"notes"`
 }
 
+type GetAllCharactesRes struct {
+	IdChar   int64  `json:"idChar"`
+	CharName string `json:"charName"`
+	Avatar   string `json:"avatar"`
+}
+
 type GetCharacterReq struct {
 	Id int64 `json:"id"`
 }
@@ -76,7 +83,7 @@ type SetActiveCharReq struct {
 }
 
 type Repository interface {
-	GetAllCharactersByAccId(ctx context.Context, idAcc int64) ([]Character, error)
+	GetAllCharactersByAccId(ctx context.Context, idAcc int64) ([]GetAllCharactesRes, error)
 	GetCharacterById(ctx context.Context, id int64) (*Character, error)
 	CreateCharacter(ctx context.Context, character *CreateCharacterReq) error
 	UpdateCharacterHpById(ctx context.Context, id int64, hp int64) error
@@ -85,7 +92,7 @@ type Repository interface {
 }
 
 type Service interface {
-	GetAllCharactersByAccId(c context.Context, idAcc int64) ([]Character, error)
+	GetAllCharactersByAccId(c context.Context, idAcc int64) ([]GetAllCharactesRes, error)
 	GetCharacterById(c context.Context, id int64) (*Character, error)
 	CreateCharacter(c context.Context, character *CreateCharacterReq) error
 	SetActiveCharacterById(c context.Context, req *SetActiveCharReq) error
