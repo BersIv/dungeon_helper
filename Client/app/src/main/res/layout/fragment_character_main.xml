@@ -12,4 +12,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="198dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="600dp"
+        android:text="Список персонажей"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_character" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createChar_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:text="Создать персонажа"
+        app:layout_constraintBottom_toBottomOf="@+id/text_character"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_character"
+        app:layout_constraintVertical_bias="0.807" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/characterView"
+        android:layout_width="147dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="188dp"
+        android:clickable="true"
+        android:contentDescription="Просмотр персонажа"
+        android:src="@drawable/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
