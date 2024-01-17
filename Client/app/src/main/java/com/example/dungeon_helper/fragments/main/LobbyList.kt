@@ -10,30 +10,31 @@ import android.widget.TextView
 import com.example.dungeon_helper.AuthActivity
 import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.R
+import com.example.dungeon_helper.databinding.FragmentLobbyListBinding
 import com.example.dungeon_helper.databinding.FragmentLobbyMainBinding
 
-class LobbyMain : Fragment() {
+class LobbyList : Fragment() {
 
     companion object {
-        fun newInstance() = LobbyMain()
+        fun newInstance() = LobbyList()
     }
-    private lateinit var viewModel: LobbyMainViewModel
 
+    private lateinit var viewModel: LobbyListViewModel
 
-    private var _binding: FragmentLobbyMainBinding? = null
+    private var _binding: FragmentLobbyListBinding? = null
     private  val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val lobbyMainViewModel = ViewModelProvider(this)[LobbyMainViewModel::class.java]
+    ): View? {
+        val lobbyMainViewModel = ViewModelProvider(this)[LobbyListViewModel::class.java]
 
-        _binding = FragmentLobbyMainBinding.inflate(inflater, container, false)
+        _binding = FragmentLobbyListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textLobby
+        val textView: TextView = binding.textLobbyList
         lobbyMainViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
@@ -49,16 +50,11 @@ class LobbyMain : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val listBtn = binding.lobbyListBtn
-        val createBtn = binding.lobbyCreateBtn
+        val backBtn = binding.backBtn
 
 
-        listBtn.setOnClickListener {
-            (activity as MainActivity).navController.navigate(R.id.action_navigation_lobby_to_lobbyList)
-        }
-
-        createBtn.setOnClickListener {
-            (activity as MainActivity).navController.navigate(R.id.action_navigation_lobby_to_lobbyCreate)
+        backBtn.setOnClickListener {
+            (activity as MainActivity).navController.navigate(R.id.action_lobbyList_to_navigation_lobby)
         }
 
     }

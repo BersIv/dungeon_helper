@@ -22,7 +22,14 @@
     <fragment
         android:id="@+id/navigation_lobby"
         android:name="com.example.dungeon_helper.fragments.main.LobbyMain"
-        tools:layout="@layout/fragment_lobby_main" />
+        tools:layout="@layout/fragment_lobby_main" >
+        <action
+            android:id="@+id/action_navigation_lobby_to_lobbyCreate"
+            app:destination="@id/lobbyCreate" />
+        <action
+            android:id="@+id/action_navigation_lobby_to_lobbyList"
+            app:destination="@id/lobbyList" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"
@@ -100,6 +107,24 @@
         <action
             android:id="@+id/action_infoChapter1Content_to_infoAllChapters"
             app:destination="@id/infoAllChapters" />
+    </fragment>
+    <fragment
+        android:id="@+id/lobbyCreate"
+        android:name="com.example.dungeon_helper.fragments.main.LobbyCreate"
+        android:label="fragment_lobby_create"
+        tools:layout="@layout/fragment_lobby_create" >
+        <action
+            android:id="@+id/action_lobbyCreate_to_navigation_lobby"
+            app:destination="@id/navigation_lobby" />
+    </fragment>
+    <fragment
+        android:id="@+id/lobbyList"
+        android:name="com.example.dungeon_helper.fragments.main.LobbyList"
+        android:label="fragment_lobby_list"
+        tools:layout="@layout/fragment_lobby_list" >
+        <action
+            android:id="@+id/action_lobbyList_to_navigation_lobby"
+            app:destination="@id/navigation_lobby" />
     </fragment>
 
 </navigation>
