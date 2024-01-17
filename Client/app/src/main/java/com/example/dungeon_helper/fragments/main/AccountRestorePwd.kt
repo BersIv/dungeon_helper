@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.databinding.FragmentAccountRestorePwdBinding
 import com.example.dungeon_helper.R
+import com.example.dungeon_helper.SharedViewModel
 
 
 class AccountRestorePwd : Fragment() {
@@ -55,8 +56,13 @@ class AccountRestorePwd : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val shared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+
+        val mail = binding.textFieldMail.editText
         val backBtn = binding.backBtn
         val restoreBtn = binding.restoreBtn
+
 
         backBtn.setOnClickListener {
             val activity = requireActivity() as MainActivity
@@ -74,6 +80,9 @@ class AccountRestorePwd : Fragment() {
 
         }
         restoreBtn.setOnClickListener {
+
+            shared.mailChangePwd.value = mail?.text.toString()
+
             (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd_to_accountRestorePwd2)
         }
     }

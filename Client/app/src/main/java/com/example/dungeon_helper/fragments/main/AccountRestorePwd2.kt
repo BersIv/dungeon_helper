@@ -7,9 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.MainActivity
+import com.example.dungeon_helper.SharedViewModel
 import com.example.dungeon_helper.databinding.FragmentAccountRestorePwd2Binding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.IOException
 
 class AccountRestorePwd2 : Fragment() {
 
@@ -65,14 +78,75 @@ class AccountRestorePwd2 : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val shared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+
+        val newPwd = binding.textFieldPwd.editText
+        val newPwdRep = binding.textFieldPwdRep.editText
         val backBtn2 = binding.backBtn2
         val savePwdBtn = binding.savePwdBtn
 
         backBtn2.setOnClickListener{
             (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd2_to_navigation_account)
         }
+
         savePwdBtn.setOnClickListener {
-            (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd2_to_navigation_account)
+            GlobalScope.launch(Dispatchers.Main) {
+
+                //val client = OkHttpClient()
+                val jsonBody = JSONObject().apply {
+                    put("oldPassword", newPwd?.text.toString())
+                    put("newPassword", newPwdRep?.text.toString())
+                }
+
+                val mediaType = "application/json; charset=utf-8".toMediaType()
+                val body: RequestBody = jsonBody.toString().toRequestBody(mediaType)
+
+                var token: String = ""
+                shared.token.observe(viewLifecycleOwner, Observer {
+                    // updating data in displayMsg
+                    token = it
+                })
+
+
+                //println(getCookieValue())
+
+                val client = OkHttpClient.Builder().addInterceptor { chain ->
+                    val original = chain.request()
+                    val authorized = original.newBuilder()
+                        .header("Authorization", token)
+                        .build()
+                    chain.proceed(authorized)
+                }
+                    .build()
+
+                val request = Request.Builder()
+                    .url("http://194.247.187.44:5000/account/change/password")
+                    .patch(body)
+                    .build()
+
+                try {
+                    val response = withContext(Dispatchers.IO) {
+                        client.newCall(request).execute()
+                    }
+
+                    if (!response.isSuccessful) {
+                        throw IOException("Запрос к серверу не был успешен:" +
+                                " ${response.code} ${response.message}")
+                    }
+                    // пример получения конкретного заголовка ответа
+                    println("${response.code} ${response.message}")
+                    // вывод тела ответа
+                    println(response.body!!.string())
+
+                    (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd2_to_navigation_account)
+
+                } catch (e: IOException) {
+                    println("Ошибка подключения: $e");
+                }
+            }
+
+
         }
     }
 
