@@ -34,13 +34,13 @@ func AccountRouter(accountHandler *account.Handler) Option {
 
 func AlignmentRouter(alignmentHandler *alignment.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/getAlignments", alignmentHandler.GetAllAlignments).Methods("GET")
+		r.HandleFunc("/class/getAlignments", alignmentHandler.GetAllAlignments).Methods("GET")
 	}
 }
 
 func ClassRouter(classHandler *class.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/getClasses", classHandler.GetAllClasses).Methods("GET")
+		r.HandleFunc("/class/getClasses", classHandler.GetAllClasses).Methods("GET")
 	}
 }
 
@@ -58,35 +58,35 @@ func SubracesRouter(subracesHandler *subraces.Handler) Option {
 
 func StatsRouter(statsHandler *stats.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/getStatsById", statsHandler.GetStatsById).Methods("GET")
+		r.HandleFunc("/stats/getStatsById", statsHandler.GetStatsById).Methods("GET")
 	}
 }
 
 func SkillsRouter(skillHandler *skills.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/getSkills", skillHandler.GetAllSkills).Methods("GET")
+		r.HandleFunc("/skills/getSkills", skillHandler.GetAllSkills).Methods("GET")
 	}
 }
 
 func CharacterRouter(characterHandler *character.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/getAllCharactersByAccId", characterHandler.GetAllCharactersByAccId).Methods("GET")
-		r.HandleFunc("/getCharacterById", characterHandler.GetCharacterById).Methods("GET")
-		r.HandleFunc("/createCharacter", characterHandler.CreateCharacter).Methods("POST")
-		r.HandleFunc("/setActiveCharacter", characterHandler.SetActiveCharacterById).Methods("POST")
+		r.HandleFunc("/character/getAllCharactersByAccId", characterHandler.GetAllCharactersByAccId).Methods("GET")
+		r.HandleFunc("/character/getCharacterById", characterHandler.GetCharacterById).Methods("GET")
+		r.HandleFunc("/character/createCharacter", characterHandler.CreateCharacter).Methods("POST")
+		r.HandleFunc("/character/setActiveCharacter", characterHandler.SetActiveCharacterById).Methods("POST")
 	}
 }
 
 func LobbyRouter(lobbyHandler *lobby.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/getAllLobby", lobbyHandler.GetAllLobby).Methods("POST")
+		r.HandleFunc("/lobby/getAllLobby", lobbyHandler.GetAllLobby).Methods("POST")
 	}
 }
 
 func WebsocketRouter(wsHandler *websocket.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/ws/join", wsHandler.JoinLobby)
-		r.HandleFunc("/ws/create", wsHandler.CreateLobby)
+		r.HandleFunc("/lobby/join", wsHandler.JoinLobby)
+		r.HandleFunc("/lobby/create", wsHandler.CreateLobby)
 	}
 }
 
