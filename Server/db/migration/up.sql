@@ -4,7 +4,7 @@ create table `image`
 (
     id    int auto_increment
         primary key,
-    image longblob not null
+    image mediumblob not null
 );
 
 create table `account`
@@ -80,6 +80,7 @@ create table `characters`
     id            int auto_increment
         primary key,
     hp            int         not null,
+    lvl           int         not null,
     exp           int         not null,
     idAvatar      int         not null,
     charName      varchar(16) not null,
@@ -183,22 +184,6 @@ create table `accLobby`
         foreign key (idAcc) references account (id)
 );
 
-INSERT INTO image(image)
-    VALUE (1);
-INSERT INTO image(image)
-    VALUE (2);
-INSERT INTO image(image)
-    VALUE (3);
-INSERT INTO image(image)
-    VALUE (4);
-INSERT INTO image(image)
-    VALUE (5);
-
-INSERT INTO account(email, password, nickname, idAvatar)
-VALUES (1, 1, 1, 1);
-INSERT INTO account(email, password, nickname, idAvatar)
-VALUES (2, 2, 2, 2);
-
 INSERT INTO stats(strength, dexterity, constitution, intelligence, wisdom, charisma)
 VALUES (1, 1, 1, 1, 1, 1);
 INSERT INTO stats(strength, dexterity, constitution, intelligence, wisdom, charisma)
@@ -234,27 +219,3 @@ INSERT INTO alignment(alignmentName)
     VALUE ('Законопослушный');
 INSERT INTO alignment(alignmentName)
     VALUE ('Нейтральный');
-
-INSERT INTO characters (hp, exp, idAvatar, charName, sex, weight, height, idClass, idRace, idSubrace, idStats,
-                        addLanguage, idAlignment, ideals, weaknesses, traits, allies, organizations, enemies,
-                        story, goals, treasures, notes)
-    VALUE (100, 0, 3, 'Влад', true, 100, 170, 1, 1, 1, 3, 'Японский', 1,
-           'Нет', 'Нет', 'Нет', 'Нет', 'Нет', 'Нет', 'Нет', 'Нет', 'Нет', 'Нет');
-
-INSERT INTO characters (hp, exp, idAvatar, charName, sex, weight, height, idClass, idRace, idSubrace, idStats,
-                        addLanguage, idAlignment, ideals, weaknesses, traits, allies, organizations, enemies,
-                        story, goals, treasures, notes)
-    VALUE (200, 0, 4, 'Игорь', false, 50, 180, 2, 2, 2, 4, 'Японский', 2,
-           'Да', 'Да', 'Да', 'Да', 'Да', 'Да', 'Да', 'Да', 'Да', 'Да');
-
-INSERT INTO charSkills (idSkill, idChar)
-    VALUE (1, 1);
-INSERT INTO charSkills (idSkill, idChar)
-    VALUE (2, 1);
-INSERT INTO charSkills (idSkill, idChar)
-    VALUE (1, 2);
-
-INSERT INTO accChar (act, idAccount, idChar)
-    VALUE (true, 1, 1);
-INSERT INTO accChar (act, idAccount, idChar)
-    VALUE (true, 2, 2);

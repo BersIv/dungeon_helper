@@ -17,7 +17,7 @@ func NewService(repository Repository) Service {
 	}
 }
 
-func (s *service) GetAllCharactersByAccId(c context.Context, idAcc int64) ([]Character, error) {
+func (s *service) GetAllCharactersByAccId(c context.Context, idAcc int64) ([]GetAllCharactesRes, error) {
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
 
