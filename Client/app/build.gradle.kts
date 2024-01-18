@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -64,6 +65,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("com.google.android.material:material:1.10.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     val nav_version = "2.7.5"
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -83,6 +85,7 @@ dependencies {
     implementation("androidx.test:runner:1.5.2@aar")
     implementation("androidx.test.espresso:espresso-core:3.5.1@aar")
     implementation("junit:junit:4.13.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
 
 
     implementation("androidx.core:core-ktx:1.12.0")
