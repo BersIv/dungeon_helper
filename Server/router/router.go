@@ -52,26 +52,26 @@ func RacesRouter(racesHandler *races.Handler) Option {
 
 func SubracesRouter(subracesHandler *subraces.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/subrace/getSubraces", subracesHandler.GetAllSubraces).Methods("GET")
+		r.HandleFunc("/subrace/getSubraces", subracesHandler.GetAllSubraces).Methods("POST")
 	}
 }
 
 func StatsRouter(statsHandler *stats.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/stats/getStatsById", statsHandler.GetStatsById).Methods("GET")
+		r.HandleFunc("/stats/getStatsById", statsHandler.GetStatsById).Methods("POST")
 	}
 }
 
 func SkillsRouter(skillHandler *skills.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/skills/getSkills", skillHandler.GetAllSkills).Methods("GET")
+		r.HandleFunc("/skills/getSkills", skillHandler.GetAllSkills).Methods("POST")
 	}
 }
 
 func CharacterRouter(characterHandler *character.Handler) Option {
 	return func(r *mux.Router) {
 		r.HandleFunc("/character/getAllCharactersByAccId", characterHandler.GetAllCharactersByAccId).Methods("GET")
-		r.HandleFunc("/character/getCharacterById", characterHandler.GetCharacterById).Methods("GET")
+		r.HandleFunc("/character/getCharacterById", characterHandler.GetCharacterById).Methods("POST")
 		r.HandleFunc("/character/createCharacter", characterHandler.CreateCharacter).Methods("POST")
 		r.HandleFunc("/character/setActiveCharacter", characterHandler.SetActiveCharacterById).Methods("POST")
 	}
@@ -79,7 +79,7 @@ func CharacterRouter(characterHandler *character.Handler) Option {
 
 func LobbyRouter(lobbyHandler *lobby.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/lobby/getAllLobby", lobbyHandler.GetAllLobby).Methods("POST")
+		r.HandleFunc("/lobby/getAllLobby", lobbyHandler.GetAllLobby).Methods("GET")
 	}
 }
 
