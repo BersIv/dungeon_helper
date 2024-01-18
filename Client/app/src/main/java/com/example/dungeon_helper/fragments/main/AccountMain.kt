@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import com.example.dungeon_helper.MainActivity
 import android.widget.TextView
 import com.example.dungeon_helper.AuthActivity
+import androidx.appcompat.app.AppCompatDelegate
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentAccountMainBinding
 import android.content.Intent
@@ -61,81 +63,97 @@ class AccountMain : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    private fun changeTheme(isDarkTheme: Boolean) {
+        if (isDarkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        requireActivity().recreate()
+    }
 
     @SuppressLint("RestrictedApi")
     override fun onStart() {
         super.onStart()
+        val themeSwitch: SwitchMaterial = binding.switchTheme
 
-        binding.nickFill.text
+        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            changeTheme(isChecked)
 
-        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+            binding.nickFill.text
 
-        sharedViewModel.nickname.observe(viewLifecycleOwner, Observer {
-            // updating data in displayMsg
-            println(it)
-            binding.nickFill.text = it
-        })
+            sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
-        sharedViewModel.email.observe(viewLifecycleOwner, Observer {
-            // updating data in displayMsg
-            binding.emailFill.text = it
-        })
+            sharedViewModel.nickname.observe(viewLifecycleOwner, Observer {
+                // updating data in displayMsg
+                println(it)
+                binding.nickFill.text = it
+            })
 
-
-        val changePwdBtn = binding.changePwdBtn
-        val exAccBtn = binding.exAccBtn
-        val editBtn = binding.editBtn
+            sharedViewModel.email.observe(viewLifecycleOwner, Observer {
+                // updating data in displayMsg
+                binding.emailFill.text = it
+            })
 
 
-        changePwdBtn.setOnClickListener {
-          (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountRestorePwd2)
-         }
-        editBtn.setOnClickListener{
-            (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
-        }
-        exAccBtn.setOnClickListener {
-            (requireActivity() as MainActivity).showConfirmationDialog(
-                "Подтверждение выхода",
-                "Вы уверены,что хотите выйти из аккаунта?",
-                {
-                    GlobalScope.launch(Dispatchers.Main) {
+            val changePwdBtn = binding.changePwdBtn
+            val exAccBtn = binding.exAccBtn
+            val editBtn = binding.editBtn
 
-                        val client = OkHttpClient()
 
-                        val request = Request.Builder()
-                            .url("http://194.247.187.44:5000/auth/logout")
-                            .post("".toRequestBody())
-                            .build()
+            changePwdBtn.setOnClickListener {
+                (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountRestorePwd2)
+            }
+            editBtn.setOnClickListener {
+                (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
+            }
+            exAccBtn.setOnClickListener {
+                (requireActivity() as MainActivity).showConfirmationDialog(
+                    "Подтверждение выхода",
+                    "Вы уверены,что хотите выйти из аккаунта?",
+                    {
+                        GlobalScope.launch(Dispatchers.Main) {
 
-                        try {
-                            val response = withContext(Dispatchers.IO) {
-                                client.newCall(request).execute()
+                            val client = OkHttpClient()
+
+                            val request = Request.Builder()
+                                .url("http://194.247.187.44:5000/auth/logout")
+                                .post("".toRequestBody())
+                                .build()
+
+                            try {
+                                val response = withContext(Dispatchers.IO) {
+                                    client.newCall(request).execute()
+                                }
+
+                                if (!response.isSuccessful) {
+                                    throw IOException(
+                                        "Запрос к серверу не был успешен:" +
+                                                " ${response.code} ${response.message}"
+                                    )
+                                }
+                                // пример получения конкретного заголовка ответа
+                                println("${response.code} ${response.message}")
+                                // вывод тела ответа
+                                println(response.body!!.string())
+
+                                val intent =
+                                    Intent(activity as MainActivity, AuthActivity::class.java)
+                                startActivity(intent)
+
+                            } catch (e: IOException) {
+                                println("Ошибка подключения: $e");
                             }
 
-                            if (!response.isSuccessful) {
-                                throw IOException("Запрос к серверу не был успешен:" +
-                                        " ${response.code} ${response.message}")
-                            }
-                            // пример получения конкретного заголовка ответа
-                            println("${response.code} ${response.message}")
-                            // вывод тела ответа
-                            println(response.body!!.string())
 
-                            val intent = Intent(activity as MainActivity, AuthActivity::class.java)
-                            startActivity(intent)
-
-                        } catch (e: IOException) {
-                            println("Ошибка подключения: $e");
                         }
-
-
+                    },
+                    {
                     }
-                },
-                {
-                }
-            )
+                )
 
 
+            }
         }
     }
 }

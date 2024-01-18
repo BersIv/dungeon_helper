@@ -59,7 +59,6 @@ class CharacterCreate4 : Fragment() {
     }
 
     private fun enablePlusMinusButtons() {
-        // Разблокировать кнопки минус и плюс только если выбрана характеристика
         binding.plusBtn.isEnabled = characteristicSelected
         binding.minusBtn.isEnabled = characteristicSelected
     }
@@ -77,7 +76,6 @@ class CharacterCreate4 : Fragment() {
         currentSpentPointsTextView = spentPointsTextView
         this.valueTextView = valueTextView
 
-        // При выборе новой характеристики также обновляем текст
         updateCharacteristic(textTextView.text.toString(), valueTextView)
         enablePlusMinusButtons()
     }
@@ -91,30 +89,17 @@ class CharacterCreate4 : Fragment() {
         spentPointsTextView: TextView,
         textTextView: TextView
     ) {
-        // Получаем текущее значение текста кнопки и преобразуем его в число
         val currentValue = button.text.toString().toInt()
 
-        // Увеличиваем значение на 1
         val newValue = currentValue + 1
-
-        // Обновляем текст в value
         valueTextView.text = newValue.toString()
 
-        // Обновляем текст на кнопке
         button.text = newValue.toString()
-
-        // Обновляем текст в sumTextView
         sumTextView.text = newValue.toString()
-
-        // Вычисляем значение модификатора и обновляем текст в modTextView
         val modifierValue = (newValue - 10) / 2
         modTextView.text = modifierValue.toString()
-
-        // Увеличиваем количество потраченных очков
         currentPoints += 1
         spentPointsTextView.text = currentPoints.toString()
-
-        // Обновляем текст в Characteristic
         updateCharacteristic(textTextView.text.toString(), valueTextView)
     }
 
@@ -126,30 +111,22 @@ class CharacterCreate4 : Fragment() {
         spentPointsTextView: TextView,
         textTextView: TextView
     ) {
-        // Получаем текущее значение текста кнопки и преобразуем его в число
         val currentValue = button.text.toString().toInt()
 
-        // Уменьшаем значение на 1
         val newValue = currentValue - 1
 
-        // Обновляем текст в value
         valueTextView.text = newValue.toString()
 
-        // Обновляем текст на кнопке
         button.text = newValue.toString()
 
-        // Обновляем текст в sumTextView
         sumTextView.text = newValue.toString()
 
-        // Вычисляем значение модификатора и обновляем текст в modTextView
         val modifierValue = (newValue - 10) / 2
         modTextView.text = modifierValue.toString()
 
-        // Уменьшаем количество потраченных очков
         currentPoints -= 1
         spentPointsTextView.text = currentPoints.toString()
 
-        // Обновляем текст в Characteristic
         updateCharacteristic(textTextView.text.toString(), valueTextView)
     }
 
