@@ -34,7 +34,7 @@ func AccountRouter(accountHandler *account.Handler) Option {
 
 func AlignmentRouter(alignmentHandler *alignment.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/class/getAlignments", alignmentHandler.GetAllAlignments).Methods("GET")
+		r.HandleFunc("/alignments/getAlignments", alignmentHandler.GetAllAlignments).Methods("GET")
 	}
 }
 
