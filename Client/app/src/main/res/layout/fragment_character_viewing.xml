@@ -203,25 +203,206 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/RaceExample" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/HpExample"
+        <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="212dp"
-            android:text="Здоровье пример"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.142"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/materialTextView8" />
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView8">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="Хар-ка"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="СИЛ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="ЛОВ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="ТЕЛ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="5"
+                    android:gravity="center"
+                    android:text="ИНТ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="6"
+                    android:gravity="center"
+                    android:text="МДР" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="7"
+                    android:gravity="center"
+                    android:text="ХАР" />
+            </TableRow>
+
+            <TableRow >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="Модиф"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/modSil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modLov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modTel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modIntel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="5"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modMdr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="6"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modHar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="7"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="Итого"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/sumSil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/sumLov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumTel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumIntel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="5"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumMdr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="6"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumHar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="7"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+            </TableRow>
+
+        </TableLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/Hp"
+            android:id="@+id/Lang"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginTop="144dp"
-            android:text="Здоровье"
+            android:layout_marginTop="176dp"
+            android:text="Дополнительный язык"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintHorizontal_bias="0.162"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialTextView8" />
 
@@ -229,23 +410,12 @@
             android:id="@+id/LangExample"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginTop="284dp"
+            android:layout_marginTop="244dp"
             android:text="Дополнительный язык пример"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.204"
+            app:layout_constraintHorizontal_bias="0.195"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/materialTextView8" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/Lang"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="216dp"
-            android:text="Дополнительный язык"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView8" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView7"
