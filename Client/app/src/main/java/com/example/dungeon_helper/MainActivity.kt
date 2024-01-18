@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.dungeon_helper.databinding.ActivityMainBinding
 import com.example.dungeon_helper.fragments.main.AccountMain
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /*
  *      MainActivity
@@ -28,6 +29,25 @@ class MainActivity : AppCompatActivity() {
         return binding.navView
     }
 
+    fun showConfirmationDialog(
+        title: String,
+        message: String,
+        onPositiveButtonClick: () -> Unit,
+        onNegativeButtonClick: () -> Unit
+    ) {
+        val builder = MaterialAlertDialogBuilder(this)
+        builder.setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Да") { _, _ -> onPositiveButtonClick.invoke() }
+            .setNegativeButton("Нет") { dialog, _ ->
+                onNegativeButtonClick.invoke()
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+
+        val dialog = builder.create()
+        dialog.show()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -94,38 +94,46 @@ class AccountMain : Fragment() {
             (activity as MainActivity).navController.navigate(R.id.action_navigation_account_to_accountEdit)
         }
         exAccBtn.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
+            (requireActivity() as MainActivity).showConfirmationDialog(
+                "Подтверждение выхода",
+                "Вы уверены,что хотите выйти из аккаунта?",
+                {
+                    GlobalScope.launch(Dispatchers.Main) {
 
-                val client = OkHttpClient()
+                        val client = OkHttpClient()
 
-                val request = Request.Builder()
-                    .url("http://194.247.187.44:5000/auth/logout")
-                    .post("".toRequestBody())
-                    .build()
+                        val request = Request.Builder()
+                            .url("http://194.247.187.44:5000/auth/logout")
+                            .post("".toRequestBody())
+                            .build()
 
-                try {
-                    val response = withContext(Dispatchers.IO) {
-                        client.newCall(request).execute()
+                        try {
+                            val response = withContext(Dispatchers.IO) {
+                                client.newCall(request).execute()
+                            }
+
+                            if (!response.isSuccessful) {
+                                throw IOException("Запрос к серверу не был успешен:" +
+                                        " ${response.code} ${response.message}")
+                            }
+                            // пример получения конкретного заголовка ответа
+                            println("${response.code} ${response.message}")
+                            // вывод тела ответа
+                            println(response.body!!.string())
+
+                            val intent = Intent(activity as MainActivity, AuthActivity::class.java)
+                            startActivity(intent)
+
+                        } catch (e: IOException) {
+                            println("Ошибка подключения: $e");
+                        }
+
+
                     }
-
-                    if (!response.isSuccessful) {
-                        throw IOException("Запрос к серверу не был успешен:" +
-                                " ${response.code} ${response.message}")
-                    }
-                    // пример получения конкретного заголовка ответа
-                    println("${response.code} ${response.message}")
-                    // вывод тела ответа
-                    println(response.body!!.string())
-
-                    val intent = Intent(activity as MainActivity, AuthActivity::class.java)
-                    startActivity(intent)
-
-                } catch (e: IOException) {
-                    println("Ошибка подключения: $e");
+                },
+                {
                 }
-
-
-            }
+            )
 
 
         }
