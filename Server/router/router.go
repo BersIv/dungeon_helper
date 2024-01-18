@@ -64,7 +64,7 @@ func StatsRouter(statsHandler *stats.Handler) Option {
 
 func SkillsRouter(skillHandler *skills.Handler) Option {
 	return func(r *mux.Router) {
-		r.HandleFunc("/skills/getSkills", skillHandler.GetAllSkills).Methods("POST")
+		r.HandleFunc("/skills/getSkills", skillHandler.GetAllSkills).Methods("GET")
 	}
 }
 
