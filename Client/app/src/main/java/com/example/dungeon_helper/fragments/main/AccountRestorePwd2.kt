@@ -86,8 +86,16 @@ class AccountRestorePwd2 : Fragment() {
         val backBtn2 = binding.backBtn2
         val savePwdBtn = binding.savePwdBtn
 
+
         backBtn2.setOnClickListener{
-            (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd2_to_navigation_account)
+            (requireActivity() as MainActivity).showConfirmationDialog(
+                "Подтверждение возврата",
+                "Данные не сохранены. Вы уверены, что хотите вернуться?",
+                {
+                    (activity as MainActivity).navController.navigate(R.id.action_accountRestorePwd2_to_navigation_account)
+                },
+                {}
+            )
         }
 
         savePwdBtn.setOnClickListener {

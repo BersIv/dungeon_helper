@@ -45,18 +45,25 @@ class CharacterCreate1 : Fragment() {
         super.onStart()
         val backBtn = binding.backBtn
         backBtn.setOnClickListener {
-            val activity = requireActivity() as MainActivity
-            val navView = activity.getNavView()
-            val menu = navView.menu
-            val menuItem1 = menu.findItem(R.id.navigation_info)
-            val menuItem2 = menu.findItem(R.id.navigation_character)
-            val menuItem3 = menu.findItem(R.id.navigation_lobby)
-            val menuItem4 = menu.findItem(R.id.navigation_account)
-            menuItem1.isVisible = true
-            menuItem2.isVisible = true
-            menuItem3.isVisible = true
-            menuItem4.isVisible = true
-            (activity as MainActivity).navController.navigate(R.id.action_characterCreate1_to_navigation_character)
+            (requireActivity() as MainActivity).showConfirmationDialog(
+                "Подтверждение возврата",
+                "Данные не сохранены. Вы уверены, что хотите вернуться?",
+                {
+                    val activity = requireActivity() as MainActivity
+                    val navView = activity.getNavView()
+                    val menu = navView.menu
+                    val menuItem1 = menu.findItem(R.id.navigation_info)
+                    val menuItem2 = menu.findItem(R.id.navigation_character)
+                    val menuItem3 = menu.findItem(R.id.navigation_lobby)
+                    val menuItem4 = menu.findItem(R.id.navigation_account)
+                    menuItem1.isVisible = true
+                    menuItem2.isVisible = true
+                    menuItem3.isVisible = true
+                    menuItem4.isVisible = true
+                    activity.navController.navigate(R.id.action_characterCreate1_to_navigation_character)
+                },
+                {  }
+            )
         }
         val forwBtn = binding.forwBtn
         forwBtn.setOnClickListener{

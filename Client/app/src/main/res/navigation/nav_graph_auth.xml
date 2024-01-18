@@ -45,5 +45,8 @@
         <action
             android:id="@+id/action_authRestorePwd2_to_auth"
             app:destination="@id/auth" />
+        <action
+            android:id="@+id/action_authRestorePwd2_to_authRestorePwd"
+            app:destination="@id/authRestorePwd" />
     </fragment>
 </navigation>

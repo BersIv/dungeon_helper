@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:text="Назад"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.037"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
         android:layout_width="370dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="276dp"
+        android:layout_marginTop="230dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -85,101 +86,421 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.273" />
 
-<!--    <TableLayout-->
-<!--        android:id="@+id/tableCharacteristics"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="400dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/text_character_create4"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintMarginTop="16dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/spinnerOptions">-->
-
-<!--        &lt;!&ndash; Шапка таблицы &ndash;&gt;-->
-<!--        <TableRow>-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="1"-->
-<!--                android:text="Хар-ка" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="2"-->
-<!--                android:text="СИЛ" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="3"-->
-<!--                android:text="ЛОВ" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="4"-->
-<!--                android:text="ТЕЛ" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="5"-->
-<!--                android:text="ИНТ" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="6"-->
-<!--                android:text="МДР" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="7"-->
-<!--                android:text="ХАР" />-->
-<!--        </TableRow>-->
+    <TableLayout
+        android:id="@+id/tableCharacteristics"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="400dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_character_create4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerOptions">
 
 
-<!--        <TableRow>-->
+        <TableRow>
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="1"-->
-<!--                android:text="Значение" />-->
+            <TextView
+                android:layout_width="37dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Хар-ка"
+                android:textSize="12sp" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="2"-->
-<!--                android:text="10" />-->
 
-<!--            &lt;!&ndash; Добавьте другие ячейки с нужными значениями &ndash;&gt;-->
-<!--        </TableRow>-->
+            <TextView
+                android:layout_width="50dp"
+                android:id="@+id/textSil"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="СИЛ" />
 
-<!--        &lt;!&ndash; Дополнительные строки с характеристиками &ndash;&gt;-->
+            <TextView
+                android:layout_width="57dp"
+                android:id="@+id/textLov"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="ЛОВ" />
 
-<!--        &lt;!&ndash; Строка с итогом и очками &ndash;&gt;-->
-<!--        <TableRow>-->
+            <TextView
+                android:layout_width="57dp"
+                android:id="@+id/textTel"
+                android:layout_height="wrap_content"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="ТЕЛ" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="1"-->
-<!--                android:text="Итого" />-->
+            <TextView
+                android:layout_width="57dp"
+                android:id="@+id/textIntel"
+                android:layout_height="wrap_content"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="ИНТ" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_column="2"-->
-<!--                android:text="Очки (0/27)" />-->
+            <TextView
+                android:layout_width="57dp"
+                android:id="@+id/textMdr"
+                android:layout_height="wrap_content"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="МДР" />
 
-<!--            &lt;!&ndash; Добавьте другие ячейки с нужными значениями &ndash;&gt;-->
-<!--        </TableRow>-->
-<!--    </TableLayout>-->
+            <TextView
+                android:layout_width="57dp"
+                android:id="@+id/textHar"
+                android:layout_height="wrap_content"
+                android:layout_column="7"
+                android:gravity="center"
+                android:text="ХАР" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Знач." />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sil"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:text="8"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/lov"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:text="8"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tel"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_column="4"
+                android:text="8"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/intel"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_column="5"
+                android:text="8"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mdr"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_column="6"
+                android:text="8"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/har"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_column="7"
+                android:text="8"
+                android:textSize="12sp" />
+
+
+        </TableRow>
+
+        <!-- Дополнительные строки с характеристиками -->
+
+        <!-- Строка с итогом и очками -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="+ расы"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="7"
+                android:gravity="center"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Модиф"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/modSil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/modLov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/modTel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/modIntel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/modMdr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/modHar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="7"
+                android:gravity="center"
+                android:text="0" />
+
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Итого"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/sumSil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/sumLov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/sumTel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="4"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/sumIntel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="5"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/sumMdr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="6"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/sumHar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="7"
+                android:gravity="center"
+                android:text="0" />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/Characteristic"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:text="Характеристика"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.587" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/plus_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="475dp"
+        android:text="+"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/minus_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="475dp"
+        android:text="-"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/value"
+        android:layout_width="50dp"
+        android:layout_height="33dp"
+        android:background="@color/purple_200"
+        android:text="0"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.642" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:text="Очков потрачено:"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.694" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:text="0"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.693" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_marginTop="20dp"
+        android:text="Дополнительный язык"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.749" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LangCharacter"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="160dp"
+        android:layout_height="81dp"
+        android:hint="Язык"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.869">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
