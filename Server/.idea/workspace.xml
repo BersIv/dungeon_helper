@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0183bfc7-68f1-4eda-ba91-86558bfd025c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Client/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/SharedViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/shared/SharedViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/auth/AuthMain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/auth/AuthMain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/auth/AuthRestorePwd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/auth/AuthRestorePwd.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/auth/AuthRestorePwd2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/auth/AuthRestorePwd2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountEdit.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountEdit.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountEditViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountEditViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountMain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountMain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountMainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountMainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountRestorePwd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountRestorePwd.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountRestorePwd2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountRestorePwd2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountRestorePwd2ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountRestorePwd2ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/AccountRestorePwdViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/account/AccountRestorePwdViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate1.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate1.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate1ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate1ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate2ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate2ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate3ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate3ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate4.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate4.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate4ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate4ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate5.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate5.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate5ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate5ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate6.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate6.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate6ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate6ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate7.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate7.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterCreate7ViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterCreate7ViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterMain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterMain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterMainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterMainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterViewing.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterViewing.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/CharacterViewingViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/character/CharacterViewingViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoAllChapters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoAllChapters.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoAllChaptersViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoAllChaptersViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoChapter1Content.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoChapter1Content.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoChapter1ContentViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoChapter1ContentViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoMain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoMain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoMainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoMainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoVers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoVers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/InfoVersViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/info/InfoVersViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/LobbyCreate.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/lobby/LobbyCreate.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/LobbyCreateViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/lobby/LobbyCreateViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/LobbyList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/lobby/LobbyList.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/LobbyListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/lobby/LobbyListViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/LobbyMain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/lobby/LobbyMain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/LobbyMainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/java/com/example/dungeon_helper/fragments/main/lobby/LobbyMainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_edit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_edit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_restore_pwd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_restore_pwd.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_restore_pwd2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_account_restore_pwd2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create5.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_create7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_viewing.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_character_viewing.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_all_chapters.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_all_chapters.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_chapter1_content.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_chapter1_content.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_vers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_info_vers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_lobby_create.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_lobby_create.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_lobby_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_lobby_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_lobby_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/layout/fragment_lobby_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/build.gradle.kts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.22rc1" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2b8VerTnLcTIoJpcFtxXjrEIGqS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "C:/Users/boris/AndroidStudioProjects/dungeon_helper/Server",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-266795519c66-911b893a1778-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.13135.104" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
