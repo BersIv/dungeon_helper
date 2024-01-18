@@ -11,8 +11,8 @@ type Subraces struct {
 	Stats       stats.GetStatsRes `json:"stats"`
 }
 
-type RaceId struct {
-	RaceId int64 `json:"raceId"`
+type GetSubracesReq struct {
+	IdRace int64 `json:"idRace"`
 }
 
 type CreateCharReq struct {
@@ -22,9 +22,9 @@ type CreateCharReq struct {
 }
 
 type Repository interface {
-	GetAllSubraces(ctx context.Context, idRace int64) ([]Subraces, error)
+	GetAllSubraces(ctx context.Context, race GetSubracesReq) ([]Subraces, error)
 }
 
 type Service interface {
-	GetAllSubraces(c context.Context, idRace int64) ([]Subraces, error)
+	GetAllSubraces(c context.Context, race GetSubracesReq) ([]Subraces, error)
 }

@@ -22,19 +22,19 @@ func (h *Handler) GetAllSubraces(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
-	var raceId RaceId
-	err = json.NewDecoder(r.Body).Decode(&raceId)
+	var req GetSubracesReq
+	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	if raceId.RaceId == 0 {
+	if req.IdRace == 0 {
 		http.Error(w, "RaceId cannot be zero", http.StatusBadRequest)
 		return
 	}
 
 	ctx := r.Context()
-	res, err := h.Service.GetAllSubraces(ctx, raceId.RaceId)
+	res, err := h.Service.GetAllSubraces(ctx, req)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

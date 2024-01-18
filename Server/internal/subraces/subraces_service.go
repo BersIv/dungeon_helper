@@ -17,11 +17,11 @@ func NewService(repository Repository) Service {
 	}
 }
 
-func (s *service) GetAllSubraces(c context.Context, idRace int64) ([]Subraces, error) {
+func (s *service) GetAllSubraces(c context.Context, req GetSubracesReq) ([]Subraces, error) {
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
 
-	races, err := s.Repository.GetAllSubraces(ctx, idRace)
+	races, err := s.Repository.GetAllSubraces(ctx, req)
 	if err != nil {
 		return nil, err
 	}
