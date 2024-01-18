@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerOptions">
 
-        <!-- Шапка таблицы -->
+
         <TableRow>
 
             <TextView
@@ -110,6 +110,7 @@
 
             <TextView
                 android:layout_width="50dp"
+                android:id="@+id/textSil"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:gravity="center"
@@ -117,6 +118,7 @@
 
             <TextView
                 android:layout_width="57dp"
+                android:id="@+id/textLov"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
                 android:gravity="center"
@@ -124,6 +126,7 @@
 
             <TextView
                 android:layout_width="57dp"
+                android:id="@+id/textTel"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
                 android:gravity="center"
@@ -131,6 +134,7 @@
 
             <TextView
                 android:layout_width="57dp"
+                android:id="@+id/textIntel"
                 android:layout_height="wrap_content"
                 android:layout_column="5"
                 android:gravity="center"
@@ -138,6 +142,7 @@
 
             <TextView
                 android:layout_width="57dp"
+                android:id="@+id/textMdr"
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:gravity="center"
@@ -145,6 +150,7 @@
 
             <TextView
                 android:layout_width="57dp"
+                android:id="@+id/textHar"
                 android:layout_height="wrap_content"
                 android:layout_column="7"
                 android:gravity="center"
@@ -236,7 +242,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="3"
                 android:gravity="center"
-                android:text="+2" />
+                android:text="0" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -250,7 +256,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="5"
                 android:gravity="center"
-                android:text="+1" />
+                android:text="0" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -438,6 +444,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.642" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:text="Очков потрачено:"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.694" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:text="0"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.693" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"

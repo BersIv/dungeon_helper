@@ -10,6 +10,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentCharacterCreate4Binding
@@ -23,6 +25,13 @@ class CharacterCreate4 : Fragment() {
     private lateinit var viewModel: CharacterCreate4ViewModel
     private var _binding: FragmentCharacterCreate4Binding? = null
     private val binding get() = _binding!!
+
+    private lateinit var currentCharacteristicButton: MaterialButton
+    private lateinit var currentSumTextView: TextView
+    private lateinit var currentModTextView: TextView
+    private lateinit var currentSpentPointsTextView: TextView
+    private lateinit var valueTextView: MaterialTextView
+    private var characteristicSelected: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +51,106 @@ class CharacterCreate4 : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun updateCharacteristic(newText: String, valueTextView: MaterialTextView) {
+        binding.Characteristic.text = newText
+        valueTextView.text = currentCharacteristicButton.text
+    }
+
+    private fun enablePlusMinusButtons() {
+        // Разблокировать кнопки минус и плюс только если выбрана характеристика
+        binding.plusBtn.isEnabled = characteristicSelected
+        binding.minusBtn.isEnabled = characteristicSelected
+    }
+    private fun setCurrentCharacteristicButton(
+        button: MaterialButton,
+        sumTextView: TextView,
+        modTextView: TextView,
+        spentPointsTextView: TextView,
+        valueTextView: MaterialTextView,
+        textTextView: TextView
+    ) {
+        currentCharacteristicButton = button
+        currentSumTextView = sumTextView
+        currentModTextView = modTextView
+        currentSpentPointsTextView = spentPointsTextView
+        this.valueTextView = valueTextView
+
+        // При выборе новой характеристики также обновляем текст
+        updateCharacteristic(textTextView.text.toString(), valueTextView)
+        enablePlusMinusButtons()
+    }
+
+    private var currentPoints = 0
+    private fun handlePlusButtonClick(
+        button: MaterialButton,
+        valueTextView: MaterialTextView,
+        sumTextView: TextView,
+        modTextView: TextView,
+        spentPointsTextView: TextView,
+        textTextView: TextView
+    ) {
+        // Получаем текущее значение текста кнопки и преобразуем его в число
+        val currentValue = button.text.toString().toInt()
+
+        // Увеличиваем значение на 1
+        val newValue = currentValue + 1
+
+        // Обновляем текст в value
+        valueTextView.text = newValue.toString()
+
+        // Обновляем текст на кнопке
+        button.text = newValue.toString()
+
+        // Обновляем текст в sumTextView
+        sumTextView.text = newValue.toString()
+
+        // Вычисляем значение модификатора и обновляем текст в modTextView
+        val modifierValue = (newValue - 10) / 2
+        modTextView.text = modifierValue.toString()
+
+        // Увеличиваем количество потраченных очков
+        currentPoints += 1
+        spentPointsTextView.text = currentPoints.toString()
+
+        // Обновляем текст в Characteristic
+        updateCharacteristic(textTextView.text.toString(), valueTextView)
+    }
+
+    private fun handleMinusButtonClick(
+        button: MaterialButton,
+        valueTextView: MaterialTextView,
+        sumTextView: TextView,
+        modTextView: TextView,
+        spentPointsTextView: TextView,
+        textTextView: TextView
+    ) {
+        // Получаем текущее значение текста кнопки и преобразуем его в число
+        val currentValue = button.text.toString().toInt()
+
+        // Уменьшаем значение на 1
+        val newValue = currentValue - 1
+
+        // Обновляем текст в value
+        valueTextView.text = newValue.toString()
+
+        // Обновляем текст на кнопке
+        button.text = newValue.toString()
+
+        // Обновляем текст в sumTextView
+        sumTextView.text = newValue.toString()
+
+        // Вычисляем значение модификатора и обновляем текст в modTextView
+        val modifierValue = (newValue - 10) / 2
+        modTextView.text = modifierValue.toString()
+
+        // Уменьшаем количество потраченных очков
+        currentPoints -= 1
+        spentPointsTextView.text = currentPoints.toString()
+
+        // Обновляем текст в Characteristic
+        updateCharacteristic(textTextView.text.toString(), valueTextView)
     }
 
     override fun onStart() {
@@ -86,6 +195,92 @@ class CharacterCreate4 : Fragment() {
 
         }
 
+        val valueTextView = binding.value
+        val pointsText = binding.points
+
+        val silBtn = binding.sil
+        val textSilText = binding.textSil
+        val sumSil = binding.sumSil
+        val modSil = binding.modSil
+
+        silBtn.setOnClickListener {
+            characteristicSelected = true
+            setCurrentCharacteristicButton(silBtn, sumSil, modSil, pointsText, valueTextView, textSilText)
+        }
+        val lovBtn = binding.lov
+        val textLovText = binding.textLov
+        val sumLov = binding.sumLov
+        val modLov = binding.modLov
+
+        lovBtn.setOnClickListener {
+            characteristicSelected = true
+            setCurrentCharacteristicButton(lovBtn, sumLov, modLov, pointsText, valueTextView, textLovText)
+        }
+
+        val telBtn = binding.tel
+        val textTelText = binding.textTel
+        val sumTel = binding.sumTel
+        val modTel = binding.modTel
+        telBtn.setOnClickListener {
+            characteristicSelected = true
+            setCurrentCharacteristicButton(telBtn,sumTel, modTel, pointsText, valueTextView,textTelText)
+        }
+        val intBtn = binding.intel
+        val textIntText = binding.textIntel
+        val sumInt = binding.sumIntel
+        val modInt = binding.modIntel
+        intBtn.setOnClickListener {
+            characteristicSelected = true
+            setCurrentCharacteristicButton(intBtn, sumInt, modInt, pointsText, valueTextView, textIntText)
+        }
+        val mdrBtn = binding.mdr
+        val textMdrText = binding.textMdr
+        val sumMdr = binding.sumMdr
+        val modMdr = binding.modMdr
+        mdrBtn.setOnClickListener {
+            characteristicSelected = true
+            setCurrentCharacteristicButton(mdrBtn, sumMdr, modMdr, pointsText, valueTextView, textMdrText)
+        }
+        val harBtn = binding.har
+        val textHarText = binding.textHar
+        val sumHar = binding.sumHar
+        val modHar = binding.modHar
+        harBtn.setOnClickListener {
+            characteristicSelected = true
+            setCurrentCharacteristicButton(harBtn, sumHar, modHar,pointsText,valueTextView,textHarText)
+        }
+
+        val plusBtn = binding.plusBtn
+        plusBtn.isEnabled = false
+        plusBtn.setOnClickListener {
+               handlePlusButtonClick(
+                   currentCharacteristicButton,
+                   valueTextView,
+                   currentSumTextView,
+                   currentModTextView,
+                   currentSpentPointsTextView,
+                   textSilText
+               )
+
+        }
+
+        val minusBtn = binding.minusBtn
+        minusBtn.isEnabled = false
+        minusBtn.setOnClickListener {
+            handleMinusButtonClick(
+                currentCharacteristicButton,
+                valueTextView,
+                currentSumTextView,
+                currentModTextView,
+                currentSpentPointsTextView,
+                textSilText
+            )
+        }
+
+
+
+
     }
+
 
 }
