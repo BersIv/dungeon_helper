@@ -276,7 +276,7 @@ func (h *Handler) UpdatePassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	req = UpdatePasswordReq{Id: id, OldPassword: req.OldPassword, NewPassword: req.NewPassword}
+	req.Id = id
 	ctx := r.Context()
 	err = h.Service.UpdatePassword(ctx, &req)
 	if err != nil {
