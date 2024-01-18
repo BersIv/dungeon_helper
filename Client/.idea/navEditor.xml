@@ -258,6 +258,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="characterViewing">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="546" />
+                            <option name="y" value="24" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_characterViewing_to_navigation_character">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="infoAllChapters">
                     <value>
                       <LayoutPositions>
@@ -421,6 +442,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_navigation_character_to_characterCreate1">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_character_to_characterViewing">
                               <value>
                                 <LayoutPositions />
                               </value>

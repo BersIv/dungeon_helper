@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_navigation_character_to_characterCreate1"
             app:destination="@id/characterCreate1" />
+        <action
+            android:id="@+id/action_navigation_character_to_characterViewing"
+            app:destination="@id/characterViewing" />
     </fragment>
 
     <fragment
@@ -216,6 +219,15 @@
         <action
             android:id="@+id/action_characterCreate7_to_characterCreate6"
             app:destination="@id/characterCreate6" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterViewing"
+        android:name="com.example.dungeon_helper.fragments.main.CharacterViewing"
+        android:label="fragment_character_viewing"
+        tools:layout="@layout/fragment_character_viewing" >
+        <action
+            android:id="@+id/action_characterViewing_to_navigation_character"
+            app:destination="@id/navigation_character" />
     </fragment>
 
 </navigation>
