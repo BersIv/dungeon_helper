@@ -3,11 +3,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_master_lobby"
-    app:startDestination="@id/lobby3">
+    app:startDestination="@id/masterLobby">
 
     <fragment
-        android:id="@+id/lobby3"
-        android:name="com.example.dungeon_helper.fragments.lobby.Lobby"
-        android:label="fragment_lobby"
-        tools:layout="@layout/fragment_lobby" />
+        android:id="@+id/masterLobby"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobby"
+        android:label="fragment_master_lobby"
+        tools:layout="@layout/fragment_master_lobby" >
+        <action
+            android:id="@+id/action_masterLobby_to_masterLobbyViewChar"
+            app:destination="@id/masterLobbyViewChar" />
+        <action
+            android:id="@+id/action_masterLobby_to_masterLobbyInfoAllChapters"
+            app:destination="@id/masterLobbyInfoAllChapters" />
+        <action
+            android:id="@+id/action_masterLobby_to_masterLobbyChoose"
+            app:destination="@id/masterLobbyChoose" />
+    </fragment>
+    <fragment
+        android:id="@+id/masterLobbyViewChar"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobbyViewChar"
+        android:label="MasterLobbyViewChar" >
+        <action
+            android:id="@+id/action_masterLobbyViewChar_to_masterLobby"
+            app:destination="@id/masterLobby" />
+    </fragment>
+    <fragment
+        android:id="@+id/masterLobbyInfoAllChapters"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobbyInfoAllChapters"
+        android:label="fragment_master_lobby_info_all_chapters"
+        tools:layout="@layout/fragment_master_lobby_info_all_chapters" >
+        <action
+            android:id="@+id/action_masterLobbyInfoAllChapters_to_masterLobby"
+            app:destination="@id/masterLobby" />
+        <action
+            android:id="@+id/action_masterLobbyInfoAllChapters_to_masterLobbyInfoContent"
+            app:destination="@id/masterLobbyInfoContent" />
+    </fragment>
+    <fragment
+        android:id="@+id/masterLobbyInfoContent"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobbyInfoContent"
+        android:label="fragment_master_lobby_info_content"
+        tools:layout="@layout/fragment_master_lobby_info_content" >
+        <action
+            android:id="@+id/action_masterLobbyInfoContent_to_masterLobbyInfoAllChapters"
+            app:destination="@id/masterLobbyInfoAllChapters" />
+    </fragment>
+    <fragment
+        android:id="@+id/masterLobbyActChoose"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobbyActChoose"
+        android:label="fragment_master_lobby_act_choose"
+        tools:layout="@layout/fragment_master_lobby_act_choose" >
+        <action
+            android:id="@+id/action_masterLobbyActChoose_to_masterLobbyChoose"
+            app:destination="@id/masterLobbyChoose" />
+        <action
+            android:id="@+id/action_masterLobbyActChoose_to_masterLobbyHp"
+            app:destination="@id/masterLobbyHp" />
+        <action
+            android:id="@+id/action_masterLobbyActChoose_to_masterLobbyExp"
+            app:destination="@id/masterLobbyExp" />
+    </fragment>
+    <fragment
+        android:id="@+id/masterLobbyChoose"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobbyChoose"
+        android:label="fragment_master_lobby_choose"
+        tools:layout="@layout/fragment_master_lobby_choose" >
+        <action
+            android:id="@+id/action_masterLobbyChoose_to_masterLobby"
+            app:destination="@id/masterLobby" />
+        <action
+            android:id="@+id/action_masterLobbyChoose_to_masterLobbyActChoose"
+            app:destination="@id/masterLobbyActChoose" />
+    </fragment>
+    <fragment
+        android:id="@+id/masterLobbyHp"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobbyHp"
+        android:label="fragment_master_lobby_hp"
+        tools:layout="@layout/fragment_master_lobby_hp" >
+        <action
+            android:id="@+id/action_masterLobbyHp_to_masterLobbyActChoose"
+            app:destination="@id/masterLobbyActChoose" />
+    </fragment>
+    <fragment
+        android:id="@+id/masterLobbyExp"
+        android:name="com.example.dungeon_helper.fragments.lobby.MasterLobbyExp"
+        android:label="fragment_master_lobby_exp"
+        tools:layout="@layout/fragment_master_lobby_exp" >
+        <action
+            android:id="@+id/action_masterLobbyExp_to_masterLobbyActChoose"
+            app:destination="@id/masterLobbyActChoose" />
+    </fragment>
 </navigation>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.lobby.Lobby">
+    tools:context=".fragments.lobby.ClientLobby">
 
     <TextView
         android:id="@+id/text_play"
@@ -152,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rectangle"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="824dp"
+        android:layout_marginTop="800dp"
         android:text="Повысить уровень"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.451"
@@ -228,7 +228,7 @@
         android:id="@+id/view_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="680dp"
+        android:layout_marginTop="650dp"
         android:text="Просмотр персонажа"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
