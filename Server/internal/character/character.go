@@ -20,7 +20,7 @@ type Character struct {
 	Sex             bool              `json:"sex"`
 	Weight          int64             `json:"weight"`
 	Height          int64             `json:"height"`
-	Class           string            `json:"class"`
+	Class           string            `json:"charClass"`
 	Race            string            `json:"race"`
 	Subrace         string            `json:"subrace"`
 	Stats           stats.GetStatsRes `json:"stats"`
@@ -48,7 +48,7 @@ type CreateCharacterReq struct {
 	Sex             bool                   `json:"sex"`
 	Weight          int64                  `json:"weight"`
 	Height          int64                  `json:"height"`
-	Class           class.Class            `json:"class"`
+	Class           class.Class            `json:"charClass"`
 	Race            races.Races            `json:"race"`
 	Subrace         subraces.CreateCharReq `json:"subrace"`
 	Stats           stats.GetStatsRes      `json:"stats"`
