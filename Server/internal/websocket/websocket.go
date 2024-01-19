@@ -127,7 +127,7 @@ func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, i
 	_ = h.db.QueryRowContext(ctx, query, accountId).Scan(&idChar)
 
 	charRepo := character.NewRepository(h.db)
-	char, _ := charRepo.GetCharacterById(ctx, 1)
+	char, _ := charRepo.GetCharacterById(ctx, idChar)
 
 	cl.Character = char
 
