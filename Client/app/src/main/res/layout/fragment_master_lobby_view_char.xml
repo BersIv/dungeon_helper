@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.lobby.MasterLobbyViewChar">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Назад"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.012" />
+
+        <TextView
+            android:id="@+id/text_character_viewing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/characterView"
+            android:layout_width="147dp"
+            android:layout_height="165dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="92dp"
+            android:src="@drawable/img"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/WeightExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="192dp"
+            android:text="Вес пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.164"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="160dp"
+            android:text="Вес"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/HeightExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="264dp"
+            android:text="Рост пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.168"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Height"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="228dp"
+            android:text="Рост"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.144"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:text="Имя персонажа"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.179"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/nameFill"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="60dp"
+            android:text="Имя пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.166"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/SexChar"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="92dp"
+            android:text="Пол"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/SexCharExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="128dp"
+            android:text="Пол пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/ClassExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="340dp"
+            android:text="Класс пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Class"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="304dp"
+            android:text="Класс"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.147"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Race"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="376dp"
+            android:text="Раса"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.144"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/RaceExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="412dp"
+            android:text="Раса пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterView" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView8"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_marginTop="50dp"
+            android:text="Характеристики"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RaceExample" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView8">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="Хар-ка"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="СИЛ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="ЛОВ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="ТЕЛ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="5"
+                    android:gravity="center"
+                    android:text="ИНТ" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="6"
+                    android:gravity="center"
+                    android:text="МДР" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="7"
+                    android:gravity="center"
+                    android:text="ХАР" />
+            </TableRow>
+
+            <TableRow >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="Модиф"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/modSil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modLov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modTel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modIntel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="5"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modMdr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="6"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/modHar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="7"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="Итого"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/sumSil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/sumLov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumTel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumIntel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="5"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumMdr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="6"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+                <TextView
+                    android:id="@+id/sumHar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="7"
+                    android:gravity="center"
+                    android:text="0"
+                    />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Lang"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="176dp"
+            android:text="Дополнительный язык"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.162"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView8" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/LangExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="244dp"
+            android:text="Дополнительный язык пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.195"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/materialTextView8" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView7"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_marginTop="1116dp"
+            android:text="Навыки"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.462"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:clipToPadding="false"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.102"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView7" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/WorldViewExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="172dp"
+            android:text="Мировозррение пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.143"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/WorldView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="60dp"
+            android:text="Мировозррение"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.118"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Ideals"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="136dp"
+            android:text="Идеалы"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/IdealsExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="248dp"
+            android:text="Идеалы пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.118"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/WeakExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="220dp"
+            android:text="Слабости пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.122"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Weak"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="328dp"
+            android:text="Слабости"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.103"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/CharExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="68dp"
+            android:text="Черты характера пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.147"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/WeakExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Char"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="48dp"
+            android:text="Черты характера"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/WeakExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/alliesExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="152dp"
+            android:text="Союзники пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.124"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/WeakExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/allies"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="132dp"
+            android:text="Союзники"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/WeakExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/organizationsExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="236dp"
+            android:text="Организации пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.132"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/WeakExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/organizations"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="216dp"
+            android:text="Организации"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/WeakExample" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/enemies"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="40dp"
+            android:text="Враги"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.093"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/storyExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="136dp"
+            android:text="История персонажа пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.154"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/enemiesExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="56dp"
+            android:text="Враги пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.109"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/story"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="116dp"
+            android:text="История персонажа"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.125"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/organizationsExample" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/goalsExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="216dp"
+            android:text="Цели и задачи пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/goals"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="196dp"
+            android:text="Цели и задачи"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/treasure"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="276dp"
+            android:text="Сокровища"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/treasureExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="296dp"
+            android:text="Сокровища пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.128"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notesExample"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="384dp"
+            android:text="Заметки пример"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.119"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/organizationsExample" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notes"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="356dp"
+            android:text="Заметки"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.098"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/organizationsExample" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>
