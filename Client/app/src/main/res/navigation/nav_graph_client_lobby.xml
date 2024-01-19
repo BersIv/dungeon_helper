@@ -4,11 +4,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_client_lobby"
-    app:startDestination="@id/lobby2">
+    app:startDestination="@id/clientLobby">
 
     <fragment
-        android:id="@+id/lobby2"
-        android:name="com.example.dungeon_helper.fragments.lobby.Lobby"
-        android:label="fragment_lobby"
-        tools:layout="@layout/fragment_lobby" />
+        android:id="@+id/clientLobby"
+        android:name="com.example.dungeon_helper.fragments.lobby.ClientLobby"
+        android:label="fragment_client_lobby"
+        tools:layout="@layout/fragment_client_lobby" >
+        <action
+            android:id="@+id/action_clientLobby_to_clientLobbyViewChar"
+            app:destination="@id/clientLobbyViewChar" />
+        <action
+            android:id="@+id/action_clientLobby_to_clientLobbyInfoAllChapters"
+            app:destination="@id/clientLobbyInfoAllChapters" />
+        <action
+            android:id="@+id/action_clientLobby_to_clientLobbyInfoAllChapters2"
+            app:destination="@id/clientLobbyInfoAllChapters" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientLobbyViewChar"
+        android:name="com.example.dungeon_helper.fragments.lobby.ClientLobbyViewChar"
+        android:label="fragment_client_lobby_view_char"
+        tools:layout="@layout/fragment_client_lobby_view_char" >
+        <action
+            android:id="@+id/action_clientLobbyViewChar_to_clientLobby"
+            app:destination="@id/clientLobby" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientLobbyInfoAllChapters"
+        android:name="com.example.dungeon_helper.fragments.lobby.ClientLobbyInfoAllChapters"
+        android:label="fragment_client_lobby_info_all_chapters"
+        tools:layout="@layout/fragment_client_lobby_info_all_chapters" >
+        <action
+            android:id="@+id/action_clientLobbyInfoAllChapters_to_clientLobby"
+            app:destination="@id/clientLobby" />
+        <action
+            android:id="@+id/action_clientLobbyInfoAllChapters_to_clientLobbyInfoContent"
+            app:destination="@id/clientLobbyInfoContent" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientLobbyInfoContent"
+        android:name="com.example.dungeon_helper.fragments.lobby.ClientLobbyInfoContent"
+        android:label="fragment_client_lobby_info_content"
+        tools:layout="@layout/fragment_client_lobby_info_content" >
+        <action
+            android:id="@+id/action_clientLobbyInfoContent_to_clientLobbyInfoAllChapters"
+            app:destination="@id/clientLobbyInfoAllChapters" />
+    </fragment>
 </navigation>
