@@ -122,9 +122,12 @@ func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, i
 		Nickname: nickname,
 		Context:  ctx,
 	}
+	var idChar int64
+	query := `SELECT idChar FROM accChar WHERE idAccount = ? AND act = 1;`
+	_ = h.db.QueryRowContext(ctx, query, accountId).Scan(&idChar)
 
 	charRepo := character.NewRepository(h.db)
-	char, _ := charRepo.GetCharacterById(r.Context(), 1)
+	char, _ := charRepo.GetCharacterById(ctx, 1)
 
 	cl.Character = char
 
