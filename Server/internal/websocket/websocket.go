@@ -83,7 +83,7 @@ func (h *Handler) CreateLobby(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	h.Reg(w, r, accountId, idLobby, nickname)
+	h.Reg(w, r, accountId, idLobby, nickname, true)
 }
 
 func (h *Handler) JoinLobby(w http.ResponseWriter, r *http.Request) {
@@ -104,10 +104,10 @@ func (h *Handler) JoinLobby(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	h.Reg(w, r, accountId, int64(idLobby), nickname)
+	h.Reg(w, r, accountId, int64(idLobby), nickname, false)
 }
 
-func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, idLobby int64, nickname string) {
+func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, idLobby int64, nickname string, master bool) {
 	conn, err := upgrader.Upgrade(&util.HijackableResponseWriter{ResponseWriter: w}, r, nil)
 	if err != nil {
 		log.Println("Error upgrading to WebSocket:", err)
@@ -122,24 +122,32 @@ func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, i
 		Nickname: nickname,
 		Context:  ctx,
 	}
-
 	charRepo := character.NewRepository(h.db)
-	char, _ := charRepo.GetCharacterById(r.Context(), 1)
 
-	cl.Character = char
+	if !master {
+		var idChar int64
+		query := `SELECT idChar FROM accChar WHERE idAccount = ? AND act = 1;`
+		_ = h.db.QueryRowContext(ctx, query, accountId).Scan(&idChar)
+		if idChar == 0 {
+			conn.Close()
+			log.Println("No char")
+		}
+		char, _ := charRepo.GetCharacterById(ctx, idChar)
 
-	joinMessage := &Command{
-		Type:      "join",
-		Payload:   cl.IdLobby,
-		Character: cl.Character,
+		cl.Character = char
+
+		joinMessage := &Command{
+			Type:      "join",
+			Payload:   cl.IdLobby,
+			Character: cl.Character,
+		}
+		cl.Conn.WriteJSON(joinMessage)
+
+		h.hub.Broadcast <- joinMessage
 	}
-	cl.Conn.WriteJSON(joinMessage)
-
-	h.hub.Broadcast <- joinMessage
 
 	h.hub.JoinRoom <- cl
 	cl.readCommand(h.hub, charRepo)
-
 	log.Println("Client connected")
 	for {
 		_, _, err := conn.ReadMessage()

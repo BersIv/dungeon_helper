@@ -47,12 +47,12 @@ func GetIdFromToken(r *http.Request) (int64, error) {
 func GetNickNameFromToken(r *http.Request) (string, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
-		return "", errors.New("Authorization header is missing")
+		return "", errors.New("authorization header is missing")
 	}
 
 	splitToken := strings.Split(authHeader, "Bearer ")
 	if len(splitToken) != 2 {
-		return "", errors.New("Invalid token format")
+		return "", errors.New("invalid token format")
 	}
 
 	tokenString := splitToken[1]
@@ -67,7 +67,7 @@ func GetNickNameFromToken(r *http.Request) (string, error) {
 
 	claims, ok := token.Claims.(*MyJWTClaims)
 	if !ok || !token.Valid {
-		return "", errors.New("Invalid token")
+		return "", errors.New("invalid token")
 	}
 
 	return claims.Nickname, nil
