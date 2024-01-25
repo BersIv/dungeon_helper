@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.main.AccountRestorePwd2">
+    tools:context=".fragments.main.account.AccountRestorePwd2">
 
 <TextView
     android:id="@+id/textRestorePwd2"

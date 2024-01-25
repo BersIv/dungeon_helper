@@ -1,5 +1,6 @@
 package com.example.dungeon_helper.fragments.lobby
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.MasterLobbyActivity
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentMasterLobbyBinding
@@ -49,7 +51,6 @@ class MasterLobby : Fragment() {
         }
         val viewChar2 = binding.viewChar2
         val viewChar3 = binding.viewChar3
-        val backBtn = binding.backBtn
         val infoBtn = binding.infoBtn
         infoBtn.setOnClickListener {
             (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobby_to_masterLobbyInfoAllChapters)
@@ -58,6 +59,14 @@ class MasterLobby : Fragment() {
         val actBtn = binding.actionBtn
         actBtn.setOnClickListener {
             (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobby_to_masterLobbyChoose)
+        }
+
+        val backBtn = binding.backBtn
+        backBtn.setOnClickListener {
+            val intent =
+                Intent(activity as MasterLobbyActivity, MasterLobbyActivity::class.java)
+
+            startActivity(intent)
         }
 
     }

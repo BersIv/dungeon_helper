@@ -84,6 +84,9 @@
         <action
             android:id="@+id/action_masterLobbyHp_to_masterLobbyActChoose"
             app:destination="@id/masterLobbyActChoose" />
+        <action
+            android:id="@+id/action_masterLobbyHp_to_masterLobby"
+            app:destination="@id/masterLobby" />
     </fragment>
     <fragment
         android:id="@+id/masterLobbyExp"
@@ -93,5 +96,8 @@
         <action
             android:id="@+id/action_masterLobbyExp_to_masterLobbyActChoose"
             app:destination="@id/masterLobbyActChoose" />
+        <action
+            android:id="@+id/action_masterLobbyExp_to_masterLobby"
+            app:destination="@id/masterLobby" />
     </fragment>
 </navigation>

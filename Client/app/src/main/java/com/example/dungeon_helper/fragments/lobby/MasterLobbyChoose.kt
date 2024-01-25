@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.example.dungeon_helper.MasterLobbyActivity
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentMasterLobbyChooseBinding
+import com.example.dungeon_helper.shared.SharedViewModel
 
 class MasterLobbyChoose : Fragment() {
 
@@ -43,13 +44,26 @@ class MasterLobbyChoose : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
+
         val viewChar1 = binding.viewChar1
         viewChar1.setOnClickListener{
+            sharedViewModel.idToChange.value = "18"
             (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobbyChoose_to_masterLobbyActChoose)
         }
 
         val viewChar2 = binding.viewChar2
+        viewChar2.setOnClickListener{
+            sharedViewModel.idToChange.value = "18"
+            (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobbyChoose_to_masterLobbyActChoose)
+        }
+
         val viewChar3 = binding.viewChar3
+        viewChar3.setOnClickListener{
+            sharedViewModel.idToChange.value = "18"
+            (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobbyChoose_to_masterLobbyActChoose)
+        }
         val backBtn = binding.backBtn
         backBtn.setOnClickListener {
             (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobbyChoose_to_masterLobby)

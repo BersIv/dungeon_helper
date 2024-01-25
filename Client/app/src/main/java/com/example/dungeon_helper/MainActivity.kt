@@ -3,6 +3,7 @@ package com.example.dungeon_helper
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -10,9 +11,21 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dungeon_helper.databinding.ActivityMainBinding
-import com.example.dungeon_helper.fragments.main.AccountMain
+import com.example.dungeon_helper.shared.JsonHelper
+import com.example.dungeon_helper.shared.SharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.IOException
 
 /*
  *      MainActivity
@@ -79,6 +92,8 @@ class MainActivity : AppCompatActivity() {
         sharedViewModel.email.value = intent.getStringExtra("mail")
         sharedViewModel.nickname.value = intent.getStringExtra("nick")
         sharedViewModel.avatar.value = intent.getStringExtra("avatar")
+
+
 
 //        // Создание фрагмента и передача данных через метод
 //        val fragment = AccountMain()

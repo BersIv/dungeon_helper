@@ -1,7 +1,5 @@
 package com.example.dungeon_helper.fragments.auth
 
-import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,23 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.dungeon_helper.AuthActivity
-import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.R
-import com.example.dungeon_helper.SharedViewModel
+import com.example.dungeon_helper.shared.SharedViewModel
 import com.example.dungeon_helper.databinding.FragmentAuthRestorePwdBinding
-import com.example.dungeon_helper.databinding.FragmentCharacterMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.Interceptor
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
-import java.io.IOException
 
 class AuthRestorePwd : Fragment() {
 

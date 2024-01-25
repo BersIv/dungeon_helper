@@ -6,24 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.CookieManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.dungeon_helper.AuthActivity
 import com.example.dungeon_helper.MainActivity
 import com.example.dungeon_helper.R
-import com.example.dungeon_helper.SharedViewModel
+import com.example.dungeon_helper.shared.SharedViewModel
 import com.example.dungeon_helper.databinding.FragmentAuthMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Cookie
-import okhttp3.CookieJar
-import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -72,7 +66,7 @@ class AuthMain : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+        val sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
         val mail = binding.textFieldMail.editText
         val pwd = binding.textFieldPwd.editText

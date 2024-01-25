@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.main.CharacterViewing">
+    tools:context=".fragments.main.character.CharacterViewing">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -358,11 +358,10 @@
                 <TextView
                     android:id="@+id/sumTel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_column="4"
                     android:gravity="center"
-                    android:text="0"
-                    />
+                    android:text="0" />
 
                 <TextView
                     android:id="@+id/sumIntel"

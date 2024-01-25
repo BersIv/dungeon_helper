@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.example.dungeon_helper.AuthActivity
 import com.example.dungeon_helper.R
-import com.example.dungeon_helper.SharedViewModel
+import com.example.dungeon_helper.shared.SharedViewModel
 import com.example.dungeon_helper.databinding.FragmentAuthRestorePwd2Binding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

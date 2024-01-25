@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_info"
-        android:name="com.example.dungeon_helper.fragments.main.InfoMain"
+        android:name="com.example.dungeon_helper.fragments.main.info.InfoMain"
         tools:layout="@layout/fragment_info_main" >
         <action
             android:id="@+id/action_navigation_info_to_infoVers"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/navigation_character"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterMain"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterMain"
         tools:layout="@layout/fragment_character_main" >
         <action
             android:id="@+id/action_navigation_character_to_characterCreate1"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_lobby"
-        android:name="com.example.dungeon_helper.fragments.main.LobbyMain"
+        android:name="com.example.dungeon_helper.fragments.main.lobby.LobbyMain"
         tools:layout="@layout/fragment_lobby_main" >
         <action
             android:id="@+id/action_navigation_lobby_to_lobbyCreate"
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.example.dungeon_helper.fragments.main.AccountMain"
+        android:name="com.example.dungeon_helper.fragments.main.account.AccountMain"
         tools:layout="@layout/fragment_account_main" >
         <action
             android:id="@+id/action_navigation_account_to_accountEdit"
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountEdit"
-        android:name="com.example.dungeon_helper.fragments.main.AccountEdit"
+        android:name="com.example.dungeon_helper.fragments.main.account.AccountEdit"
         android:label="fragment_account_edit"
         tools:layout="@layout/fragment_account_edit" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountRestorePwd"
-        android:name="com.example.dungeon_helper.fragments.main.AccountRestorePwd"
+        android:name="com.example.dungeon_helper.fragments.main.account.AccountRestorePwd"
         android:label="fragment_account_restore_pwd"
         tools:layout="@layout/fragment_account_restore_pwd" >
         <action
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountRestorePwd2"
-        android:name="com.example.dungeon_helper.fragments.main.AccountRestorePwd2"
+        android:name="com.example.dungeon_helper.fragments.main.account.AccountRestorePwd2"
         android:label="fragment_account_restore_pwd2"
         tools:layout="@layout/fragment_account_restore_pwd2" >
         <action
@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoVers"
-        android:name="com.example.dungeon_helper.fragments.main.InfoVers"
+        android:name="com.example.dungeon_helper.fragments.main.info.InfoVers"
         android:label="fragment_info_vers"
         tools:layout="@layout/fragment_info_vers" >
         <action
@@ -96,7 +96,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoAllChapters"
-        android:name="com.example.dungeon_helper.fragments.main.InfoAllChapters"
+        android:name="com.example.dungeon_helper.fragments.main.info.InfoAllChapters"
         android:label="fragment_info_all_chapters"
         tools:layout="@layout/fragment_info_all_chapters" >
         <action
@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoChapter1Content"
-        android:name="com.example.dungeon_helper.fragments.main.InfoChapter1Content"
+        android:name="com.example.dungeon_helper.fragments.main.info.InfoChapter1Content"
         android:label="fragment_info_chapter1_content"
         tools:layout="@layout/fragment_info_chapter1_content" >
         <action
@@ -120,7 +120,7 @@
     </fragment>
     <fragment
         android:id="@+id/lobbyCreate"
-        android:name="com.example.dungeon_helper.fragments.main.LobbyCreate"
+        android:name="com.example.dungeon_helper.fragments.main.lobby.LobbyCreate"
         android:label="fragment_lobby_create"
         tools:layout="@layout/fragment_lobby_create" >
         <action
@@ -129,7 +129,7 @@
     </fragment>
     <fragment
         android:id="@+id/lobbyList"
-        android:name="com.example.dungeon_helper.fragments.main.LobbyList"
+        android:name="com.example.dungeon_helper.fragments.main.lobby.LobbyList"
         android:label="fragment_lobby_list"
         tools:layout="@layout/fragment_lobby_list" >
         <action
@@ -138,7 +138,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterCreate1"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate1"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterCreate1"
         android:label="fragment_character_create1"
         tools:layout="@layout/fragment_character_create1" >
         <action
@@ -150,7 +150,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterCreate2"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate2"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterCreate2"
         android:label="fragment_character_create2"
         tools:layout="@layout/fragment_character_create2" >
         <action
@@ -162,7 +162,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterCreate3"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate3"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterCreate3"
         android:label="fragment_character_create3"
         tools:layout="@layout/fragment_character_create3" >
         <action
@@ -174,7 +174,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterCreate4"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate4"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterCreate4"
         android:label="fragment_character_create4"
         tools:layout="@layout/fragment_character_create4" >
         <action
@@ -186,7 +186,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterCreate5"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate5"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterCreate5"
         android:label="fragment_character_create5"
         tools:layout="@layout/fragment_character_create5" >
         <action
@@ -198,7 +198,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterCreate6"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate6"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterCreate6"
         android:label="fragment_character_create6"
         tools:layout="@layout/fragment_character_create6" >
         <action
@@ -210,7 +210,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterCreate7"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterCreate7"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterCreate7"
         android:label="fragment_character_create7"
         tools:layout="@layout/fragment_character_create7" >
         <action
@@ -222,7 +222,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterViewing"
-        android:name="com.example.dungeon_helper.fragments.main.CharacterViewing"
+        android:name="com.example.dungeon_helper.fragments.main.character.CharacterViewing"
         android:label="fragment_character_viewing"
         tools:layout="@layout/fragment_character_viewing" >
         <action

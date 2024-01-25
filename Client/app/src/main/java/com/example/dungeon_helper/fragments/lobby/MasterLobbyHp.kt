@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.example.dungeon_helper.MasterLobbyActivity
 import com.example.dungeon_helper.R
 import com.example.dungeon_helper.databinding.FragmentMasterLobbyHpBinding
+import com.example.dungeon_helper.shared.SharedViewModel
+import okhttp3.WebSocket
 
 class MasterLobbyHp : Fragment() {
 
@@ -42,6 +45,25 @@ class MasterLobbyHp : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
+
+        var socket: WebSocket? = sharedViewModel.socket.value
+        sharedViewModel.socket.observe(viewLifecycleOwner, Observer {
+            // updating data in displayMsg
+            println(it)
+            socket = it
+        })
+
+        var id: String? = sharedViewModel.idToChange.value
+        sharedViewModel.idToChange.observe(viewLifecycleOwner, Observer {
+            // updating data in displayMsg
+            println(it)
+            id = it
+        })
+
+        val hp = binding.value
+
         val backBtn = binding.backBtn
         backBtn.setOnClickListener {
             (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobbyHp_to_masterLobbyActChoose)
@@ -61,7 +83,16 @@ class MasterLobbyHp : Fragment() {
                 valueTextView.text = value.toString()
             }
         }
+
         val acceptBtn = binding.acceptBtn
+        acceptBtn.setOnClickListener {
+            val hpString = hp.text
+
+            val msg = "change_hp $id $hpString"
+            socket?.send(msg.toString())
+
+            (activity as MasterLobbyActivity).navController.navigate(R.id.action_masterLobbyExp_to_masterLobby)
+        }
 
     }
 

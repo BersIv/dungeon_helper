@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.main.AccountMain">
+    tools:context=".fragments.main.account.AccountMain">
 
     <TextView
         android:id="@+id/text_account"
@@ -73,9 +73,11 @@
         android:layout_width="100dp"
         android:layout_height="20dp"
 
+        android:layout_marginBottom="132dp"
         android:text="Пример"
         app:layout_constraintBottom_toTopOf="@+id/changePwd_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
