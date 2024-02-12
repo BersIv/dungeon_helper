@@ -22,11 +22,13 @@ import (
 
 type Handler struct {
 	Service
+	util.TokenGetter
 }
 
-func NewHandler(s Service) *Handler {
+func NewHandler(s Service, tg util.TokenGetter) *Handler {
 	return &Handler{
-		Service: s,
+		Service:     s,
+		TokenGetter: tg,
 	}
 }
 
@@ -234,7 +236,7 @@ func (h *Handler) UpdateNickname(w http.ResponseWriter, r *http.Request) {
 		}
 	}(r.Body)
 
-	id, err := util.GetIdFromToken(r)
+	id, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -270,7 +272,7 @@ func (h *Handler) UpdatePassword(w http.ResponseWriter, r *http.Request) {
 		}
 	}(r.Body)
 
-	id, err := util.GetIdFromToken(r)
+	id, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -306,7 +308,7 @@ func (h *Handler) UpdateAvatar(w http.ResponseWriter, r *http.Request) {
 		}
 	}(r.Body)
 
-	id, err := util.GetIdFromToken(r)
+	id, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return

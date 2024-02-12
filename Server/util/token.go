@@ -15,7 +15,14 @@ type MyJWTClaims struct {
 	jwt.RegisteredClaims
 }
 
-func GetIdFromToken(r *http.Request) (int64, error) {
+type TokenGetter interface {
+	GetIdFromToken(r *http.Request) (int64, error)
+	GetNickNameFromToken(r *http.Request) (string, error)
+}
+
+type JWTTokenGetter struct{}
+
+func (JWTTokenGetter) GetIdFromToken(r *http.Request) (int64, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
 		return 0, errors.New("authorization header is missing")
@@ -44,7 +51,7 @@ func GetIdFromToken(r *http.Request) (int64, error) {
 	return claims.Id, nil
 }
 
-func GetNickNameFromToken(r *http.Request) (string, error) {
+func (JWTTokenGetter) GetNickNameFromToken(r *http.Request) (string, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
 		return "", errors.New("authorization header is missing")
