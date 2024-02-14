@@ -15,18 +15,25 @@ import (
 	"dungeons_helper/router"
 	"dungeons_helper/util"
 	"log"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	log.Printf("Server is starting...")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Could not load env: %s", err)
+	}
 	dbConn, err := db.NewDatabase()
 	if err != nil {
 		log.Fatalf("Could not initialize database connection: %s", err)
 	}
 
 	jwtTokenGetter := util.JWTTokenGetter{}
+	passwordHasher := util.BcryptPasswordHasher{}
 
-	accountHandler := account.NewHandler(account.NewService(account.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	accountHandler := account.NewHandler(account.NewService(account.NewRepository(dbConn.GetDB()), passwordHasher), jwtTokenGetter, passwordHasher)
 	alignmentHandler := alignment.NewHandler(alignment.NewService(alignment.NewRepository(dbConn.GetDB())), jwtTokenGetter)
 	classHandler := class.NewHandler(class.NewService(class.NewRepository(dbConn.GetDB())), jwtTokenGetter)
 	racesHandler := races.NewHandler(races.NewService(races.NewRepository(dbConn.GetDB())), jwtTokenGetter)

@@ -1,4 +1,4 @@
-package class
+package races
 
 import (
 	"context"
@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"reflect"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -17,56 +18,64 @@ import (
 
 type MockRepo struct{}
 
-func (m *MockRepo) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return []Class{{Id: 1, ClassName: "Воин"}, {Id: 2, ClassName: "Бард"}}, nil
+func (m *MockRepo) GetAllRaces(ctx context.Context) ([]Races, error) {
+	return []Races{
+		{
+			Id: 1, RaceName: "Эльф"},
+		{
+			Id: 2, RaceName: "Дворф"}}, nil
 }
 
-type MockClassService struct{}
+type MockRepoError struct{}
 
-func (s *MockClassService) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return []Class{}, nil
+func (m *MockRepoError) GetAllRaces(ctx context.Context) ([]Races, error) {
+	return nil, errors.New("mocked error")
+}
+
+type MockService struct{}
+
+func (s *MockService) GetAllRaces(ctx context.Context) ([]Races, error) {
+	return []Races{}, nil
 }
 
 type MockServiceError struct{}
 
-func (s *MockServiceError) GetAllClasses(ctx context.Context) ([]Class, error) {
+func (s *MockServiceError) GetAllRaces(ctx context.Context) ([]Races, error) {
 	return nil, errors.New("fake service error")
 }
 
-func TestGetAllClassesRepository(t *testing.T) {
+func TestGetAllRacesRepository(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
 	}
 	defer db.Close()
 
-	mockRows := sqlmock.NewRows([]string{"id", "className"}).
-		AddRow(1, "Воин").
-		AddRow(2, "Бард")
+	mockRows := sqlmock.NewRows([]string{"id", "raceName"}).
+		AddRow(1, "Эльф").
+		AddRow(2, "Дворф")
 
-	mock.ExpectQuery("SELECT id, className FROM class").WillReturnRows(mockRows)
+	mock.ExpectQuery(regexp.QuoteMeta(`SELECT id, raceName FROM races`)).WillReturnRows(mockRows)
 
 	repo := NewRepository(db)
 
 	ctx := context.Background()
-	classes, err := repo.GetAllClasses(ctx)
+	races, err := repo.GetAllRaces(ctx)
 	if err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	if len(classes) != 2 {
-		t.Errorf("expected 2 classes, got %d", len(classes))
+	if len(races) != 2 {
+		t.Errorf("expected 2 alignments, got %d", len(races))
 	}
 
-	expected := []Class{
-		{Id: 1, ClassName: "Воин"},
-		{Id: 2, ClassName: "Бард"},
+	expected := []Races{
+		{Id: 1, RaceName: "Эльф"},
+		{Id: 2, RaceName: "Дворф"},
 	}
 
-	for i, c := range classes {
-		if c.Id != expected[i].Id || c.ClassName != expected[i].ClassName {
-			t.Errorf("expected %+v, got %+v", expected[i], c)
-		}
+	if !reflect.DeepEqual(races, expected) {
+		t.Errorf("expected %+v, got %+v", expected, races)
 	}
 
 	if err := mock.ExpectationsWereMet(); err != nil {
@@ -74,19 +83,19 @@ func TestGetAllClassesRepository(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesRepository_Error(t *testing.T) {
+func TestGetAllRacesRepositoryError(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
 	}
 	defer db.Close()
 
-	mock.ExpectQuery("SELECT id, className FROM class").WillReturnError(sql.ErrConnDone)
+	mock.ExpectQuery(regexp.QuoteMeta(`SELECT id, raceName FROM races`)).WillReturnError(sql.ErrConnDone)
 
 	repo := NewRepository(db)
 
 	ctx := context.Background()
-	_, err = repo.GetAllClasses(ctx)
+	_, err = repo.GetAllRaces(ctx)
 	if err == nil {
 		t.Error("expected an error, got nil")
 	}
@@ -96,34 +105,32 @@ func TestGetAllClassesRepository_Error(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesService(t *testing.T) {
+func TestGetAllRacesService(t *testing.T) {
 	mockRepo := &MockRepo{}
 	service := NewService(mockRepo)
 
 	ctx := context.Background()
-	classes, err := service.GetAllClasses(ctx)
+	races, err := service.GetAllRaces(ctx)
 	if err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	expected := []Class{{Id: 1, ClassName: "Воин"}, {Id: 2, ClassName: "Бард"}}
-	if !reflect.DeepEqual(classes, expected) {
-		t.Errorf("expected %+v, got %+v", expected, classes)
+	expected := []Races{
+		{
+			Id: 1, RaceName: "Эльф"},
+		{
+			Id: 2, RaceName: "Дворф"}}
+	if !reflect.DeepEqual(races, expected) {
+		t.Errorf("expected %+v, got %+v", expected, races)
 	}
 }
 
-type MockRepoError struct{}
-
-func (m *MockRepoError) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return nil, errors.New("mocked error")
-}
-
-func TestGetAllClassesErrorService(t *testing.T) {
+func TestGetAllRacesErrorService(t *testing.T) {
 	mockRepo := &MockRepoError{}
 	service := NewService(mockRepo)
 
 	ctx := context.Background()
-	_, err := service.GetAllClasses(ctx)
+	_, err := service.GetAllRaces(ctx)
 	if err == nil {
 		t.Error("expected an error, got nil")
 	} else if err.Error() != "mocked error" {
@@ -131,21 +138,21 @@ func TestGetAllClassesErrorService(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/classes", nil)
+func TestGetAllRacesHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	req.Header.Set("Authorization", "Bearer 1")
 
-	svc := &MockClassService{}
+	svc := &MockService{}
 	fakeTokenGetter := &utilMocks.MockTokenGetter{Id: 123, Err: nil}
 	handler := NewHandler(svc, fakeTokenGetter)
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllRaces(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
@@ -156,25 +163,25 @@ func TestGetAllClassesHandler(t *testing.T) {
 		t.Errorf("handler returned unexpected content-type header: got %v want %v", contentType, expectedContentType)
 	}
 
-	var classes []Class
-	if err := json.Unmarshal(rr.Body.Bytes(), &classes); err != nil {
+	var races []Races
+	if err := json.Unmarshal(rr.Body.Bytes(), &races); err != nil {
 		t.Errorf("error unmarshalling response body: %v", err)
 	}
 }
 
-func TestGetAllClassesHandler_Unauthorized(t *testing.T) {
-	req, err := http.NewRequest("GET", "/classes", nil)
+func TestGetAllRacesHandler_Unauthorized(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	svc := &MockClassService{}
+	svc := &MockService{}
 	fakeTokenGetter := &utilMocks.MockTokenGetter{Id: 0, Err: errors.New("authorization header is missing")}
 	handler := NewHandler(svc, fakeTokenGetter)
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllRaces(rr, req)
 
 	if status := rr.Code; status != http.StatusUnauthorized {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusUnauthorized)
@@ -186,7 +193,7 @@ func TestGetAllClassesHandler_Unauthorized(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesHandler_ServiceError(t *testing.T) {
+func TestGetAllRacesHandler_ServiceError(t *testing.T) {
 	req, err := http.NewRequest("GET", "/classes", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -200,7 +207,7 @@ func TestGetAllClassesHandler_ServiceError(t *testing.T) {
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllRaces(rr, req)
 
 	if status := rr.Code; status != http.StatusInternalServerError {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusInternalServerError)

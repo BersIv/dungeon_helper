@@ -1,4 +1,4 @@
-package class
+package alignment
 
 import (
 	"context"
@@ -17,55 +17,61 @@ import (
 
 type MockRepo struct{}
 
-func (m *MockRepo) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return []Class{{Id: 1, ClassName: "Воин"}, {Id: 2, ClassName: "Бард"}}, nil
+func (m *MockRepo) GetAllAlignments(ctx context.Context) ([]Alignment, error) {
+	return []Alignment{{Id: 1, AlignmentName: "Законопослушный"}, {Id: 2, AlignmentName: "Нейтральный"}}, nil
 }
 
-type MockClassService struct{}
+type MockRepoError struct{}
 
-func (s *MockClassService) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return []Class{}, nil
+func (m *MockRepoError) GetAllAlignments(ctx context.Context) ([]Alignment, error) {
+	return nil, errors.New("mocked error")
+}
+
+type MockService struct{}
+
+func (s *MockService) GetAllAlignments(ctx context.Context) ([]Alignment, error) {
+	return []Alignment{}, nil
 }
 
 type MockServiceError struct{}
 
-func (s *MockServiceError) GetAllClasses(ctx context.Context) ([]Class, error) {
+func (s *MockServiceError) GetAllAlignments(ctx context.Context) ([]Alignment, error) {
 	return nil, errors.New("fake service error")
 }
 
-func TestGetAllClassesRepository(t *testing.T) {
+func TestGetAllAlignmentsRepository(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
 	}
 	defer db.Close()
 
-	mockRows := sqlmock.NewRows([]string{"id", "className"}).
-		AddRow(1, "Воин").
-		AddRow(2, "Бард")
+	mockRows := sqlmock.NewRows([]string{"id", "alignmentName"}).
+		AddRow(1, "Законопослушный").
+		AddRow(2, "Нейтральный")
 
-	mock.ExpectQuery("SELECT id, className FROM class").WillReturnRows(mockRows)
+	mock.ExpectQuery("SELECT id, alignmentName FROM alignment").WillReturnRows(mockRows)
 
 	repo := NewRepository(db)
 
 	ctx := context.Background()
-	classes, err := repo.GetAllClasses(ctx)
+	alignments, err := repo.GetAllAlignments(ctx)
 	if err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	if len(classes) != 2 {
-		t.Errorf("expected 2 classes, got %d", len(classes))
+	if len(alignments) != 2 {
+		t.Errorf("expected 2 alignments, got %d", len(alignments))
 	}
 
-	expected := []Class{
-		{Id: 1, ClassName: "Воин"},
-		{Id: 2, ClassName: "Бард"},
+	expected := []Alignment{
+		{Id: 1, AlignmentName: "Законопослушный"},
+		{Id: 2, AlignmentName: "Нейтральный"},
 	}
 
-	for i, c := range classes {
-		if c.Id != expected[i].Id || c.ClassName != expected[i].ClassName {
-			t.Errorf("expected %+v, got %+v", expected[i], c)
+	for i, a := range alignments {
+		if a.Id != expected[i].Id || a.AlignmentName != expected[i].AlignmentName {
+			t.Errorf("expected %+v, got %+v", expected[i], a)
 		}
 	}
 
@@ -74,19 +80,19 @@ func TestGetAllClassesRepository(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesRepository_Error(t *testing.T) {
+func TestGetAllAlignmentsRepository_Error(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
 	}
 	defer db.Close()
 
-	mock.ExpectQuery("SELECT id, className FROM class").WillReturnError(sql.ErrConnDone)
+	mock.ExpectQuery("SELECT id, alignmentName FROM alignment").WillReturnError(sql.ErrConnDone)
 
 	repo := NewRepository(db)
 
 	ctx := context.Background()
-	_, err = repo.GetAllClasses(ctx)
+	_, err = repo.GetAllAlignments(ctx)
 	if err == nil {
 		t.Error("expected an error, got nil")
 	}
@@ -96,34 +102,28 @@ func TestGetAllClassesRepository_Error(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesService(t *testing.T) {
+func TestGetAllAlignmentsService(t *testing.T) {
 	mockRepo := &MockRepo{}
 	service := NewService(mockRepo)
 
 	ctx := context.Background()
-	classes, err := service.GetAllClasses(ctx)
+	classes, err := service.GetAllAlignments(ctx)
 	if err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	expected := []Class{{Id: 1, ClassName: "Воин"}, {Id: 2, ClassName: "Бард"}}
+	expected := []Alignment{{Id: 1, AlignmentName: "Законопослушный"}, {Id: 2, AlignmentName: "Нейтральный"}}
 	if !reflect.DeepEqual(classes, expected) {
 		t.Errorf("expected %+v, got %+v", expected, classes)
 	}
 }
 
-type MockRepoError struct{}
-
-func (m *MockRepoError) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return nil, errors.New("mocked error")
-}
-
-func TestGetAllClassesErrorService(t *testing.T) {
+func TestGetAllAlignmentsErrorService(t *testing.T) {
 	mockRepo := &MockRepoError{}
 	service := NewService(mockRepo)
 
 	ctx := context.Background()
-	_, err := service.GetAllClasses(ctx)
+	_, err := service.GetAllAlignments(ctx)
 	if err == nil {
 		t.Error("expected an error, got nil")
 	} else if err.Error() != "mocked error" {
@@ -131,21 +131,21 @@ func TestGetAllClassesErrorService(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/classes", nil)
+func TestGetAllAlignmentsHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	req.Header.Set("Authorization", "Bearer 1")
 
-	svc := &MockClassService{}
+	svc := &MockService{}
 	fakeTokenGetter := &utilMocks.MockTokenGetter{Id: 123, Err: nil}
 	handler := NewHandler(svc, fakeTokenGetter)
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllAlignments(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
@@ -156,25 +156,25 @@ func TestGetAllClassesHandler(t *testing.T) {
 		t.Errorf("handler returned unexpected content-type header: got %v want %v", contentType, expectedContentType)
 	}
 
-	var classes []Class
-	if err := json.Unmarshal(rr.Body.Bytes(), &classes); err != nil {
+	var alignment []Alignment
+	if err := json.Unmarshal(rr.Body.Bytes(), &alignment); err != nil {
 		t.Errorf("error unmarshalling response body: %v", err)
 	}
 }
 
-func TestGetAllClassesHandler_Unauthorized(t *testing.T) {
-	req, err := http.NewRequest("GET", "/classes", nil)
+func TestGetAllAlignmentsHandler_Unauthorized(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	svc := &MockClassService{}
+	svc := &MockService{}
 	fakeTokenGetter := &utilMocks.MockTokenGetter{Id: 0, Err: errors.New("authorization header is missing")}
 	handler := NewHandler(svc, fakeTokenGetter)
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllAlignments(rr, req)
 
 	if status := rr.Code; status != http.StatusUnauthorized {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusUnauthorized)
@@ -186,7 +186,7 @@ func TestGetAllClassesHandler_Unauthorized(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesHandler_ServiceError(t *testing.T) {
+func TestGetAllAlignmentsHandler_ServiceError(t *testing.T) {
 	req, err := http.NewRequest("GET", "/classes", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -200,7 +200,7 @@ func TestGetAllClassesHandler_ServiceError(t *testing.T) {
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllAlignments(rr, req)
 
 	if status := rr.Code; status != http.StatusInternalServerError {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusInternalServerError)

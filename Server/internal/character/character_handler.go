@@ -55,7 +55,7 @@ func (h *Handler) GetCharacterById(w http.ResponseWriter, r *http.Request) {
 	var id GetCharacterReq
 	err = json.NewDecoder(r.Body).Decode(&id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 

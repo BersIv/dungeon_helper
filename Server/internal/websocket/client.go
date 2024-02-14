@@ -116,7 +116,6 @@ func (c *Client) readCommand(hub *Hub, charRepo character.Repository) {
 		case "leave":
 			c.Conn.Close()
 		default:
-			// Обработка неизвестной команды
 			fmt.Println("Unknown command:", command)
 		}
 	}

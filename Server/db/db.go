@@ -7,7 +7,6 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/joho/godotenv"
 )
 
 type Database struct {
@@ -23,11 +22,6 @@ type DatabaseTX interface {
 }
 
 func NewDatabase() (*Database, error) {
-	err := godotenv.Load()
-	if err != nil {
-		return nil, err
-	}
-
 	dbUsername := os.Getenv("DB_USERNAME")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbHost := os.Getenv("DB_HOST")

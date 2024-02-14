@@ -128,7 +128,7 @@ func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, i
 
 	if !master {
 		var idChar int64
-		query := `SELECT idChar FROM accChar WHERE idAccount = ? AND act = 1;`
+		query := `SELECT idChar FROM accChar WHERE idAccount = ? AND act = 1`
 		_ = h.db.QueryRowContext(ctx, query, accountId).Scan(&idChar)
 		if idChar == 0 {
 			conn.Close()

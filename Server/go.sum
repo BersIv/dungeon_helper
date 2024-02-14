@@ -64,6 +64,10 @@ github.com/gorilla/websocket v1.5.1/go.mod h1:x3kM2JMyaluk02fnUJpQuwD2dCS5NDG2ZH
 github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
 github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
 github.com/kisielk/sqlstruct v0.0.0-20201105191214-5f3e10d3ab46/go.mod h1:yyMNCyc/Ib3bDTKd379tNMpB/7/H5TjM2Y9QJ5THLbE=
+github.com/mocktools/go-smtp-mock v1.10.0 h1:glrRmjNqASyy+jf1IJ2nCWgEbJScD3Amf2IGcXgdEVg=
+github.com/mocktools/go-smtp-mock v1.10.0/go.mod h1:mmvlBVX6MTOBHtROX+tor9YZF5JENN8d8wrToD1vvg4=
+github.com/mocktools/go-smtp-mock/v2 v2.2.1 h1:G9oG+0PnhyyzfP/swyd2x6taGkTwc9u07VzqJL5RQUo=
+github.com/mocktools/go-smtp-mock/v2 v2.2.1/go.mod h1:n8aNpDYncZHH/cZHtJKzQyeYT/Dut00RghVM+J1Ed94=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=

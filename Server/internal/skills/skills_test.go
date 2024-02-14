@@ -1,4 +1,4 @@
-package class
+package skills
 
 import (
 	"context"
@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"reflect"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -17,56 +18,64 @@ import (
 
 type MockRepo struct{}
 
-func (m *MockRepo) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return []Class{{Id: 1, ClassName: "Воин"}, {Id: 2, ClassName: "Бард"}}, nil
+func (m *MockRepo) GetAllSkills(ctx context.Context) ([]Skills, error) {
+	return []Skills{
+		{
+			Id: 1, SkillName: "Анализ"},
+		{
+			Id: 2, SkillName: "Акробатика"}}, nil
 }
 
-type MockClassService struct{}
+type MockRepoError struct{}
 
-func (s *MockClassService) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return []Class{}, nil
+func (m *MockRepoError) GetAllSkills(ctx context.Context) ([]Skills, error) {
+	return nil, errors.New("mocked error")
+}
+
+type MockService struct{}
+
+func (s *MockService) GetAllSkills(ctx context.Context) ([]Skills, error) {
+	return []Skills{}, nil
 }
 
 type MockServiceError struct{}
 
-func (s *MockServiceError) GetAllClasses(ctx context.Context) ([]Class, error) {
+func (s *MockServiceError) GetAllSkills(ctx context.Context) ([]Skills, error) {
 	return nil, errors.New("fake service error")
 }
 
-func TestGetAllClassesRepository(t *testing.T) {
+func TestGetAllSkillsRepository(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
 	}
 	defer db.Close()
 
-	mockRows := sqlmock.NewRows([]string{"id", "className"}).
-		AddRow(1, "Воин").
-		AddRow(2, "Бард")
+	mockRows := sqlmock.NewRows([]string{"id", "skillName"}).
+		AddRow(1, "Анализ").
+		AddRow(2, "Акробатика")
 
-	mock.ExpectQuery("SELECT id, className FROM class").WillReturnRows(mockRows)
+	mock.ExpectQuery(regexp.QuoteMeta(`SELECT id, skillName FROM skills`)).WillReturnRows(mockRows)
 
 	repo := NewRepository(db)
 
 	ctx := context.Background()
-	classes, err := repo.GetAllClasses(ctx)
+	skills, err := repo.GetAllSkills(ctx)
 	if err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	if len(classes) != 2 {
-		t.Errorf("expected 2 classes, got %d", len(classes))
+	if len(skills) != 2 {
+		t.Errorf("expected 2 alignments, got %d", len(skills))
 	}
 
-	expected := []Class{
-		{Id: 1, ClassName: "Воин"},
-		{Id: 2, ClassName: "Бард"},
+	expected := []Skills{
+		{Id: 1, SkillName: "Анализ"},
+		{Id: 2, SkillName: "Акробатика"},
 	}
 
-	for i, c := range classes {
-		if c.Id != expected[i].Id || c.ClassName != expected[i].ClassName {
-			t.Errorf("expected %+v, got %+v", expected[i], c)
-		}
+	if !reflect.DeepEqual(skills, expected) {
+		t.Errorf("expected %+v, got %+v", expected, skills)
 	}
 
 	if err := mock.ExpectationsWereMet(); err != nil {
@@ -74,19 +83,19 @@ func TestGetAllClassesRepository(t *testing.T) {
 	}
 }
 
-func TestGetAllClassesRepository_Error(t *testing.T) {
+func TestGetAllSkillsRepositoryError(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
 	}
 	defer db.Close()
 
-	mock.ExpectQuery("SELECT id, className FROM class").WillReturnError(sql.ErrConnDone)
+	mock.ExpectQuery(regexp.QuoteMeta(`SELECT id, skillName FROM skills`)).WillReturnError(sql.ErrConnDone)
 
 	repo := NewRepository(db)
 
 	ctx := context.Background()
-	_, err = repo.GetAllClasses(ctx)
+	_, err = repo.GetAllSkills(ctx)
 	if err == nil {
 		t.Error("expected an error, got nil")
 	}
@@ -101,21 +110,19 @@ func TestGetAllClassesService(t *testing.T) {
 	service := NewService(mockRepo)
 
 	ctx := context.Background()
-	classes, err := service.GetAllClasses(ctx)
+	skills, err := service.GetAllSkills(ctx)
 	if err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	expected := []Class{{Id: 1, ClassName: "Воин"}, {Id: 2, ClassName: "Бард"}}
-	if !reflect.DeepEqual(classes, expected) {
-		t.Errorf("expected %+v, got %+v", expected, classes)
+	expected := []Skills{
+		{
+			Id: 1, SkillName: "Анализ"},
+		{
+			Id: 2, SkillName: "Акробатика"}}
+	if !reflect.DeepEqual(skills, expected) {
+		t.Errorf("expected %+v, got %+v", expected, skills)
 	}
-}
-
-type MockRepoError struct{}
-
-func (m *MockRepoError) GetAllClasses(ctx context.Context) ([]Class, error) {
-	return nil, errors.New("mocked error")
 }
 
 func TestGetAllClassesErrorService(t *testing.T) {
@@ -123,7 +130,7 @@ func TestGetAllClassesErrorService(t *testing.T) {
 	service := NewService(mockRepo)
 
 	ctx := context.Background()
-	_, err := service.GetAllClasses(ctx)
+	_, err := service.GetAllSkills(ctx)
 	if err == nil {
 		t.Error("expected an error, got nil")
 	} else if err.Error() != "mocked error" {
@@ -132,20 +139,20 @@ func TestGetAllClassesErrorService(t *testing.T) {
 }
 
 func TestGetAllClassesHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/classes", nil)
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	req.Header.Set("Authorization", "Bearer 1")
 
-	svc := &MockClassService{}
+	svc := &MockService{}
 	fakeTokenGetter := &utilMocks.MockTokenGetter{Id: 123, Err: nil}
 	handler := NewHandler(svc, fakeTokenGetter)
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllSkills(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
@@ -156,25 +163,25 @@ func TestGetAllClassesHandler(t *testing.T) {
 		t.Errorf("handler returned unexpected content-type header: got %v want %v", contentType, expectedContentType)
 	}
 
-	var classes []Class
-	if err := json.Unmarshal(rr.Body.Bytes(), &classes); err != nil {
+	var skills []Skills
+	if err := json.Unmarshal(rr.Body.Bytes(), &skills); err != nil {
 		t.Errorf("error unmarshalling response body: %v", err)
 	}
 }
 
 func TestGetAllClassesHandler_Unauthorized(t *testing.T) {
-	req, err := http.NewRequest("GET", "/classes", nil)
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	svc := &MockClassService{}
+	svc := &MockService{}
 	fakeTokenGetter := &utilMocks.MockTokenGetter{Id: 0, Err: errors.New("authorization header is missing")}
 	handler := NewHandler(svc, fakeTokenGetter)
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllSkills(rr, req)
 
 	if status := rr.Code; status != http.StatusUnauthorized {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusUnauthorized)
@@ -200,7 +207,7 @@ func TestGetAllClassesHandler_ServiceError(t *testing.T) {
 
 	rr := httptest.NewRecorder()
 
-	handler.GetAllClasses(rr, req)
+	handler.GetAllSkills(rr, req)
 
 	if status := rr.Code; status != http.StatusInternalServerError {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusInternalServerError)
