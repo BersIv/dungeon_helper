@@ -3,6 +3,7 @@ package account
 import (
 	"context"
 	"dungeons_helper/util"
+	"errors"
 	"fmt"
 	"net/smtp"
 	"os"
@@ -29,6 +30,10 @@ func NewService(repository Repository, ph util.PasswordHasher) Service {
 func (s *service) CreateAccount(c context.Context, req *CreateAccountReq) error {
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
+
+	if err := s.isPasswordStrong(req.Password); err != nil {
+		return err
+	}
 
 	hashedPassword, err := s.PasswordHasher.HashPassword(req.Password)
 	if err != nil {
@@ -233,6 +238,45 @@ func SendWelcomeEmail(toEmail string) error {
 	err := SendEmail(toEmail, subject, body)
 	if err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (s *service) isPasswordStrong(password string) error {
+	if len(password) < 8 {
+		return errors.New("password must be at least 8 characters long")
+	}
+
+	containsUpperCase := false
+	containsLowerCase := false
+	containsDigit := false
+	containsSpecialChar := false
+
+	for _, char := range password {
+		switch {
+		case 'A' <= char && char <= 'Z':
+			containsUpperCase = true
+		case 'a' <= char && char <= 'z':
+			containsLowerCase = true
+		case '0' <= char && char <= '9':
+			containsDigit = true
+		default:
+			containsSpecialChar = true
+		}
+	}
+
+	if !containsUpperCase {
+		return errors.New("password must contain at least one uppercase letter")
+	}
+	if !containsLowerCase {
+		return errors.New("password must contain at least one lowercase letter")
+	}
+	if !containsDigit {
+		return errors.New("password must contain at least one digit")
+	}
+	if !containsSpecialChar {
+		return errors.New("password must contain at least one special character")
 	}
 
 	return nil
