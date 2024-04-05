@@ -35,7 +35,7 @@ func (s *service) GetCharacterById(c context.Context, id int64) (*Character, err
 
 	char, err := s.Repository.GetCharacterById(ctx, id)
 	if err != nil {
-		return nil, nil
+		return nil, err
 	}
 
 	return char, nil

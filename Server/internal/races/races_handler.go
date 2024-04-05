@@ -8,16 +8,18 @@ import (
 
 type Handler struct {
 	Service
+	util.TokenGetter
 }
 
-func NewHandler(s Service) *Handler {
+func NewHandler(s Service, tg util.TokenGetter) *Handler {
 	return &Handler{
-		Service: s,
+		Service:     s,
+		TokenGetter: tg,
 	}
 }
 
 func (h *Handler) GetAllRaces(w http.ResponseWriter, r *http.Request) {
-	_, err := util.GetIdFromToken(r)
+	_, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return

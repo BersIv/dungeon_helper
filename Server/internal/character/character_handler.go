@@ -10,16 +10,18 @@ import (
 
 type Handler struct {
 	Service
+	util.TokenGetter
 }
 
-func NewHandler(s Service) *Handler {
+func NewHandler(s Service, tg util.TokenGetter) *Handler {
 	return &Handler{
-		Service: s,
+		Service:     s,
+		TokenGetter: tg,
 	}
 }
 
 func (h *Handler) GetAllCharactersByAccId(w http.ResponseWriter, r *http.Request) {
-	idAcc, err := util.GetIdFromToken(r)
+	idAcc, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -44,7 +46,7 @@ func (h *Handler) GetAllCharactersByAccId(w http.ResponseWriter, r *http.Request
 }
 
 func (h *Handler) GetCharacterById(w http.ResponseWriter, r *http.Request) {
-	_, err := util.GetIdFromToken(r)
+	_, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -53,7 +55,7 @@ func (h *Handler) GetCharacterById(w http.ResponseWriter, r *http.Request) {
 	var id GetCharacterReq
 	err = json.NewDecoder(r.Body).Decode(&id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
@@ -90,7 +92,7 @@ func (h *Handler) CreateCharacter(w http.ResponseWriter, r *http.Request) {
 		}
 	}(r.Body)
 
-	char.IdAcc, err = util.GetIdFromToken(r)
+	char.IdAcc, err = h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -130,7 +132,7 @@ func (h *Handler) SetActiveCharacterById(w http.ResponseWriter, r *http.Request)
 		}
 	}(r.Body)
 
-	req.IdAcc, err = util.GetIdFromToken(r)
+	req.IdAcc, err = h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return

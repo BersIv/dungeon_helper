@@ -15,14 +15,16 @@ import (
 )
 
 type Handler struct {
-	db  db.DatabaseTX
-	hub *Hub
+	db          db.DatabaseTX
+	hub         *Hub
+	tokenGetter util.TokenGetter
 }
 
-func NewHandler(db db.DatabaseTX, h *Hub) *Handler {
+func NewHandler(db db.DatabaseTX, h *Hub, tg util.TokenGetter) *Handler {
 	return &Handler{
-		db:  db,
-		hub: h,
+		db:          db,
+		hub:         h,
+		tokenGetter: tg,
 	}
 }
 
@@ -41,7 +43,7 @@ func (h *Handler) CreateLobby(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	accountId, err := util.GetIdFromToken(r)
+	accountId, err := h.tokenGetter.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -77,7 +79,7 @@ func (h *Handler) CreateLobby(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println("Res: ", idLobby)
-	nickname, err := util.GetNickNameFromToken(r)
+	nickname, err := h.tokenGetter.GetNickNameFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -87,13 +89,13 @@ func (h *Handler) CreateLobby(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) JoinLobby(w http.ResponseWriter, r *http.Request) {
-	accountId, err := util.GetIdFromToken(r)
+	accountId, err := h.tokenGetter.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
 
-	nickname, err := util.GetNickNameFromToken(r)
+	nickname, err := h.tokenGetter.GetNickNameFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -126,7 +128,7 @@ func (h *Handler) Reg(w http.ResponseWriter, r *http.Request, accountId int64, i
 
 	if !master {
 		var idChar int64
-		query := `SELECT idChar FROM accChar WHERE idAccount = ? AND act = 1;`
+		query := `SELECT idChar FROM accChar WHERE idAccount = ? AND act = 1`
 		_ = h.db.QueryRowContext(ctx, query, accountId).Scan(&idChar)
 		if idChar == 0 {
 			conn.Close()

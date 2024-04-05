@@ -22,11 +22,15 @@ import (
 
 type Handler struct {
 	Service
+	util.TokenGetter
+	util.PasswordHasher
 }
 
-func NewHandler(s Service) *Handler {
+func NewHandler(s Service, tg util.TokenGetter, ph util.PasswordHasher) *Handler {
 	return &Handler{
-		Service: s,
+		Service:        s,
+		TokenGetter:    tg,
+		PasswordHasher: ph,
 	}
 }
 
@@ -70,7 +74,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	var account LoginAccountReq
 	err := json.NewDecoder(r.Body).Decode(&account)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	defer func(Body io.ReadCloser) {
@@ -84,7 +88,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	res, err := h.Service.Login(ctx, &account)
 	if err != nil {
-		handleError(w, err, http.StatusInternalServerError)
+		handleError(w, err, http.StatusUnauthorized)
 		return
 	}
 
@@ -112,7 +116,7 @@ func (h *Handler) LoginGoogle(w http.ResponseWriter, r *http.Request) {
 	var googleToken Token
 	err := json.NewDecoder(r.Body).Decode(&googleToken)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	defer func(Body io.ReadCloser) {
@@ -168,7 +172,7 @@ func (h *Handler) LoginGoogle(w http.ResponseWriter, r *http.Request) {
 
 			account.Avatar = base64Image
 			account.Nickname = strings.Split(account.Email, "@")[0]
-			account.Password = util.GeneratePassword()
+			account.Password = h.GeneratePassword()
 			err = h.Service.CreateAccount(ctx, &account)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -234,7 +238,7 @@ func (h *Handler) UpdateNickname(w http.ResponseWriter, r *http.Request) {
 		}
 	}(r.Body)
 
-	id, err := util.GetIdFromToken(r)
+	id, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -270,7 +274,7 @@ func (h *Handler) UpdatePassword(w http.ResponseWriter, r *http.Request) {
 		}
 	}(r.Body)
 
-	id, err := util.GetIdFromToken(r)
+	id, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -306,7 +310,7 @@ func (h *Handler) UpdateAvatar(w http.ResponseWriter, r *http.Request) {
 		}
 	}(r.Body)
 
-	id, err := util.GetIdFromToken(r)
+	id, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return

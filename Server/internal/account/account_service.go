@@ -15,12 +15,14 @@ import (
 type service struct {
 	Repository
 	timeout time.Duration
+	util.PasswordHasher
 }
 
-func NewService(repository Repository) Service {
+func NewService(repository Repository, ph util.PasswordHasher) Service {
 	return &service{
-		Repository: repository,
-		timeout:    time.Duration(2) * time.Second,
+		Repository:     repository,
+		timeout:        time.Duration(2) * time.Second,
+		PasswordHasher: ph,
 	}
 }
 
@@ -28,7 +30,7 @@ func (s *service) CreateAccount(c context.Context, req *CreateAccountReq) error 
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
 
-	hashedPassword, err := util.HashPassword(req.Password)
+	hashedPassword, err := s.PasswordHasher.HashPassword(req.Password)
 	if err != nil {
 		return err
 	}
@@ -45,7 +47,7 @@ func (s *service) CreateAccount(c context.Context, req *CreateAccountReq) error 
 		return err
 	}
 
-	// err = sendWelcomeEmail(req.Email)
+	// err = SendWelcomeEmail(req.Email)
 	// if err != nil {
 	// 	return err
 	// }
@@ -62,7 +64,7 @@ func (s *service) Login(c context.Context, req *LoginAccountReq) (*LoginAccountR
 		return nil, err
 	}
 
-	err = util.CheckPassword(req.Password, account.Password)
+	err = s.PasswordHasher.CheckPassword(req.Password, account.Password)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +103,7 @@ func (s *service) RestorePassword(c context.Context, req *RestoreReq) error {
 		return err
 	}
 
-	hashedPassword, err := util.HashPassword(req.NewPassword)
+	hashedPassword, err := s.PasswordHasher.HashPassword(req.NewPassword)
 	if err != nil {
 		return err
 	}
@@ -146,7 +148,7 @@ func (s *service) UpdatePassword(c context.Context, req *UpdatePasswordReq) erro
 	// 	return err
 	// }
 
-	hashedPassword, err := util.HashPassword(req.NewPassword)
+	hashedPassword, err := s.PasswordHasher.HashPassword(req.NewPassword)
 	if err != nil {
 		return err
 	}
@@ -195,7 +197,7 @@ func newToken(res *Account) (string, error) {
 	return ss, nil
 }
 
-func sendEmail(toEmail string, subject string, body string) error {
+func SendEmail(toEmail string, subject string, body string) error {
 	smtpHost := os.Getenv("SMTP_HOST")
 	smtpPort, _ := strconv.Atoi(os.Getenv("SMTP_PORT"))
 	smtpUsername := os.Getenv("SMTP_USERNAME")
@@ -224,11 +226,11 @@ func sendEmail(toEmail string, subject string, body string) error {
 	return nil
 }
 
-func sendWelcomeEmail(toEmail string) error {
+func SendWelcomeEmail(toEmail string) error {
 	subject := "Добро пожаловать!"
 	body := "Спасибо за регистрацию!"
 
-	err := sendEmail(toEmail, subject, body)
+	err := SendEmail(toEmail, subject, body)
 	if err != nil {
 		return err
 	}

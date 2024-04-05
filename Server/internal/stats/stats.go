@@ -12,8 +12,8 @@ type Stats struct {
 	Charisma     int64 `json:"charisma"`
 }
 
-var GetStatsReq struct {
-	Id int64 `json:"id"`
+type GetStatsReq struct {
+	Id int64 `json:"Id"`
 }
 
 type GetStatsRes struct {

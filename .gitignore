@@ -15,3 +15,5 @@
 local.properties
 .vscode/launch.json
 Server/cmd/__debug_*
+Server/coverage
+Server/internal/coverage

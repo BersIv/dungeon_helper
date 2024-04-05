@@ -25,7 +25,7 @@ func (r *repository) GetAllSkills(ctx context.Context) ([]Skills, error) {
 	defer func(rows *sql.Rows) {
 		err := rows.Close()
 		if err != nil {
-
+			return
 		}
 	}(rows)
 

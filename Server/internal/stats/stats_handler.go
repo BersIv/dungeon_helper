@@ -3,42 +3,40 @@ package stats
 import (
 	"dungeons_helper/util"
 	"encoding/json"
-	"io"
 	"net/http"
 )
 
 type Handler struct {
 	Service
+	util.TokenGetter
 }
 
-func NewHandler(s Service) *Handler {
+func NewHandler(s Service, tg util.TokenGetter) *Handler {
 	return &Handler{
-		Service: s,
+		Service:     s,
+		TokenGetter: tg,
 	}
 }
-
 func (h *Handler) GetStatsById(w http.ResponseWriter, r *http.Request) {
-	_, err := util.GetIdFromToken(r)
+	_, err := h.GetIdFromToken(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
 
-	err = json.NewDecoder(r.Body).Decode(&GetStatsReq)
+	var req GetStatsReq
+	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	defer func(Body io.ReadCloser) {
-		err := Body.Close()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-	}(r.Body)
+	if req.Id == 0 {
+		http.Error(w, "RaceId cannot be zero", http.StatusBadRequest)
+		return
+	}
 
 	ctx := r.Context()
-	res, err := h.Service.GetStatsById(ctx, GetStatsReq.Id)
+	res, err := h.Service.GetStatsById(ctx, req.Id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

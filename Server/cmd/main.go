@@ -13,29 +13,39 @@ import (
 	"dungeons_helper/internal/subraces"
 	"dungeons_helper/internal/websocket"
 	"dungeons_helper/router"
+	"dungeons_helper/util"
 	"log"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	log.Printf("Server is starting...")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Could not load env: %s", err)
+	}
 	dbConn, err := db.NewDatabase()
 	if err != nil {
 		log.Fatalf("Could not initialize database connection: %s", err)
 	}
 
-	accountHandler := account.NewHandler(account.NewService(account.NewRepository(dbConn.GetDB())))
-	alignmentHandler := alignment.NewHandler(alignment.NewService(alignment.NewRepository(dbConn.GetDB())))
-	classHandler := class.NewHandler(class.NewService(class.NewRepository(dbConn.GetDB())))
-	racesHandler := races.NewHandler(races.NewService(races.NewRepository(dbConn.GetDB())))
-	subracesHandler := subraces.NewHandler(subraces.NewService(subraces.NewRepository(dbConn.GetDB())))
-	statsHandler := stats.NewHandler(stats.NewService(stats.NewRepository(dbConn.GetDB())))
-	skillHandler := skills.NewHandler(skills.NewService(skills.NewRepository(dbConn.GetDB())))
-	characterHandler := character.NewHandler(character.NewService(character.NewRepository(dbConn.GetDB())))
-	lobbyHandler := lobby.NewHandler(lobby.NewService(lobby.NewRepository(dbConn.GetDB())))
+	jwtTokenGetter := util.JWTTokenGetter{}
+	passwordHasher := util.BcryptPasswordHasher{}
+
+	accountHandler := account.NewHandler(account.NewService(account.NewRepository(dbConn.GetDB()), passwordHasher), jwtTokenGetter, passwordHasher)
+	alignmentHandler := alignment.NewHandler(alignment.NewService(alignment.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	classHandler := class.NewHandler(class.NewService(class.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	racesHandler := races.NewHandler(races.NewService(races.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	subracesHandler := subraces.NewHandler(subraces.NewService(subraces.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	statsHandler := stats.NewHandler(stats.NewService(stats.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	skillHandler := skills.NewHandler(skills.NewService(skills.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	characterHandler := character.NewHandler(character.NewService(character.NewRepository(dbConn.GetDB())), jwtTokenGetter)
+	lobbyHandler := lobby.NewHandler(lobby.NewService(lobby.NewRepository(dbConn.GetDB())), jwtTokenGetter)
 
 	hub := websocket.NewHub(dbConn.GetDB())
 	go hub.Run()
-	wsHandler := websocket.NewHandler(dbConn.GetDB(), hub)
+	wsHandler := websocket.NewHandler(dbConn.GetDB(), hub, jwtTokenGetter)
 
 	r := router.InitRouter(
 		router.AccountRouter(accountHandler),
